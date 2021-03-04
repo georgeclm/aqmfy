@@ -27,4 +27,8 @@ class WishlistsController extends Controller
         Wishlist::destroy($wishlist->id);
         return redirect()->back()->with('success', 'Service have been removed from wishlist');
     }
+    public function add(Service $service)
+    {
+        return auth()->user()->favorite()->toggle($service);
+    }
 }

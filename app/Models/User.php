@@ -53,4 +53,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Order::class);
     }
+    public function favorite()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

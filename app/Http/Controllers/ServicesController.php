@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ServicesController extends Controller
 {
@@ -16,7 +15,8 @@ class ServicesController extends Controller
     }
     function show(Service $service)
     {
-        return view('service.detail', compact('service'));
+        $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
+        return view('service.detail', compact('service', 'favorite'));
     }
     public function create()
     {

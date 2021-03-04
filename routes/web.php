@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [WishlistsController::class, 'store'])->name('wishlists.store');
         Route::delete('/{wishlist}', [WishlistsController::class, 'destroy'])->name('wishlists.destroy');
     });
+    Route::post('/wishlist/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
+
     Route::prefix('orders')->group(function () {
         Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');
         Route::get('/{user}/order', [OrdersController::class, 'order'])->name('orders.show');

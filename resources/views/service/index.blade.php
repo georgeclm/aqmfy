@@ -20,9 +20,9 @@
                             <img src="{{ asset("storage/product/{$item->image}") }}" class="slider-img" alt="...">
 
                         </div>
-                        <div class="carousel-caption d-none d-md-block slider-text">
+                        <div class="carousel-caption d-none d-md-block slider-text text-light">
                             <h5>{{ $item->name }}</h5>
-                            <p>{{ Str::limit($item->description, 25) }}</p>
+                            <p>{{ Str::limit($item->description, 50) }}</p>
                         </div>
                     </a>
                 </div>

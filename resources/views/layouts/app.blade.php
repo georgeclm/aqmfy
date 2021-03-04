@@ -111,7 +111,7 @@
     }
 
     img.detail-img {
-        height: 200px;
+        height: 400px;
     }
 
     .search-box {

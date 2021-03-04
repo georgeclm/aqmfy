@@ -13,4 +13,8 @@ class Service extends Model
     {
         return $this->belongsTo(Seller::class);
     }
+    public function favorited()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

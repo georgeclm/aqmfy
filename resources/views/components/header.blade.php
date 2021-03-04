@@ -45,7 +45,8 @@
 
                         <li class="nav-item">
                             <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show', auth()->user()) }}"> <span
-                                    class="badge badge-pill bg-danger">{{ $wishlistCount }}</span> Wishlist</a>
+                                    class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
+                                Wishlist</a>
                         </li>
                         @if ($hasSeller)
 

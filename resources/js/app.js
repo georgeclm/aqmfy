@@ -5,9 +5,9 @@
  */
 
 require('./bootstrap');
-import 'bootstrap';
 
 window.Vue = require('vue');
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +19,10 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import Vue from 'vue'
 import ExampleComponent from './components/ExampleComponent.vue';
+import WishlistButton from './components/WishlistButton.vue';
+
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
@@ -30,6 +33,6 @@ import ExampleComponent from './components/ExampleComponent.vue';
 
 const app = new Vue({
     el: '#app',
-    components:{ExampleComponent}
+    components:{ExampleComponent,WishlistButton}
 
 });

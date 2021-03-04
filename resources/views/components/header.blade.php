@@ -19,7 +19,7 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link @if ($order) active @endif"
-                                href="/myorders">Orders</a>
+                                href="{{ route('orders.index', auth()->user()) }}">Orders</a>
                         </li>
                     @endguest
                 </ul>
@@ -44,7 +44,8 @@
                     @else
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/cartlist"> <span class="badge badge-pill bg-danger">1</span> Cart</a>
+                            <a class="nav-link" href="{{ route('carts.show', auth()->user()) }}"> <span
+                                    class="badge badge-pill bg-danger">{{ $cartCount }}</span> Cart</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -57,7 +58,8 @@
                                     <li><a class="dropdown-item" href="{{ route('sellers.show', auth()->user()) }}">Your
                                             Toko</a></li>
                                 @else
-                                    <li><a class="dropdown-item" href="/toko/create">Create Toko</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('sellers.create') }}">Create Toko</a>
+                                    </li>
                                 @endif
                             </ul>
                         </li>

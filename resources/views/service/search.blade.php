@@ -9,7 +9,7 @@
         <div class="text-center">
             <div class="col-md-12">
                 <div class="trending-wrapper m-auto">
-                    <h2 class="mb-4">Result for Products</h2>
+                    <h2 class="mb-4">Result for Services</h2>
                     <div class="row row-cols-1 row-cols-md-6">
                         @if ($services->count())
                             @foreach ($services as $item)
@@ -29,7 +29,7 @@
                         @else
 
                     </div>
-                    <div class="h4 text-center">No Product Found</div>
+                    <div class="h4 text-center">No Service Found</div>
                     @endif
 
                 </div>

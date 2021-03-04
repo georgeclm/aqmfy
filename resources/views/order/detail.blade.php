@@ -12,35 +12,32 @@
                     </tr>
                     <tr>
                         <td>Tax</td>
-                        <td>Rp. 0</td>
+                        <td>Rp. {{ number_format(($total * 10) / 100) }}</td>
                     </tr>
-                    <tr>
-                        <td>Delivery Charges</td>
-                        <td>Rp. 10</td>
-                    </tr>
+
                     <tr>
                         <td>Total amount</td>
-                        <td>Rp. {{ number_format($total + 10) }}</td>
+                        <td>Rp. {{ number_format(($total * 110) / 100) }}</td>
                     </tr>
                 </tbody>
             </table>
             <div>
-                <form action="/order1" method="POST">
+                <form action="{{ route('orders.now') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <textarea name="address" type="email" placeholder="Enter your address" class="form-control"
+                        <textarea name="description" placeholder="Describe your request" class="form-control"
                             required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="pwd">Payment Method:</label> <br><br>
-                        <input type="radio" value="cash" class="form-check-input" name="payment" id=""><span> Online
-                            Payment</span> <br><br>
-                        <input type="radio" value="cash" class="form-check-input" name="payment" id=""><span> Cash On
-                            Delivery</span><br><br>
-                        <input type="radio" value="cash" class="form-check-input" name="payment" id=""><span> Shop
-                            Outlet</span> <br><br>
+                        <input type="radio" value="Gopay" class="form-check-input" name="payment"><span> Gopay</span>
+                        <br><br>
+                        <input type="radio" value="OVO" class="form-check-input" name="payment"><span>
+                            OVO</span><br><br>
+                        <input type="radio" value="BCA Transfer" class="form-check-input" name="payment"><span> BCA
+                            Transfer</span> <br><br>
                     </div>
-                    <input type="hidden" name="product_id" value="{{ $serviceId }}">
+                    <input type="hidden" name="service_id" value="{{ $service->id }}">
 
                     <button type="submit" class="btn btn-outline-success">Pay Now</button>
                 </form>

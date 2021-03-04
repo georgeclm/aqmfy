@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Colance')
+@section('title', 'Colance - Freelance Services Marketplace')
 
 @section('content')
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -14,7 +14,7 @@
         </ol>
         <div class="carousel-inner">
             @foreach ($services as $item)
-                <div class="carousel-item {{ $item->id == 1 ? 'active' : '' }}" data-bs-interval="10000">
+                <div class="carousel-item {{ $item->id == $first ? 'active' : '' }}" data-bs-interval="10000">
                     <a href="{{ route('services.show', $item->id) }}">
                         <div class="text-center">
                             <img src="{{ asset("storage/product/{$item->image}") }}" class="slider-img" alt="...">
@@ -39,7 +39,7 @@
     </div>
     <div class="container mb-5 mt-5">
         <div class="col-md-12 text-center">
-            <h3 class='mb-4'>Trending Products</h3>
+            <h3 class='mb-4'>Trending Services</h3>
             <div class="row row-cols-1 row-cols-md-6">
                 @if ($services->count())
                     @foreach ($services as $item)
@@ -58,7 +58,7 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="h4">Product Not Found</div>
+                    <div class="h4">Service Not Found</div>
                 @endif
             </div>
 

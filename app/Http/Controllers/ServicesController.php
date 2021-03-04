@@ -11,7 +11,8 @@ class ServicesController extends Controller
     function index()
     {
         $services = Service::all();
-        return view('service.index', compact('services'));
+        $first = $services[0]->id;
+        return view('service.index', compact('services', 'first'));
     }
     function show(Service $service)
     {
@@ -38,6 +39,7 @@ class ServicesController extends Controller
         }
         $request->file('image')->store('product', 'public');
         // dd($request->image->hashName());
+
         $service = new Service([
             "name" => $request->name,
             "price" => $request->price,
@@ -46,7 +48,7 @@ class ServicesController extends Controller
             "delivery_time" => $request->delivery_time,
             "revision_time" => $request->revision_time,
             "image" => $request->image->hashName(),
-            "user_id" => auth()->id()
+            "seller_id" => auth()->user()->seller->id
         ]);
         $service->save(); // Finally, save the record.
         return redirect('/');
@@ -60,5 +62,35 @@ class ServicesController extends Controller
             ->orWhere('description', 'LIKE', '%' . $query . '%')
             ->get();
         return view('service.search', compact('services'));
+    }
+    public function edit(Service $service)
+    {
+        return view('service.edit', compact('service'));
+    }
+    public function update(Service $service)
+    {
+        $data = request()->validate([
+            'name' => '',
+            'price' => '',
+            'delivery_time' => '',
+            'revision_time' => '',
+            'category' => '',
+            'description' => '',
+            'image' => 'image',
+        ]);
+        if (request('image')) {
+            request('image')->store('product', 'public');
+            $imageArray = ['image' => request('image')->hashName()];
+        }
+        $service->update(array_merge(
+            $data,
+            $imageArray ?? []
+        ));
+        return redirect()->route('services.show', $service)->with('success', 'Gig Have Been Updated');
+    }
+    public function destroy(Service $service)
+    {
+        Service::destroy($service->id);
+        return redirect()->route('sellers.show', auth()->user())->with('success', 'Gig Have Been Removed');
     }
 }

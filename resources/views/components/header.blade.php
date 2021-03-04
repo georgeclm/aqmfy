@@ -25,7 +25,7 @@
                 </ul>
                 <div class="col-md-8 text-center">
                     <form action="/search" class="d-flex container-fluid">
-                        <input class="form-control me-2" name="query" type="search" placeholder="Search"
+                        <input class="form-control me-2" name="query" type="search" placeholder="Find Services"
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -44,25 +44,28 @@
                     @else
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('carts.show', auth()->user()) }}"> <span
-                                    class="badge badge-pill bg-danger">{{ $cartCount }}</span> Cart</a>
+                            <a class="nav-link @if ($wishlist) active @endif" href="{{ route('carts.show', auth()->user()) }}"> <span
+                                    class="badge badge-pill bg-danger">{{ $cartCount }}</span> Wishlist</a>
                         </li>
+                        @if ($hasSeller)
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Toko
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @if ($hasSeller)
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Toko
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{{ route('sellers.show', auth()->user()) }}">Your
                                             Toko</a></li>
-                                @else
-                                    <li><a class="dropdown-item" href="{{ route('sellers.create') }}">Create Toko</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </li>
+
+                                </ul>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('sellers.create') }}">Become a seller</a>
+                            </li>
+
+                        @endif
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

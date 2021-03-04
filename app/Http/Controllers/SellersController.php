@@ -24,7 +24,7 @@ class SellersController extends Controller
     }
     function show(Seller $seller)
     {
-        $services = Service::where('user_id', $seller->user_id)->get();
+        $services = Service::where('seller_id', $seller->id)->get();
         return view('seller.detail', compact('seller', 'services'));
     }
 }

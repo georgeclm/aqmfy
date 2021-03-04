@@ -12,7 +12,7 @@ class header extends Component
      *
      * @return void
      */
-    public $home;
+    public $wishlist;
     public $order;
     public $hasSeller;
     public $cartCount;
@@ -27,9 +27,9 @@ class header extends Component
             }
         }
         $currentURL = url()->current();
-        if ($currentURL == "http://127.0.0.1:8000") {
-            $this->home = true;
-        } else if ($currentURL == "http://127.0.0.1:8000/myorders") {
+        if ($currentURL == "http://127.0.0.1:8000/carts/" . auth()->id() . "/cart") {
+            $this->wishlist = true;
+        } else if ($currentURL == "http://127.0.0.1:8000/orders/" . auth()->id()) {
             $this->order = true;
         }
     }

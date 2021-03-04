@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Your Cart - Colance')
+@section('title', 'Your Wishlist - Colance')
 @section('content')
 
     <div class="container">
         <div class="col-sm-10">
             <div class="trending-wrapper">
                 @if ($carts->count() != 0)
-                    <h2 class="mb-3">Your Cart</h2>
+                    <h2 class="mb-3">Your Wishlist</h2>
                     <a class="btn btn-success" href="{{ route('orders.show', auth()->user()) }}">Order Now</a> <br><br>
 
                     @foreach ($carts as $item)
@@ -21,7 +21,7 @@
                                 <div class="">
                                     <h2>{{ $item->service->name }}</h2>
                                     <h5>{{ $item->service->description }}</h5>
-                                    <h5>$ {{ number_format($item->service->price) }}</h5>
+                                    <h5>Rp. {{ number_format($item->service->price) }}</h5>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -30,7 +30,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-warning">Remove from
-                                        Cart</button>
+                                        Wishlist</button>
                                 </form>
                             </div>
 
@@ -44,7 +44,7 @@
                 @else
                     <div class="d-grid gap-2 col-5 mx-auto text-center">
                         <br><br>
-                        <h2 class="mb-3 fs-1">Cart is empty </h2>
+                        <h2 class="mb-3 fs-1">Wishlist is empty </h2>
                         <a class="btn btn-outline-primary btn-lg" href="{{ route('services.index') }}">Start Shopping</a>
                     </div>
 

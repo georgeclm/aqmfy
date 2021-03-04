@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('orders')->group(function () {
         Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');
         Route::get('/{user}/order', [OrdersController::class, 'order'])->name('orders.show');
+        Route::get('/{service}/ordernow', [OrdersController::class, 'orderNow'])->name('orders.nowShow');
         Route::post('/buy', [OrdersController::class, 'buyNow'])->name('orders.now');
         Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
     });

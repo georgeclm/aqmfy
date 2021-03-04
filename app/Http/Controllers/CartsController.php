@@ -20,11 +20,11 @@ class CartsController extends Controller
         $cart->user_id = auth()->id();
         $cart->service_id = $request->service_id;
         $cart->save();
-        return redirect()->back()->with('success', 'Service added to cart');
+        return redirect()->back()->with('success', 'Service added to wishlist');
     }
     public function destroy(Cart $cart)
     {
         Cart::destroy($cart->id);
-        return redirect()->back()->with('success', 'Service have been removed from cart');
+        return redirect()->back()->with('success', 'Service have been removed from wishlist');
     }
 }

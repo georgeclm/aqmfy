@@ -15,12 +15,12 @@
                             aria-describedby="emailHelp" placeholder="Name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Seller Address</label>
+                        <label for="exampleInputEmail1" class="form-label">Address</label>
                         <input type="text" name="address" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="Domicili" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Seller Link</label>
+                        <label for="exampleInputEmail1" class="form-label">Website Link</label>
                         <input type="text" name="url" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="Website" required>
                     </div>

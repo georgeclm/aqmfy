@@ -13,17 +13,20 @@
                 <h4>Description: {{ $service->description }}</h4>
                 <h4>Category: {{ $service->category }}</h4>
                 <br><br>
-                <form action="#" method="POST">
+                <form action="{{ route('carts.store') }}" method="POST">
                     @csrf
                     <!--This input hidden to take the service id that is going to cart-->
                     <input type="hidden" name="service_id" value="{{ $service->id }}">
-                    <button class="btn btn-primary">Add to cart</button><br><br>
+                    <button class="btn btn-primary">
+                        Add to cart</button><br><br>
 
                 </form>
-                <form action='#' method="POST">
+                @error('service_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <form action='{{ route('orders.now') }}' method="POST">
                     @csrf
-
-                    <input type="hidden" name="product_id" value="{{ $service->id }}">
+                    <input type="hidden" name="service_id" value="{{ $service->id }}">
                     <button class="btn btn-success">Buy Now</button>
                 </form>
 

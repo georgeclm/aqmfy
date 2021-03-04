@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartsController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
@@ -34,11 +36,23 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/{user}', [UsersController::class, 'show'])->name('profile.index');
 
+
     Route::prefix('seller')->group(function () {
-        Route::get("/create", [SellersController::class, 'create'])->name('seller.create');
+        Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
         Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show');
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
         Route::patch('/{service}', [SellersController::class, 'update'])->name('sellers.update');
+    });
+    Route::prefix('carts')->group(function () {
+        Route::get('/{user}/cart', [CartsController::class, 'show'])->name('carts.show');
+        Route::post('/', [CartsController::class, 'store'])->name('carts.store');
+        Route::delete('/{cart}', [CartsController::class, 'destroy'])->name('carts.destroy');
+    });
+    Route::prefix('orders')->group(function () {
+        Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');
+        Route::get('/{user}/order', [OrdersController::class, 'order'])->name('orders.show');
+        Route::post('/buy', [OrdersController::class, 'buyNow'])->name('orders.now');
+        Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
     });
 });

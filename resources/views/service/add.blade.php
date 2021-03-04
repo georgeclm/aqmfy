@@ -2,7 +2,7 @@
 @section('title', 'Add Service - Colance')
 @section('content')
 
-    <div class="container custom-login">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-4 col-sm-offset-4">
                 <h4>Add Your Service</h4>

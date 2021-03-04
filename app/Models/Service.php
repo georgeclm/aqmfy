@@ -9,8 +9,12 @@ class Service extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function user()
+    public function seller()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Seller::class);
+    }
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

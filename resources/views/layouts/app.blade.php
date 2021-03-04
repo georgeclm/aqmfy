@@ -22,6 +22,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 </head>
 
 <body>
@@ -48,5 +53,94 @@
         <x-footer />
     </div>
 </body>
+<script>
+    $('.livesearch').select2({
+        placeholder: 'Search',
+        ajax: {
+            url: '/search',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return {
+                            text: item.name,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+</script>
+<style>
+    .custom-login {
+        height: 500px;
+        padding-top: 100px;
+    }
+
+    img.slider-img {
+        height: 400px !important;
+    }
+
+    .custom-product {
+        height: 600px;
+    }
+
+    .slider-text {
+        background-color: #5c6d5c4a;
+    }
+
+    img.trending-image {
+        height: 100px;
+    }
+
+    img.trending-image-search {
+        height: 250px;
+    }
+
+    .trending-item {
+        float: left;
+        width: 20%;
+    }
+
+    .trending-wrapper {
+        margin: 30px;
+    }
+
+    img.detail-img {
+        height: 200px;
+    }
+
+    .search-box {
+        width: 500px !important;
+    }
+
+    .cart-list-divider {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+
+    .link-web a {
+        color: #000;
+        text-decoration: none;
+        transition: color 0.5s;
+    }
+
+    .link-web a:hover {
+        transition: 1s;
+        border-bottom: 0px;
+        color: #646786;
+
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+</style>
 
 </html>

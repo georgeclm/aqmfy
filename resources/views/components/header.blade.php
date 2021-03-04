@@ -29,6 +29,7 @@
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+
                 </div>
 
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -52,12 +53,12 @@
                                 Toko
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {{-- @if ($value == 'no') --}}
-                                <li><a class="dropdown-item" href="/tokoprofile/{{ auth()->id() }}">Your
-                                        Toko</a></li>
-                                {{-- @else --}}
-                                <li><a class="dropdown-item" href="/toko/create">Create Toko</a></li>
-                                {{-- @endif --}}
+                                @if ($hasSeller)
+                                    <li><a class="dropdown-item" href="{{ route('sellers.show', auth()->user()) }}">Your
+                                            Toko</a></li>
+                                @else
+                                    <li><a class="dropdown-item" href="/toko/create">Create Toko</a></li>
+                                @endif
                             </ul>
                         </li>
 

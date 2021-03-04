@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServicesController extends Controller
 {
@@ -27,8 +28,8 @@ class ServicesController extends Controller
             'category' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'delivery_time' => 'required',
-            'revision_time' => 'required',
+            'delivery_time' => 'required|numeric',
+            'revision_time' => 'required|numeric',
         ]);
         if ($request->hasFile('image')) {
             $request->validate([
@@ -36,17 +37,28 @@ class ServicesController extends Controller
             ]);
         }
         $request->file('image')->store('product', 'public');
-        $product = new Service([
-            "name" => $request->get('name'),
-            "price" => $request->get('price'),
-            "category" => $request->get('category'),
-            "description" => $request->get('description'),
-            "delivery_time" => $request->get('delivery_time'),
-            "revision_time" => $request->get('revision_time'),
-            "image" => $request->file('image')->hashName(),
+        // dd($request->image->hashName());
+        $service = new Service([
+            "name" => $request->name,
+            "price" => $request->price,
+            "category" => $request->category,
+            "description" => $request->description,
+            "delivery_time" => $request->delivery_time,
+            "revision_time" => $request->revision_time,
+            "image" => $request->image->hashName(),
             "user_id" => auth()->id()
         ]);
-        $product->save(); // Finally, save the record.
+        $service->save(); // Finally, save the record.
         return redirect('/');
+    }
+    function search(Request $request)
+    {
+        // for the search engine inside database search all the name like to following value
+        $query = $request->input('query');
+        $services = Service::where('name', 'LIKE', '%' . $query . '%')
+            ->orWhere('category', 'LIKE', '%' . $query . '%')
+            ->orWhere('description', 'LIKE', '%' . $query . '%')
+            ->get();
+        return view('service.search', compact('services'));
     }
 }

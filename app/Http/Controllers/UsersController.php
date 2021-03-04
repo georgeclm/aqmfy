@@ -9,6 +9,6 @@ class UsersController extends Controller
 {
     public function show(User $user)
     {
-        return view('profile.index', compact('user'));
+        return view('profile.detail', compact('user'));
     }
 }

@@ -13,8 +13,14 @@ class header extends Component
      */
     public $home;
     public $order;
+    public $hasSeller;
     public function __construct()
     {
+        if (auth()->user()) {
+            if (auth()->user()->seller) {
+                $this->hasSeller = true;
+            }
+        }
         $currentURL = url()->current();
         if ($currentURL == "http://127.0.0.1:8000") {
             $this->home = true;

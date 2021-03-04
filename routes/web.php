@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -16,18 +17,28 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [ServicesController::class, 'index'])->name('services.index');
-Route::group(['middleware' => 'auth', 'prefix' => 'service'], function () {
-    Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
-    Route::post('/', [ServicesController::class, 'store'])->name('services.store;');
-    Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show');
-    Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
-    Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
-    Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
-});
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/{user}', [UsersController::class, 'show'])->name('profile.index');
-});
-
-
 Auth::routes();
+
+
+Route::get('/', [ServicesController::class, 'index'])->name('services.index');
+// for the search using ajax
+Route::get("/search", [ServicesController::class, 'search']);
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('service')->group(function () {
+        Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
+        Route::post('/', [ServicesController::class, 'store'])->name('services.store');
+        Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show');
+        Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
+        Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
+        Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
+    });
+    Route::get('/{user}', [UsersController::class, 'show'])->name('profile.index');
+
+    Route::prefix('seller')->group(function () {
+        Route::get("/create", [SellersController::class, 'create'])->name('seller.create');
+        Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
+        Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show');
+        Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
+        Route::patch('/{service}', [SellersController::class, 'update'])->name('sellers.update');
+    });
+});

@@ -17,9 +17,9 @@
 
                 <br><br>
                 @if (auth()->id() != $service->seller->id)
-                    <form action="{{ route('carts.store') }}" method="POST">
+                    <form action="{{ route('wishlists.store') }}" method="POST">
                         @csrf
-                        <!--This input hidden to take the service id that is going to cart-->
+                        <!--This input hidden to take the service id that is going to wishlist-->
                         <input type="hidden" name="service_id" value="{{ $service->id }}">
                         <button class="btn btn-primary">
                             Add to Wishlist</button><br><br>

@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Models\Cart;
+use App\Models\Wishlist;
 use Illuminate\View\Component;
 
 class header extends Component
@@ -15,19 +15,19 @@ class header extends Component
     public $wishlist;
     public $order;
     public $hasSeller;
-    public $cartCount;
+    public $wishlistCount;
     public function __construct()
     {
         if (auth()->user()) {
             if (auth()->user()->seller) {
                 $this->hasSeller = true;
             }
-            if (auth()->user()->cart) {
-                $this->cartCount = Cart::where('user_id', auth()->id())->count();;
+            if (auth()->user()->wishlist) {
+                $this->wishlistCount = Wishlist::where('user_id', auth()->id())->count();;
             }
         }
         $currentURL = url()->current();
-        if ($currentURL == "http://127.0.0.1:8000/carts/" . auth()->id() . "/cart") {
+        if ($currentURL == "http://127.0.0.1:8000/wishslists/" . auth()->id() . "/wishlist") {
             $this->wishlist = true;
         } else if ($currentURL == "http://127.0.0.1:8000/orders/" . auth()->id()) {
             $this->order = true;

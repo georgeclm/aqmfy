@@ -45,9 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Seller::class);
     }
-    public function cart()
+    public function wishlist()
     {
-        return $this->hasOne(Cart::class);
+        return $this->hasOne(Wishlist::class);
     }
     public function order()
     {

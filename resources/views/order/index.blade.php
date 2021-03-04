@@ -30,7 +30,8 @@
                     <div class="d-grid gap-2 col-5 mx-auto text-center">
                         <br><br>
                         <h2 class="mb-3 fs-1">Order is empty </h2>
-                        <a class="btn btn-outline-secondary btn-lg" href="{{ route('carts.show', auth()->user()) }}"> Go
+                        <a class="btn btn-outline-secondary btn-lg" href="{{ route('wishlists.show', auth()->user()) }}">
+                            Go
                             to
                             Wishlist</a>
                     </div>

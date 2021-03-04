@@ -13,8 +13,4 @@ class Service extends Model
     {
         return $this->belongsTo(Seller::class);
     }
-    public function cart()
-    {
-        return $this->hasMany(Cart::class);
-    }
 }

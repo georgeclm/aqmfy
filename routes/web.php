@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\WishlistsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,10 +44,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
         Route::patch('/{service}', [SellersController::class, 'update'])->name('sellers.update');
     });
-    Route::prefix('carts')->group(function () {
-        Route::get('/{user}/cart', [CartsController::class, 'show'])->name('carts.show');
-        Route::post('/', [CartsController::class, 'store'])->name('carts.store');
-        Route::delete('/{cart}', [CartsController::class, 'destroy'])->name('carts.destroy');
+    Route::prefix('wishlists')->group(function () {
+        Route::get('/{user}/wishlist', [WishlistsController::class, 'show'])->name('wishlists.show');
+        Route::post('/', [WishlistsController::class, 'store'])->name('wishlists.store');
+        Route::delete('/{wishlist}', [WishlistsController::class, 'destroy'])->name('wishlists.destroy');
     });
     Route::prefix('orders')->group(function () {
         Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');

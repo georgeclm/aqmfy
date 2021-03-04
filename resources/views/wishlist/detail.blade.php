@@ -5,11 +5,11 @@
     <div class="container">
         <div class="col-sm-10">
             <div class="trending-wrapper">
-                @if ($carts->count() != 0)
+                @if ($wishlists->count() != 0)
                     <h2 class="mb-3">Your Wishlist</h2>
                     <a class="btn btn-success" href="{{ route('orders.show', auth()->user()) }}">Order Now</a> <br><br>
 
-                    @foreach ($carts as $item)
+                    @foreach ($wishlists as $item)
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
                                 <a href="detail/{{ $item->service->id }}">
@@ -20,13 +20,13 @@
                             <div class="col-sm-4">
                                 <div class="">
                                     <h2>{{ $item->service->name }}</h2>
-                                    <h5>{{ $item->service->description }}</h5>
+                                    <h5>{{ Str::limit($item->service->description, 25) }}</h5>
                                     <h5>Rp. {{ number_format($item->service->price) }}</h5>
                                 </div>
                             </div>
                             <div class="col-sm-3">
 
-                                <form action="{{ route('carts.destroy', $item->id) }}" method="POST">
+                                <form action="{{ route('wishlists.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-warning">Remove from
@@ -37,7 +37,7 @@
                         </div>
                     @endforeach
 
-                    @if ($carts->count() > 4)
+                    @if ($wishlists->count() > 4)
                         <a class="btn btn-success" href="{{ route('orders.show', auth()->user()) }}">Order Now</a>
                         <br><br>
                     @endif

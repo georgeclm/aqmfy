@@ -44,8 +44,8 @@
                     @else
 
                         <li class="nav-item">
-                            <a class="nav-link @if ($wishlist) active @endif" href="{{ route('carts.show', auth()->user()) }}"> <span
-                                    class="badge badge-pill bg-danger">{{ $cartCount }}</span> Wishlist</a>
+                            <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show', auth()->user()) }}"> <span
+                                    class="badge badge-pill bg-danger">{{ $wishlistCount }}</span> Wishlist</a>
                         </li>
                         @if ($hasSeller)
 

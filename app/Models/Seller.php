@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Seller extends Model
 {
     use HasFactory;
+    public function sellerImage()
+    {
+        // folder inside the public path for default image
+        $imagePath = ($this->image) ? $this->image : 'jAZHCrXvUSsoh3BtdypreKvz8tz0M4DEnDOfvvDt.png';
+        return 'storage/product/' . $imagePath;
+    }
+
     protected $guarded = [];
     public function user()
     {

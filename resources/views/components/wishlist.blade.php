@@ -4,7 +4,6 @@
             <div class="trending-wrapper">
                 @if ($services->count() != 0)
                     <h2 class="mb-3">Your Wishlist</h2>
-                    <a class="btn btn-success" href="{{ route('orders.show', auth()->user()) }}">Order Now</a>
                     <br><br>
 
                     @foreach ($services as $item)
@@ -41,10 +40,6 @@
                         </div>
                     @endforeach
 
-                    @if ($services->count() > 4)
-                        <a class="btn btn-success" href="{{ route('orders.show', auth()->user()) }}">Order Now</a>
-                        <br><br>
-                    @endif
                 @else
                     <div class="d-grid gap-2 col-5 mx-auto text-center">
                         <br><br>

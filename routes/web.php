@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
         Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show');
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
-        Route::patch('/{service}', [SellersController::class, 'update'])->name('sellers.update');
+        Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');
     });
     Route::prefix('wishlists')->group(function () {
         Route::get('/{user}/wishlist', [WishlistsController::class, 'show'])->name('wishlists.show');

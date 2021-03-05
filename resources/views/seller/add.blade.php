@@ -24,6 +24,10 @@
                         <input type="text" name="url" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="Website" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Seller Picture</label>
+                        <input type="file" class="form-control" name="image" aria-describedby="emailHelp">
+                    </div>
 
                     <button type="submit" class="btn btn-outline-success">Create</button>
                 </form>

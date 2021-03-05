@@ -5,23 +5,42 @@
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-2">
+                <img src="{{ asset($seller->sellerImage()) }}" class="rounded-circle" width="200px" height="200px">
+
+            </div>
+            <div class="col-sm-4">
                 <a href="{{ route('services.index') }}" class="btn btn-outline-primary mb-3">Back</a>
                 <h2>{{ $seller->sellername }}</h2>
-                <h3>Address: {{ $seller->address }}</h3>
+                <h3>From {{ $seller->address }}</h3>
                 <h3>Website: {{ $seller->url }}</h3>
             </div>
-            <div class="col-sm-6 mt-auto">
-                <a href="{{ route('services.create') }}" class="btn btn-outline-success mb-3">Add Service</a>
-            </div>
+            @if ($seller->id == auth()->id())
+                <div class="col-sm-6 mt-auto">
+                    <a href="{{ route('services.create') }}" class="btn btn-outline-success mb-3">Add Service</a>
+                    <a href="{{ route('sellers.edit', $seller) }}" class="btn btn-outline-secondary mb-3">Update Seller
+                        Profile</a>
+                </div>
+
+
+            @else
+            @endif
         </div>
         <div class="row">
             <div class="container trending-wrapper mb-5">
                 <div class="col-md-12 text-center">
                     @if ($services->count() == 0)
-                        <h3 class="">You didn't sell any service yet</h3>
+                        <h3 class="">
+                            @if (auth()->id() == $seller->id)You didn't Sell any Service
+                            Yet @else
+                                {{ $seller->sellername }} Didn't Have any Services Yet @endif
+                        </h3>
                     @else
-                        <h3 class='mb-4'>Your Services</h3>
+                        <h3 class='mb-4'>
+                        @if (auth()->id() == $seller->id)Your Services @else
+                                {{ $seller->sellername }} Services @endif
+                        </h3>
+
                         <div class="row row-cols-1 row-cols-md-6">
                             @foreach ($services as $item)
                                 <div class="col mb-4 link-web">

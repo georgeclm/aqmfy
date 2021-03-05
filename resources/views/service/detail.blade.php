@@ -29,7 +29,8 @@
                     @error('service_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                    <a href="{{ route('orders.nowShow', $service) }}" class="btn btn-success">Buy Now</a>
+                    <a href="{{ route('orders.nowShow', $service) }}" class="btn btn-success">Continue
+                        (Rp. {{ number_format($service->price) }})</a>
                 @else
                     <a href="{{ route('services.edit', $service) }}" class="btn btn-outline-primary mb-4">Edit Your
                         Gig</a>
@@ -48,9 +49,29 @@
         <div class="row">
             <div class="col-sm-6 ">
                 <h2 class="text-center">About This Gig</h2> <br>
-                <h4>{{ $service->description }}</h4>
             </div>
+            <div class="col-sm-6 ">
+                <h2 class="text-center">About The Seller</h2> <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>{{ $service->description }}</h4>
 
+            </div>
+            <div class="col-sm-2">
+                <img src="{{ asset($service->seller->sellerImage()) }}" class="rounded-circle" width="200px"
+                    height="200px">
+            </div>
+            <div class="link-web col-sm-4 mt-5">
+                <a href="{{ route('sellers.show', $service->seller) }}"><strong>
+                        <h4>{{ $service->seller->sellername }}
+                    </strong></h4>
+                </a>
+                <h4>From {{ $service->seller->address }}</h4>
+                <h4>{{ $service->seller->url }}</h4>
+
+            </div>
         </div>
     </div>
 @endsection

@@ -25,11 +25,12 @@ Auth::routes();
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 // for the search using ajax
 Route::get("/search", [ServicesController::class, 'search']);
+Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show');
+
 Route::middleware(['auth'])->group(function () {
     Route::prefix('service')->group(function () {
         Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
         Route::post('/', [ServicesController::class, 'store'])->name('services.store');
-        Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show');
         Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
         Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
         Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
@@ -46,16 +47,13 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::prefix('wishlists')->group(function () {
         Route::get('/{user}/wishlist', [WishlistsController::class, 'show'])->name('wishlists.show');
-        Route::post('/', [WishlistsController::class, 'store'])->name('wishlists.store');
-        Route::delete('/{wishlist}', [WishlistsController::class, 'destroy'])->name('wishlists.destroy');
+        Route::post('/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
     });
-    Route::post('/wishlist/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
 
     Route::prefix('orders')->group(function () {
         Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');
-        Route::get('/{user}/order', [OrdersController::class, 'order'])->name('orders.show');
-        Route::get('/{service}/ordernow', [OrdersController::class, 'orderNow'])->name('orders.nowShow');
-        Route::post('/buy', [OrdersController::class, 'buyNow'])->name('orders.now');
+        Route::get('/{service}/order', [OrdersController::class, 'show'])->name('orders.show');
+        Route::get('/{service}/pay', [OrdersController::class, 'pay'])->name('orders.pay');
         Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
     });
 });

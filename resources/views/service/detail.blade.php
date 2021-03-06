@@ -17,19 +17,15 @@
 
                 <br><br>
                 @if (auth()->id() != $service->seller->id)
-                    {{-- <form action="{{ route('wishlists.store') }}" method="POST">
-                        @csrf
-                        <!--This input hidden to take the service id that is going to wishlist-->
-                        <input type="hidden" name="service_id" value="{{ $service->id }}">
-                        <button class="btn btn-primary">
-                            Add to Wishlist</button><br><br>
+                    @guest
+                    @else
+                        <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>
 
-                    </form> --}}
-                    <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>
+                    @endguest
                     @error('service_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                    <a href="{{ route('orders.nowShow', $service) }}" class="btn btn-success">Continue
+                    <a href="{{ route('orders.show', $service) }}" class="btn btn-success">Continue
                         (Rp. {{ number_format($service->price) }})</a>
                 @else
                     <a href="{{ route('services.edit', $service) }}" class="btn btn-outline-primary mb-4">Edit Your

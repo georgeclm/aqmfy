@@ -76,6 +76,16 @@
 
 </script>
 <style>
+    input[type='radio'] {
+        transform: scale(2);
+    }
+
+    input[type=radio]+label::before {
+        content: '';
+        display: inline-block;
+        margin: 0 0.5rem;
+    }
+
     .custom-login {
         height: 500px;
         padding-top: 100px;

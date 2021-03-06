@@ -11,14 +11,14 @@
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
                                 <a href="{{ route('services.show', $item->id) }}">
-                                    <img class="trending-image" src="{{ asset("storage/product/{$item->image}") }}">
+                                    <img width="150" src="{{ asset("storage/product/{$item->image}") }}">
                                 </a>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-9">
                                 <div class="">
                                     <h2>Name: {{ $item->name }}</h2>
                                     <h5>Delivery Status: {{ $item->status }}</h5>
-                                    <h5>Description: {{ Str::limit($item->description, 25) }}</h5>
+                                    <h5>Description: {{ Str::limit($item->description, 40) }}</h5>
                                     <h5>Payment Status: {{ $item->payment_status }}</h5>
                                     <h5>Paymenent Method: {{ $item->payment_method }}</h5>
 

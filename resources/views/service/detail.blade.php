@@ -13,14 +13,11 @@
                 <h4>Category: {{ $service->category }}</h4>
                 <h4>Delivery Time: {{ $service->delivery_time }} day</h4>
                 <h4>Revisions: {{ $service->revision_time }}</h4>
-
-
                 <br><br>
                 @if (auth()->id() != $service->seller->id)
                     @guest
                     @else
                         <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>
-
                     @endguest
                     @error('service_id')
                         <div class="alert alert-danger">{{ $message }}</div>

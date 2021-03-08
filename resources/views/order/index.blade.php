@@ -10,7 +10,7 @@
                     @foreach ($orders as $item)
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
-                                <a href="{{ route('services.show', $item->id) }}">
+                                <a href="{{ route('services.show', [$item, $item->seller]) }}">
                                     <img width="150" src="{{ asset("storage/product/{$item->image}") }}">
                                 </a>
                             </div>
@@ -21,6 +21,8 @@
                                     <h5>Description: {{ Str::limit($item->description, 40) }}</h5>
                                     <h5>Payment Status: {{ $item->payment_status }}</h5>
                                     <h5>Paymenent Method: {{ $item->payment_method }}</h5>
+                                    <h5>Quantity: {{ $item->quantity }}</h5>
+
 
                                 </div>
                             </div>

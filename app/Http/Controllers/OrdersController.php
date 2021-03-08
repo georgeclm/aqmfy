@@ -19,15 +19,19 @@ class OrdersController extends Controller
     }
     function show(Service $service)
     {
-        return view('order.show', compact('service'));
+        $choice = 1;
+        $total = $service->price;
+        return view('order.show', compact('service', 'total', 'choice'));
     }
     function pay(Service $service)
     {
-        return view('order.order', compact('service'));
+        $price = request()->price;
+        return view('order.order', compact('service', 'price'));
     }
     public function store(Request $request)
     {
         $order = new Order;
+        $order->quantity = $request->quantity;
         $order->service_id = $request->service_id;
         $order->user_id = auth()->id();
         $order->status = 'Pending';
@@ -36,5 +40,11 @@ class OrdersController extends Controller
         $order->description = $request->description;
         $order->save();
         return redirect('/')->with('success', 'Service have been ordered');
+    }
+    function changeQuantity(Service $service)
+    {
+        $choice = request()->quantity;
+        $total = $choice * $service->price;
+        return view('order.show', compact('service', 'total', 'choice'));
     }
 }

@@ -18,7 +18,7 @@ export default {
   methods: {
     followUser() {
       axios
-        .post("/wishlist/" + this.serviceId)
+        .post("/wishlists/" + this.serviceId)
         .then((response) => {
           this.status = !this.status;
         })

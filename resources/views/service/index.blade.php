@@ -15,7 +15,7 @@
         <div class="carousel-inner">
             @foreach ($services as $item)
                 <div class="carousel-item {{ $item->id == $first ? 'active' : '' }}" data-bs-interval="10000">
-                    <a href="{{ route('services.show', $item->id) }}">
+                    <a href="{{ route('services.show', [$item->seller, $item]) }}">
                         <div class="text-center">
                             <img src="{{ asset("storage/product/{$item->image}") }}" class="slider-img" alt="...">
 
@@ -44,7 +44,7 @@
                 @if ($services->count())
                     @foreach ($services as $item)
                         <div class="col mb-4 link-web">
-                            <a href="{{ route('services.show', $item->id) }}">
+                            <a href="{{ route('services.show', [$item->seller, $item]) }}">
                                 <div class="card h-100 rounded" style="width: 12rem;">
                                     <img src="{{ asset("storage/product/{$item->image}") }}" class="card-img-top"
                                         style="width: 12rem; height: 12rem; background-size: cover; background-position: center;">

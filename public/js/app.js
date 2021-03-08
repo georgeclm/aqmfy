@@ -5002,7 +5002,7 @@ __webpack_require__.r(__webpack_exports__);
     followUser: function followUser() {
       var _this = this;
 
-      axios.post("/wishlist/" + this.serviceId).then(function (response) {
+      axios.post("/wishlists/" + this.serviceId).then(function (response) {
         _this.status = !_this.status;
       })["catch"](function (errors) {
         if (errors.response.status == 401) {

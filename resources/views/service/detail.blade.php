@@ -58,12 +58,12 @@
                     height="200px">
             </div>
             <div class="link-web col-sm-4 mt-5">
-                <a href="{{ route('sellers.show', $service->seller) }}"><strong>
-                        <h4>{{ $service->seller->sellername }}
+                <a href="{{ route('sellers.show', $seller) }}"><strong>
+                        <h4>{{ $seller->sellername }}
                     </strong></h4>
                 </a>
-                <h4>From {{ $service->seller->address }}</h4>
-                <h4>{{ $service->seller->url }}</h4>
+                <h4>From {{ $seller->address }}</h4>
+                <h4>{{ $seller->url }}</h4>
 
             </div>
         </div>

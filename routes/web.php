@@ -25,7 +25,9 @@ Auth::routes();
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 // for the search using ajax
 Route::get("/search", [ServicesController::class, 'search']);
-Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('/{seller}/{service}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('service')->group(function () {
@@ -41,7 +43,6 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('seller')->group(function () {
         Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
-        Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show');
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
         Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');
     });
@@ -51,9 +52,10 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('orders')->group(function () {
+        Route::post('/{service}', [OrdersController::class, 'changeQuantity'])->name('orders.qty');
         Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');
         Route::get('/{service}/order', [OrdersController::class, 'show'])->name('orders.show');
-        Route::get('/{service}/pay', [OrdersController::class, 'pay'])->name('orders.pay');
+        Route::post('/{service}/pay', [OrdersController::class, 'pay'])->name('orders.pay');
         Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
     });
 });

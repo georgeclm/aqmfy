@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seller;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,10 @@ class ServicesController extends Controller
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first'));
     }
-    function show(Service $service)
+    function show(Seller $seller, Service $service)
     {
         $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
-        return view('service.detail', compact('service', 'favorite'));
+        return view('service.detail', compact('service', 'favorite', 'seller'));
     }
     public function create()
     {
@@ -86,7 +87,7 @@ class ServicesController extends Controller
             $data,
             $imageArray ?? []
         ));
-        return redirect()->route('services.show', $service)->with('success', 'Gig Have Been Updated');
+        return redirect()->route('services.show', $service, $service->seller)->with('success', 'Gig Have Been Updated');
     }
     public function destroy(Service $service)
     {

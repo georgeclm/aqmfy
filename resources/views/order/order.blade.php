@@ -49,6 +49,7 @@
                         </div>
                     </div><br>
                     <input type="hidden" name="service_id" value="{{ $service->id }}">
+                    <input type="hidden" name="quantity" value="{{ $price / $service->price }}">
                 </form>
 
 
@@ -60,16 +61,16 @@
                         <h5 class="card-title mb-4"><strong>Summary</strong></h5>
                         <div class="d-flex mb-4">
                             <p class="card-text">Subtotal</p>
-                            <div class="ms-auto">Rp. {{ number_format($service->price) }}</div>
+                            <div class="ms-auto">Rp. {{ number_format($price) }}</div>
                         </div>
                         <div class="d-flex">
                             <p class="card-text">Service Fee</p>
-                            <div class="ms-auto">Rp. {{ number_format(($service->price * 10) / 100) }}</div>
+                            <div class="ms-auto">Rp. {{ number_format(($price * 10) / 100) }}</div>
                         </div>
                         <hr>
                         <div class="d-flex">
                             <p class="card-text"><strong>Total</strong> </p>
-                            <div class="ms-auto"><strong>Rp. {{ number_format(($service->price * 110) / 100) }}</strong>
+                            <div class="ms-auto"><strong>Rp. {{ number_format(($price * 110) / 100) }}</strong>
                             </div>
                         </div>
                         <div class="d-flex">

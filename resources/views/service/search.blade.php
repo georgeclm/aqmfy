@@ -14,7 +14,7 @@
                         @if ($services->count())
                             @foreach ($services as $item)
                                 <div class="col mb-4 link-web">
-                                    <a href="{{ route('services.show', $item->id) }}">
+                                    <a href="{{ route('services.show', [$item, $item->seller]) }}">
                                         <div class="card h-100 rounded" style="width: 12rem;">
                                             <img src="{{ asset("storage/product/{$item->image}") }}" class="card-img-top"
                                                 style="width: 12rem; height: 12rem; background-size: cover; background-position: center;">

@@ -13,16 +13,16 @@
             <li data-bs-target="#carouselExampleDark" data-bs-slide-to="6"></li>
         </ol>
         <div class="carousel-inner">
-            @foreach ($services as $item)
-                <div class="carousel-item {{ $item->id == $first ? 'active' : '' }}" data-bs-interval="10000">
-                    <a href="{{ route('services.show', [$item->seller, $item]) }}">
+            @foreach ($services as $service)
+                <div class="carousel-item {{ $service->id == $first ? 'active' : '' }}" data-bs-interval="10000">
+                    <a href="{{ route('services.show', [$service->seller, $service]) }}">
                         <div class="text-center">
-                            <img src="{{ asset("storage/product/{$item->image}") }}" class="slider-img" alt="...">
+                            <img src="{{ asset("storage/product/{$service->image}") }}" class="slider-img" alt="...">
 
                         </div>
                         <div class="carousel-caption d-none d-md-block slider-text text-light">
-                            <h5>{{ $item->name }}</h5>
-                            <p>{{ Str::limit($item->description, 50) }}</p>
+                            <h5>{{ $service->name }}</h5>
+                            <p>{{ Str::limit($service->description, 50) }}</p>
                         </div>
                     </a>
                 </div>
@@ -42,15 +42,15 @@
             <h3 class='mb-4'>Trending Services</h3>
             <div class="row row-cols-1 row-cols-md-6">
                 @if ($services->count())
-                    @foreach ($services as $item)
+                    @foreach ($services as $service)
                         <div class="col mb-4 link-web">
-                            <a href="{{ route('services.show', [$item->seller, $item]) }}">
+                            <a href="{{ route('services.show', [$service->seller, $service]) }}">
                                 <div class="card h-100 rounded" style="width: 12rem;">
-                                    <img src="{{ asset("storage/product/{$item->image}") }}" class="card-img-top"
+                                    <img src="{{ asset("storage/product/{$service->image}") }}" class="card-img-top"
                                         style="width: 12rem; height: 12rem; background-size: cover; background-position: center;">
                                     <div class="card-body">
-                                        <h6 class="card-title">{{ $item->name }}</h6>
-                                        <h5 class="card-text"> Rp. {{ number_format($item->price) }}</h5>
+                                        <h6 class="card-title">{{ $service->name }}</h6>
+                                        <h5 class="card-text"> Rp. {{ number_format($service->price) }}</h5>
 
                                     </div>
                                 </div>

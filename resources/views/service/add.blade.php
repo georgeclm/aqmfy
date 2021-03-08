@@ -28,12 +28,14 @@
                         <input type="number" name="revision_time" class="form-control" id="exampleInputEmail1"
                             aria-describedby="emailHelp" placeholder="0" required>
                     </div>
-
-
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Category</label>
-                        <input type="text" name="category" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Category" required>
+                        <select name="category" class="form-select" required>
+                            <option selected>Choose Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Description</label>

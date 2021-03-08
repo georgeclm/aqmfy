@@ -9,7 +9,7 @@
                     @foreach ($services as $service)
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
-                                <a href="{{ route('services.show', [$service, $service->seller]) }}">
+                                <a href="{{ route('services.show', $service) }}">
                                     <img class="trending-image"
                                         src="{{ asset("storage/product/{$service->image}") }}">
                                 </a>

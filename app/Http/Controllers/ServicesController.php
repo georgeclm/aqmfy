@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Seller;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -14,14 +15,15 @@ class ServicesController extends Controller
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first'));
     }
-    function show(Seller $seller, Service $service)
+    function show(Service $service)
     {
         $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
-        return view('service.detail', compact('service', 'favorite', 'seller'));
+        return view('service.detail', compact('service', 'favorite'));
     }
     public function create()
     {
-        return view('service.add');
+        $categories = Category::all();
+        return view('service.add', compact('categories'));
     }
     public function store(Request $request)
     {
@@ -44,12 +46,12 @@ class ServicesController extends Controller
         $service = new Service([
             "name" => $request->name,
             "price" => $request->price,
-            "category" => $request->category,
             "description" => $request->description,
             "delivery_time" => $request->delivery_time,
             "revision_time" => $request->revision_time,
             "image" => $request->image->hashName(),
-            "seller_id" => auth()->user()->seller->id
+            "seller_id" => auth()->user()->seller->id,
+            "category_id" => $request->category
         ]);
         $service->save(); // Finally, save the record.
         return redirect('/');
@@ -87,7 +89,7 @@ class ServicesController extends Controller
             $data,
             $imageArray ?? []
         ));
-        return redirect()->route('services.show', $service, $service->seller)->with('success', 'Gig Have Been Updated');
+        return redirect()->route('services.show', $service)->with('success', 'Gig Have Been Updated');
     }
     public function destroy(Service $service)
     {

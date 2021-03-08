@@ -17,4 +17,8 @@ class Service extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

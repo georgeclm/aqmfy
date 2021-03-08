@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Category;
 use Illuminate\View\Component;
 
 class header extends Component
@@ -14,8 +15,10 @@ class header extends Component
     public $wishlist;
     public $order;
     public $hasSeller;
+    public $categories;
     public function __construct()
     {
+        $this->categories = Category::all();
         if (auth()->user()) {
             if (auth()->user()->seller) {
                 $this->hasSeller = true;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
@@ -25,23 +26,25 @@ Auth::routes();
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 // for the search using ajax
 Route::get("/search", [ServicesController::class, 'search']);
-Route::get('/{seller}/{service}', [ServicesController::class, 'show'])->name('services.show');
-Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show');
+Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show');
+Route::get('/search/{category}', [CategoriesController::class, 'search'])->name('search.category');
+
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('service')->group(function () {
-        Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
+    Route::prefix('services')->group(function () {
+        Route::get('/c/create', [ServicesController::class, 'create'])->name('services.create');
         Route::post('/', [ServicesController::class, 'store'])->name('services.store');
         Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
         Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
         Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
     });
-    Route::get('/{user}', [UsersController::class, 'show'])->name('profile.index');
+    Route::get('/profiles/{user}', [UsersController::class, 'show'])->name('profile.userprofile');
 
 
     Route::prefix('seller')->group(function () {
-        Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
+        Route::get("/s/create", [SellersController::class, 'create'])->name('sellers.create');
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
         Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');

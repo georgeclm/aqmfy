@@ -21,6 +21,20 @@
                             <a class="nav-link @if ($order) active @endif"
                                 href="{{ route('orders.index', auth()->user()) }}">Orders</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach ($categories as $category)
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+
                     @endguest
                 </ul>
                 <div class="col-md-8 text-center">
@@ -75,7 +89,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item"
-                                        href="{{ route('profile.index', auth()->user()) }}">Profile</a>
+                                        href="{{ route('profile.userprofile', auth()->user()) }}">Profile</a>
                                 </li>
 
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"

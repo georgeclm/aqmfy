@@ -10,7 +10,7 @@
                     @foreach ($orders as $service)
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
-                                <a href="{{ route('services.show', [$service, $service->seller]) }}">
+                                <a href="{{ route('services.show', $service) }}">
                                     <img width="150" src="{{ asset("storage/product/{$service->image}") }}">
                                 </a>
                             </div>

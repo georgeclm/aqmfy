@@ -19,6 +19,7 @@
                     @else
                         <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>
                     @endguest
+
                     @error('service_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

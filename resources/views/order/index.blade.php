@@ -7,21 +7,21 @@
             <div class="trending-wrapper">
                 @if ($orders->count() != 0)
                     <h2 class="mb-3">My Orders</h2>
-                    @foreach ($orders as $service)
+                    @foreach ($orders as $order)
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
-                                <a href="{{ route('services.show', $service) }}">
-                                    <img width="150" src="{{ asset("storage/product/{$service->image}") }}">
+                                <a href="{{ route('services.show', $order->service_id) }}">
+                                    <img width="150" src="{{ asset("storage/product/{$order->image}") }}">
                                 </a>
                             </div>
                             <div class="col-sm-9">
                                 <div class="">
-                                    <h2>Name: {{ $service->name }}</h2>
-                                    <h5>Delivery Status: {{ $service->status }}</h5>
-                                    <h5>Description: {{ Str::limit($service->description, 40) }}</h5>
-                                    <h5>Payment Status: {{ $service->payment_status }}</h5>
-                                    <h5>Paymenent Method: {{ $service->payment_method }}</h5>
-                                    <h5>Quantity: {{ $service->quantity }}</h5>
+                                    <h2>Name: {{ $order->name }}</h2>
+                                    <h5>Delivery Status: {{ $order->status }}</h5>
+                                    <h5>Description: {{ Str::limit($order->description, 40) }}</h5>
+                                    <h5>Payment Status: {{ $order->payment_status }}</h5>
+                                    <h5>Paymenent Method: {{ $order->payment_method }}</h5>
+                                    <h5>Quantity: {{ $order->quantity }}</h5>
 
 
                                 </div>

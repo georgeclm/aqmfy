@@ -61,7 +61,6 @@ class ServicesController extends Controller
         // for the search engine inside database search all the name like to following value
         $query = $request->input('query');
         $services = Service::where('name', 'LIKE', '%' . $query . '%')
-            ->orWhere('category', 'LIKE', '%' . $query . '%')
             ->orWhere('description', 'LIKE', '%' . $query . '%')
             ->get();
         return view('service.search', compact('services'));

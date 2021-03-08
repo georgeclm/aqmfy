@@ -37,7 +37,7 @@
 
                     @endguest
                 </ul>
-                <div class="col-md-8 text-center">
+                <div class="col-md-7 text-center">
                     <form action="/search" class="d-flex container-fluid">
                         <input class="form-control me-2" name="query" type="search" placeholder="Find Services"
                             aria-label="Search">

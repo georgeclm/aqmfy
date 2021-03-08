@@ -11,10 +11,13 @@ class OrdersController extends Controller
 {
     function index()
     {
+        // $orders = auth()->user()->order;
+        // dd($orders[0]);
         $orders = DB::table('orders')
             ->join('services', 'orders.service_id', '=', 'services.id')
             ->where('orders.user_id', auth()->id())
             ->get();
+        // dd($orders);
         return view('order.index', compact('orders'));
     }
     function show(Service $service)

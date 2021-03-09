@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Seller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ServicesController extends Controller
 {
@@ -59,10 +60,15 @@ class ServicesController extends Controller
     function search(Request $request)
     {
         // for the search engine inside database search all the name like to following value
+        // dd(Session::get('services'));
         $query = $request->input('query');
-        $services = Service::where('name', 'LIKE', '%' . $query . '%')
-            ->orWhere('description', 'LIKE', '%' . $query . '%')
-            ->get();
+        if ($query == null) {
+            $services = Session::get('services');
+        } else {
+            $services = Service::where('name', 'LIKE', '%' . $query . '%')
+                ->orWhere('description', 'LIKE', '%' . $query . '%')
+                ->get();
+        }
         return view('service.search', compact('services'));
     }
     public function edit(Service $service)

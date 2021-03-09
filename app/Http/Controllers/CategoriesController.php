@@ -11,6 +11,6 @@ class CategoriesController extends Controller
     public function search(Category $category)
     {
         $services = Service::where('category_id', $category->id)->get();
-        return view('service.search', compact('services'));
+        return redirect()->route('search')->with(compact('services'));
     }
 }

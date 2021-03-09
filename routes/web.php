@@ -25,7 +25,7 @@ Auth::routes();
 
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 // for the search using ajax
-Route::get("/search", [ServicesController::class, 'search']);
+Route::get("/search", [ServicesController::class, 'search'])->name('search');
 Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
 Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show');
 Route::get('/search/{category}', [CategoriesController::class, 'search'])->name('search.category');

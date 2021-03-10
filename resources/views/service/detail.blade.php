@@ -67,5 +67,95 @@
 
             </div>
         </div>
-    </div>
-@endsection
+        <div class="row">
+            <div class="col-sm-6">
+                @if (count($stars) != 0)
+                    @foreach ($service->ratings as $rating)
+                        <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        <span class="heading"><strong>{{ $service->ratings->count() }} Reviews</strong></span>
+                        <span class="fa fa-star @if ($average>= 1) checked @endif"></span>
+                        <span class="fa fa-star @if ($average>= 2) checked @endif"></span>
+                        <span class="fa fa-star @if ($average>= 3) checked @endif"></span>
+                        <span class="fa fa-star @if ($average>= 4) checked @endif"></span>
+                        <span class="fa fa-star @if ($average>= 5) checked @endif"></span>
+                        <span class="heading"><strong> {{ $average }}</strong></span>
+
+                        <hr style="border:3px solid #f1f1f1">
+
+                        <div class="row">
+                            <div class="side">
+                                <div class="h5">5 Stars</div>
+                            </div>
+                            <div class="middle">
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $stars[1] }}%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="side right">
+                                <div class="h5">{{ number_format($stars[0]) }}</div>
+                            </div>
+                            <div class="side">
+                                <div class="h5">4 Stars</div>
+                            </div>
+                            <div class="middle">
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $stars[3] }}%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="side right">
+                                <div class="h5">{{ number_format($stars[2]) }}</div>
+                            </div>
+                            <div class="side">
+                                <div class="h5">3 Stars</div>
+                            </div>
+                            <div class="middle">
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $stars[5] }}%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="side right">
+                                <div class="h5">{{ number_format($stars[4]) }}</div>
+                            </div>
+                            <div class="side">
+                                <div class="h5">2 Stars</div>
+                            </div>
+                            <div class="middle">
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $stars[7] }}%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="side right">
+                                <div class="h5">{{ number_format($stars[6]) }}</div>
+                            </div>
+                            <div class="side">
+                                <div class="h5">1 Star</div>
+                            </div>
+                            <div class="middle">
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ $stars[9] }}%"
+                                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="side right">
+                                <div class="h5">{{ number_format($stars[8]) }}</div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="h5 link-web pt-1">
+                            {{ $rating->user->name }} <strong>★ {{ $rating->rating }}</strong>
+                        </div>
+                        <div class="container h5">
+                            {{ $rating->comment }}
+                        </div>
+
+                    @endforeach
+                @endif
+
+            </div>
+        </div>
+    @endsection

@@ -6,19 +6,25 @@ use App\Models\Order;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OrdersController extends Controller
 {
     function index()
     {
         // $orders = auth()->user()->order;
-        // dd($orders[0]);
+        if (Session::has('rating')) {
+            $ratingserviceid = Session::get('rating')['order']->service_id;
+        } else {
+            $ratingserviceid = null;
+        }
         $orders = DB::table('orders')
             ->join('services', 'orders.service_id', '=', 'services.id')
             ->where('orders.user_id', auth()->id())
+            ->select('services.*', 'orders.*')
             ->get();
         // dd($orders);
-        return view('order.index', compact('orders'));
+        return view('order.index', compact('orders', 'ratingserviceid'));
     }
     function show(Service $service)
     {
@@ -49,5 +55,10 @@ class OrdersController extends Controller
         $choice = request()->quantity;
         $total = $choice * $service->price;
         return view('order.show', compact('service', 'total', 'choice'));
+    }
+    public function destroy(Order $order)
+    {
+        Order::destroy($order->id);
+        return redirect()->route('orders.index', auth()->user())->with('rating', compact('order'));
     }
 }

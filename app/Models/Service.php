@@ -21,4 +21,8 @@ class Service extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class)->orderBy('created_at', 'DESC');
+    }
 }

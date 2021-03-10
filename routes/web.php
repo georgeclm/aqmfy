@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
@@ -60,5 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{service}/order', [OrdersController::class, 'show'])->name('orders.show');
         Route::post('/{service}/pay', [OrdersController::class, 'pay'])->name('orders.pay');
         Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
+        Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('orders.destroy');
     });
+    Route::post('/rating', [RatingsController::class, 'store'])->name('ratings.store');
 });

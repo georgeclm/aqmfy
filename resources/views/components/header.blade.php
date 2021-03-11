@@ -90,7 +90,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item"
-                                        href="{{ route('profile.userprofile', auth()->user()) }}">Profile</a>
+                                        href="{{ route('profiles.edit', auth()->user()) }}">Profile</a>
                                 </li>
 
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"

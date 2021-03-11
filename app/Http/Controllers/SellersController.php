@@ -18,6 +18,7 @@ class SellersController extends Controller
         $seller->sellername = $request->sellername;
         $seller->address = $request->address;
         $seller->url = $request->url;
+        $seller->description = $request->description;
         $seller->user_id = auth()->id();
         if ($request->hasFile('image')) {
             $request->validate([
@@ -43,10 +44,11 @@ class SellersController extends Controller
     public function update(Seller $seller)
     {
         $data = request()->validate([
-            'sellername' => '',
-            'address' => '',
+            'sellername' => 'required',
+            'address' => 'required',
             'url' => '',
             'image' => 'image',
+            'description' => ''
         ]);
         if (request('image')) {
             request('image')->store('product', 'public');

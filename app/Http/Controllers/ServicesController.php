@@ -12,7 +12,7 @@ class ServicesController extends Controller
 {
     function index()
     {
-        $services = Service::all();
+        $services = Service::with('ratings')->get();
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first'));
     }
@@ -96,7 +96,7 @@ class ServicesController extends Controller
     public function update(Service $service)
     {
         $data = request()->validate([
-            'name' => '',
+            'name' => 'required',
             'price' => '',
             'delivery_time' => '',
             'revision_time' => '',

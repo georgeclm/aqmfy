@@ -25,6 +25,11 @@
                             aria-describedby="emailHelp" placeholder="Website" required>
                     </div>
                     <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description of You</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="image" class="form-label">Seller Picture</label>
                         <input type="file" class="form-control" name="image" aria-describedby="emailHelp">
                     </div>

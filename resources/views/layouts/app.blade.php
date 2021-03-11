@@ -15,7 +15,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -54,9 +54,6 @@
     </div>
 </body>
 <script>
-    $(':radio').change(function() {
-        console.log('New star rating: ' + this.value);
-    });
     $('.livesearch').select2({
         placeholder: 'Search',
         ajax: {
@@ -163,6 +160,14 @@
         font-size: 50px;
     }
 
+    .ratingindex {
+        display: inline-block;
+        position: relative;
+        height: 20px;
+        line-height: 20px;
+        font-size: 20px;
+    }
+
     .rating label {
         position: absolute;
         top: 0;
@@ -230,6 +235,10 @@
         font-size: 25px;
     }
 
+    .fb {
+        font-size: 15px;
+    }
+
     .checked {
         color: orange;
     }
@@ -259,44 +268,7 @@
         clear: both;
     }
 
-    /* The bar container */
-    .bar-container {
-        width: 100%;
-        background-color: #f1f1f1;
-        text-align: center;
-        color: white;
-    }
 
-    /* Individual bars */
-    .bar-5 {
-        width: 60%;
-        height: 18px;
-        background-color: #4CAF50;
-    }
-
-    .bar-4 {
-        width: 30%;
-        height: 18px;
-        background-color: #2196F3;
-    }
-
-    .bar-3 {
-        width: 10%;
-        height: 18px;
-        background-color: #00bcd4;
-    }
-
-    .bar-2 {
-        width: 4%;
-        height: 18px;
-        background-color: #ff9800;
-    }
-
-    .bar-1 {
-        width: 15%;
-        height: 18px;
-        background-color: #f44336;
-    }
 
     /* Responsive layout - make the columns stack on top of each other instead of next to each other */
     @media (max-width: 400px) {

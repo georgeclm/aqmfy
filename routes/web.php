@@ -41,7 +41,9 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
         Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
     });
-    Route::get('/profiles/{user}', [UsersController::class, 'show'])->name('profile.userprofile');
+    Route::get('/profiles/{user}', [UsersController::class, 'edit'])->name('profiles.edit');
+    Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
+
 
 
     Route::prefix('seller')->group(function () {

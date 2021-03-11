@@ -27,6 +27,11 @@
                             value="{{ old('url') ?? $seller->url }}" aria-describedby="emailHelp" placeholder="Website">
                     </div>
                     <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description of You</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Seller Image</label>
                         <input type="file" name="image" class="form-control" id="exampleInputEmail1"
                             value="{{ old('image') }}" aria-describedby="emailHelp">

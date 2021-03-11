@@ -11,20 +11,25 @@
             </div>
             <div class="col-sm-4">
                 <a href="{{ route('services.index') }}" class="btn btn-outline-primary mb-3">Back</a>
-                <h2>{{ $seller->sellername }}</h2>
+                <h2><strong>{{ $seller->sellername }}</strong></h2>
                 <h3>From {{ $seller->address }}</h3>
                 <h3>Website: {{ $seller->url }}</h3>
             </div>
+            <div class="col-sm-4">
+                <div class="h4"><strong> Description</strong></div>
+                <div class="h5">{{ $seller->description }}</div>
+            </div>
+
             @if ($seller->id == auth()->id())
-                <div class="col-sm-6 mt-auto">
+                <div class="col-sm-2 align-self-end">
                     <a href="{{ route('services.create') }}" class="btn btn-outline-success mb-3">Add Service</a>
-                    <a href="{{ route('sellers.edit', $seller) }}" class="btn btn-outline-secondary mb-3">Update Seller
+                    <a href="{{ route('sellers.edit', $seller) }}" class="btn btn-outline-secondary mb-3">Update
+                        Seller
                         Profile</a>
                 </div>
-
-
             @else
             @endif
+
         </div>
         <div class="row">
             <div class="container trending-wrapper mb-5">

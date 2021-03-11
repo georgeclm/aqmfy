@@ -71,8 +71,6 @@
             <div class="col-sm-6">
                 @if (count($stars) != 0)
                     @foreach ($service->ratings as $rating)
-                        <link rel="stylesheet"
-                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                         <span class="heading"><strong>{{ $service->ratings->count() }} Reviews</strong></span>
                         <span class="fa fa-star @if ($average>= 1) checked @endif"></span>
                         <span class="fa fa-star @if ($average>= 2) checked @endif"></span>

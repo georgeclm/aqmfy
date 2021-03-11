@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/profiles/{user}', [UsersController::class, 'edit'])->name('profiles.edit');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
+    Route::post('/follow/{user}', [UsersController::class, 'follow']);
 
 
 

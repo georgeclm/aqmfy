@@ -54,4 +54,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Service::class);
     }
+    public function following()
+    {
+        return $this->belongsToMany(Seller::class);
+    }
 }

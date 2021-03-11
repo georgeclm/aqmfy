@@ -24,4 +24,8 @@ class Seller extends Model
     {
         return $this->hasMany(Service::class);
     }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

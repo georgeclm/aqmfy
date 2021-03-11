@@ -35,7 +35,8 @@ class SellersController extends Controller
     function show(Seller $seller)
     {
         $services = Service::where('seller_id', $seller->id)->get();
-        return view('seller.detail', compact('seller', 'services'));
+        $follows = (auth()->user()) ? auth()->user()->following->contains($seller->id) : false;
+        return view('seller.detail', compact('seller', 'services', 'follows'));
     }
     public function edit(Seller $seller)
     {

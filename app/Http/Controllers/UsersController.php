@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function follow(User $user)
+    {
+        return auth()->user()->following()->toggle($user->seller);
+    }
     public function edit(User $user)
     {
         return view('profile.edit', compact('user'));

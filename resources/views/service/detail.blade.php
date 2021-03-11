@@ -64,6 +64,10 @@
                 </a>
                 <h4>From {{ $service->seller->address }}</h4>
                 <h4>{{ $service->seller->url }}</h4>
+                <div class="h4">
+                    <strong>{{ $service->seller->followers->count() }}</strong>
+                    followers
+                </div>
 
             </div>
         </div>

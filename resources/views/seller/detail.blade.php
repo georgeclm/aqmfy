@@ -14,6 +14,10 @@
                 <h2><strong>{{ $seller->sellername }}</strong></h2>
                 <h3>From {{ $seller->address }}</h3>
                 <h3>Website: {{ $seller->url }}</h3>
+                <div class="h4">
+                    <strong>{{ $seller->followers->count() }}</strong>
+                    followers
+                </div>
             </div>
             <div class="col-sm-4">
                 <div class="h4"><strong> Description</strong></div>
@@ -28,6 +32,7 @@
                         Profile</a>
                 </div>
             @else
+                <follow-button user-id={{ $seller->id }} follows="{{ $follows }}"></follow-button>
             @endif
 
         </div>

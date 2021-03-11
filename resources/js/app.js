@@ -20,8 +20,9 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 import Vue from 'vue'
-import ExampleComponent from './components/ExampleComponent.vue';
 import WishlistButton from './components/WishlistButton.vue';
+import FollowButton from './components/FollowButton.vue';
+
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
@@ -33,6 +34,6 @@ import WishlistButton from './components/WishlistButton.vue';
 
 const app = new Vue({
     el: '#app',
-    components:{ExampleComponent,WishlistButton}
+    components:{FollowButton,WishlistButton}
 
 });

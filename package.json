@@ -43,6 +43,7 @@
   },
   "homepage": "https://github.com/georgeclm/colance-app#readme",
   "dependencies": {
-    "@popperjs/core": "^2.9.0"
+    "@popperjs/core": "^2.9.0",
+    "typeahead": "^0.2.2"
   }
 }

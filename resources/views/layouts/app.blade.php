@@ -11,7 +11,7 @@
 
     <title>@yield('title')</title>
 
-    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+    <script src="{{ mix('js/app.js') }}"></script>
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,16 +21,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
     </script>
-
 </head>
 
 <body>
+    <x-header />
     <div id="app">
-        <x-header />
         @if (session('error'))
             <div class="alert alert-danger">
                 <ul>
@@ -53,6 +51,7 @@
 </body>
 <script type="text/javascript">
     var path = "{{ route('autocomplete') }}";
+
     $('input.typeahead').typeahead({
         source: function(query, process) {
             return $.get(path, {

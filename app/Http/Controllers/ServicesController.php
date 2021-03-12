@@ -12,6 +12,7 @@ class ServicesController extends Controller
 {
     function index()
     {
+        // dd(auth()->user()->seller);
         $services = Service::with('ratings')->get();
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first'));
@@ -46,6 +47,7 @@ class ServicesController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'category' => 'required',
@@ -85,6 +87,7 @@ class ServicesController extends Controller
         } else {
             $services = Service::where('name', 'LIKE', '%' . $query . '%')
                 ->orWhere('description', 'LIKE', '%' . $query . '%')
+                ->with('ratings')
                 ->get();
         }
         return view('service.search', compact('services'));

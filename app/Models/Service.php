@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
+    protected $table = 'services';
     use HasFactory;
     protected $guarded = [];
     public function seller()

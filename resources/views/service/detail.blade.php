@@ -14,7 +14,7 @@
                 <h4>Delivery Time: {{ $service->delivery_time }} day</h4>
                 <h4>Revisions: {{ $service->revision_time }}</h4>
                 <br><br>
-                @if (auth()->id() != $service->seller->id)
+                @if (auth()->id() != $service->seller->user_id)
                     @guest
                     @else
                         <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>

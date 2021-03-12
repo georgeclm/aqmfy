@@ -10,19 +10,19 @@
                 <form action="{{ route('sellers.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Seller Name</label>
-                        <input type="text" name="sellername" class="form-control" id="exampleInputEmail1"
+                        <label for="exampleInputName" class="form-label">Seller Name</label>
+                        <input type="text" name="sellername" class="form-control" id="exampleInputName"
                             aria-describedby="emailHelp" placeholder="Name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Address</label>
-                        <input type="text" name="address" class="form-control" id="exampleInputEmail1"
+                        <label for="exampleInputAddress" class="form-label">Address</label>
+                        <input type="text" name="address" class="form-control" id="exampleInputAddress"
                             aria-describedby="emailHelp" placeholder="Domicili" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Website Link</label>
-                        <input type="text" name="url" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Website" required>
+                        <label for="exampleInputUrl" class="form-label">Website Link</label>
+                        <input type="text" name="url" class="form-control" id="exampleInputUrl" aria-describedby="emailHelp"
+                            placeholder="Website" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Description of You</label>

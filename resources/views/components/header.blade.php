@@ -71,7 +71,8 @@
                                     Toko
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('sellers.show', auth()->user()) }}">Your
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('sellers.show', auth()->user()->seller) }}">Your
                                             Toko</a></li>
 
                                 </ul>

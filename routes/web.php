@@ -8,7 +8,6 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------

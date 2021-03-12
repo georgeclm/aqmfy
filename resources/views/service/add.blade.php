@@ -45,9 +45,11 @@
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Service Image</label>
-                        <input type="file" name="image" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" required>
+                        <input type="file" name="images[]" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" required multiple>
                     </div>
+
+
 
                     <button type="submit" class="btn btn-outline-primary">Upload Service</button>
                 </form>

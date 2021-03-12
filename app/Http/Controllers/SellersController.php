@@ -14,19 +14,20 @@ class SellersController extends Controller
     }
     function store(Request $request)
     {
+
         $seller = new Seller;
         $seller->sellername = $request->sellername;
         $seller->address = $request->address;
         $seller->url = $request->url;
         $seller->description = $request->description;
         $seller->user_id = auth()->id();
-        if ($request->hasFile('image')) {
+        if ($request->image) {
             $request->validate([
                 'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
+            $request->image->store('product', 'public');
+            $seller->image = $request->image->hashName();
         }
-        $request->file('image')->store('product', 'public');
-        $seller->image = $request->image->hashName();
         $seller->save();
 
 
@@ -34,6 +35,7 @@ class SellersController extends Controller
     }
     function show(Seller $seller)
     {
+
         $services = Service::where('seller_id', $seller->id)->get();
         $follows = (auth()->user()) ? auth()->user()->following->contains($seller->id) : false;
         return view('seller.detail', compact('seller', 'services', 'follows'));

@@ -7,6 +7,7 @@ use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,9 @@ Auth::routes();
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 // for the search using ajax
 Route::get("/search", [ServicesController::class, 'search'])->name('search');
+Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('autocomplete');
+
+
 Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
 Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show');
 Route::get('/search/{category}', [CategoriesController::class, 'search'])->name('search.category');

@@ -7,7 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-
+// // gg this is the way to import jquery ui to the app
+// import 'jquery-ui/themes/base/all.css';
+// import 'jquery-ui/ui/widgets/autocomplete.js';
 
 /**
  * The following block of code may be used to automatically register your
@@ -31,9 +33,10 @@ import FollowButton from './components/FollowButton.vue';
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+ window.onload = function () {
 const app = new Vue({
     el: '#app',
     components:{FollowButton,WishlistButton}
 
 });
+}

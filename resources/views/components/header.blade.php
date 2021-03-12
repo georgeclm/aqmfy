@@ -39,9 +39,11 @@
 
                 </ul>
                 <div class="col-md-7 text-center">
-                    <form action="/search" class="d-flex container-fluid">
-                        <input class="form-control me-2" name="query" type="search" placeholder="Find Services"
-                            aria-label="Search">
+
+                    <form action="/search" class="d-flex container-fluid" autocomplete="off">
+                        <input class="typeahead form-control me-2" type="text" placeholder="Find Services" name="query">
+                        {{-- <input class="form-control me-2" name="query" type="search" placeholder="Find Services"
+                            aria-label="Search"> --}}
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 

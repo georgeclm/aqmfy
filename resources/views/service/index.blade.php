@@ -17,7 +17,7 @@
                 <div class="carousel-item {{ $service->id == $first ? 'active' : '' }}" data-bs-interval="10000">
                     <a href="{{ route('services.show', $service) }}">
                         <div class="text-center">
-                            <img src="{{ asset("storage/product/{$service->image}") }}" class="slider-img" alt="...">
+                            <img src="{{ asset("storage/product/{$service->image}") }}" class="slider-img">
 
                         </div>
                         <div class="carousel-caption d-none d-md-block slider-text text-light">
@@ -37,6 +37,8 @@
             <span class="visually-hidden">Next</span>
         </a>
     </div>
+
+
     <div class="container mb-5 mt-5">
         <div class="col-md-12">
             <h3 class='mb-4'>Trending Services</h3>

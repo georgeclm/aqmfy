@@ -10,8 +10,20 @@ use Illuminate\Support\Facades\Session;
 
 class ServicesController extends Controller
 {
+    public function autocomplete(Request $request)
+    {
+
+        $str = "";
+        if ($request->has('str')) {
+            $str = $request->str;
+        }
+        $data = Service::where("name", "LIKE", '%' . $str . '%')
+            ->get();
+        return response()->json($data);
+    }
     function index()
     {
+        // dd((boolval("dara")));
         // dd(auth()->user()->seller);
         $services = Service::with('ratings')->get();
         $first = $services[0]->id;

@@ -9,44 +9,80 @@
                 <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Name of Service</label>
-                        <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="Name" required>
+                        <label for="exampleInputName" class="form-label">Name of Service</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputName"
+                            value="{{ old('name') }}" aria-describedby="emailHelp" placeholder="Name" required>
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="0" required>
+                        <label for="exampleInputPrice" class="form-label">Price</label>
+                        <input type="number" name="price" class="form-control" id="exampleInputPrice"
+                            value="{{ old('price') }}" aria-describedby="emailHelp" placeholder="0" required>
+                        @error('price')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Delivery Time (Days)</label>
-                        <input type="number" name="delivery_time" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="0" required>
+                        <label for="exampleInputDeliveryTime" class="form-label">Delivery Time (Days)</label>
+                        <input type="number" name="delivery_time" class="form-control" id="exampleInputDeliveryTime"
+                            value="{{ old('delivery_time') }}" aria-describedby="emailHelp" placeholder="0" required>
+                        @error('delivery_time')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Revision Time</label>
-                        <input type="number" name="revision_time" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" placeholder="0" required>
+                        <label for="exampleInputRevisionTime" class="form-label">Revision Time</label>
+                        <input type="number" name="revision_time" class="form-control" id="exampleInputRevisionTime"
+                            value="{{ old('revision_time') }}" aria-describedby="emailHelp" placeholder="0" required>
+                        @error('revision_time')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Category</label>
+                        <label for="exampleInputCategory" class="form-label">Category</label>
                         <select name="category" class="form-select" required>
                             <option selected>Choose Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        @error('category')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Description</label>
-                        <textarea name="description" class="form-control" id="exampleInputEmail1" rows=5
-                            aria-describedby="emailHelp" placeholder="Description" required></textarea>
+                        <label for="exampleInputDescription" class="form-label">Description</label>
+                        <textarea name="description" class="form-control" id="exampleInputDescription" rows=5
+                            aria-describedby="emailHelp" placeholder="Description"
+                            required>{{ old('description') }}</textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Service Image</label>
-                        <input type="file" name="images[]" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" required multiple>
+                        <label for="image" class="form-label">Service Image</label>
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                            aria-describedby="emailHelp" required value="{{ old('image') }}">
+                        @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
 

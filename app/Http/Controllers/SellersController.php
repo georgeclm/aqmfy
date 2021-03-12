@@ -14,20 +14,24 @@ class SellersController extends Controller
     }
     function store(Request $request)
     {
-
+        // dd($request->all());
         $seller = new Seller;
         $seller->sellername = $request->sellername;
         $seller->address = $request->address;
         $seller->url = $request->url;
         $seller->description = $request->description;
         $seller->user_id = auth()->id();
-        if ($request->image) {
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+        if (request('image')) {
+            request()->validate([
+                'image' => 'mimes:jpeg,png,jpg,gif,svg',
             ]);
-            $request->image->store('product', 'public');
-            $seller->image = $request->image->hashName();
+
+            request('image')->store('product', 'public');
+            $seller->image = request('image')->hashName();
+        } else {
+            $seller->image = "jAZHCrXvUSsoh3BtdypreKvz8tz0M4DEnDOfvvDt.png";
         }
+
         $seller->save();
 
 
@@ -50,7 +54,7 @@ class SellersController extends Controller
             'sellername' => 'required',
             'address' => 'required',
             'url' => '',
-            'image' => 'image',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg',
             'description' => ''
         ]);
         if (request('image')) {

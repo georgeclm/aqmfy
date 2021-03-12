@@ -47,21 +47,19 @@ class ServicesController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
+        // dd(request('image'));
+
+        request()->validate([
             'name' => 'required',
             'category' => 'required',
             'price' => 'required',
             'description' => 'required',
             'delivery_time' => 'required|numeric',
             'revision_time' => 'required|numeric',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-            ]);
-        }
-        $request->file('image')->store('product', 'public');
+
+        request('image')->store('product', 'public');
         // dd($request->image->hashName());
 
         $service = new Service([
@@ -70,7 +68,7 @@ class ServicesController extends Controller
             "description" => $request->description,
             "delivery_time" => $request->delivery_time,
             "revision_time" => $request->revision_time,
-            "image" => $request->image->hashName(),
+            "image" => request('image')->hashName(),
             "seller_id" => auth()->user()->seller->id,
             "category_id" => $request->category
         ]);

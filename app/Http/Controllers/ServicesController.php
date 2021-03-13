@@ -10,16 +10,11 @@ use Illuminate\Support\Facades\Session;
 
 class ServicesController extends Controller
 {
-    public function autocomplete(Request $request)
+    public function autocomplete()
     {
 
-        $str = "";
-        if ($request->has('str')) {
-            $str = $request->str;
-        }
-        $data = Service::where("name", "LIKE", '%' . $str . '%')
-            ->get();
-        return response()->json($data);
+        $services = Service::all();
+        return response()->json($services);
     }
     function index()
     {
@@ -104,7 +99,8 @@ class ServicesController extends Controller
     }
     public function edit(Service $service)
     {
-        return view('service.edit', compact('service'));
+        $categories = Category::all();
+        return view('service.edit', compact('service', 'categories'));
     }
     public function update(Service $service)
     {

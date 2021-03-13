@@ -30,28 +30,28 @@ Route::get("/search", [ServicesController::class, 'search'])->name('search');
 Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('autocomplete');
 
 
-Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('/service/{service}', [ServicesController::class, 'show'])->name('services.show');
 Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show');
 Route::get('/search/{category}', [CategoriesController::class, 'search'])->name('search.category');
 
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('services')->group(function () {
-        Route::get('/c/create', [ServicesController::class, 'create'])->name('services.create');
+    Route::prefix('service')->group(function () {
+        Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
         Route::post('/', [ServicesController::class, 'store'])->name('services.store');
         Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
         Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
         Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
     });
-    Route::get('/profiles/{user}', [UsersController::class, 'edit'])->name('profiles.edit');
+    Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
     Route::post('/follow/{user}', [UsersController::class, 'follow']);
 
 
 
-    Route::prefix('seller')->group(function () {
-        Route::get("/s/create", [SellersController::class, 'create'])->name('sellers.create');
+    Route::prefix('sellers')->group(function () {
+        Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
         Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');

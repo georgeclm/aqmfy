@@ -11,13 +11,25 @@
                     @method('patch')
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                            value="{{ old('name') ?? $user->name }}" aria-describedby="emailHelp" placeholder="Name">
+                        <input type="text" name="name" class="form-control @error('name')is-invalid @enderror"
+                            id="exampleInputEmail1" value="{{ old('name') ?? $user->name }}" aria-describedby="emailHelp"
+                            placeholder="Name">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control" id="exampleInputEmail1"
-                            value="{{ old('email') ?? $user->email }}" aria-describedby="emailHelp" placeholder="Email">
+                        <input type="text" name="email" class="form-control @error('email')is-invalid @enderror"
+                            id="exampleInputEmail1" value="{{ old('email') ?? $user->email }}"
+                            aria-describedby="emailHelp" placeholder="Email">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
 

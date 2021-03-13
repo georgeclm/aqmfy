@@ -10,8 +10,9 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Name of Service</label>
-                        <input type="text" name="name" class="form-control" id="exampleInputName"
-                            value="{{ old('name') }}" aria-describedby="emailHelp" placeholder="Name" required>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                            id="exampleInputName" value="{{ old('name') }}" aria-describedby="emailHelp"
+                            placeholder="Name" required>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -20,8 +21,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPrice" class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control" id="exampleInputPrice"
-                            value="{{ old('price') }}" aria-describedby="emailHelp" placeholder="0" required>
+                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror"
+                            id="exampleInputPrice" value="{{ old('price') }}" aria-describedby="emailHelp" placeholder="0"
+                            required>
                         @error('price')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -30,7 +32,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputDeliveryTime" class="form-label">Delivery Time (Days)</label>
-                        <input type="number" name="delivery_time" class="form-control" id="exampleInputDeliveryTime"
+                        <input type="number" name="delivery_time"
+                            class="form-control @error('revision_time') is-invalid @enderror" id="exampleInputDeliveryTime"
                             value="{{ old('delivery_time') }}" aria-describedby="emailHelp" placeholder="0" required>
                         @error('delivery_time')
                             <span class="invalid-feedback" role="alert">
@@ -40,7 +43,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputRevisionTime" class="form-label">Revision Time</label>
-                        <input type="number" name="revision_time" class="form-control" id="exampleInputRevisionTime"
+                        <input type="number" name="revision_time"
+                            class="form-control @error('revision_time') is-invalid @enderror" id="exampleInputRevisionTime"
                             value="{{ old('revision_time') }}" aria-describedby="emailHelp" placeholder="0" required>
                         @error('revision_time')
                             <span class="invalid-feedback" role="alert">
@@ -50,7 +54,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputCategory" class="form-label">Category</label>
-                        <select name="category" class="form-select" required>
+                        <select name="category" class="form-select @error('category') is-invalid @enderror" required>
                             <option selected>Choose Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -64,8 +68,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputDescription" class="form-label">Description</label>
-                        <textarea name="description" class="form-control" id="exampleInputDescription" rows=5
-                            aria-describedby="emailHelp" placeholder="Description"
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror"
+                            id="exampleInputDescription" rows=5 aria-describedby="emailHelp" placeholder="Description"
                             required>{{ old('description') }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">

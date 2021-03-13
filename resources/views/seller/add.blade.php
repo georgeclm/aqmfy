@@ -10,23 +10,47 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Seller Name</label>
-                        <input type="text" name="sellername" class="form-control" id="exampleInputName"
-                            value="{{ old('sellername') }}" aria-describedby="emailHelp" placeholder="Name" required>
+                        <input type="text" name="sellername" class="form-control @error('sellername')is-invalid @enderror"
+                            id="exampleInputName" value="{{ old('sellername') }}" aria-describedby="emailHelp"
+                            placeholder="Name" required>
+                        @error('sellername')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputAddress" class="form-label">Address</label>
-                        <input type="text" name="address" class="form-control" id="exampleInputAddress"
-                            value="{{ old('address') }}" aria-describedby="emailHelp" placeholder="Domicili" required>
+                        <input type="text" name="address" class="form-control @error('address')is-invalid @enderror"
+                            id="exampleInputAddress" value="{{ old('address') }}" aria-describedby="emailHelp"
+                            placeholder="Domicili" required>
+                        @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputUrl" class="form-label">Website Link</label>
-                        <input type="text" name="url" class="form-control" id="exampleInputUrl" aria-describedby="emailHelp"
-                            value="{{ old('url') }}" placeholder="Website" required>
+                        <input type="text" name="url" class="form-control @error('url')is-invalid @enderror"
+                            id="exampleInputUrl" aria-describedby="emailHelp" value="{{ old('url') }}"
+                            placeholder="Website" required>
+                        @error('url')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Description of You</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                        <textarea class="form-control @error('description')is-invalid @enderror"
+                            id="exampleFormControlTextarea1" rows="3"
                             name="description">{{ old('description') }}</textarea>
+                        @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Seller Picture</label>

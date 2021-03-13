@@ -56,9 +56,4 @@ class OrdersController extends Controller
         $total = $choice * $service->price;
         return view('order.show', compact('service', 'total', 'choice'));
     }
-    public function destroy(Order $order)
-    {
-        Order::destroy($order->id);
-        return redirect()->route('orders.index', auth()->user())->with('rating', compact('order'));
-    }
 }

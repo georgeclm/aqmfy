@@ -14,7 +14,7 @@
         </ol>
         <div class="carousel-inner">
             @foreach ($services as $service)
-                <div class="carousel-item {{ $service->id == $first ? 'active' : '' }}" data-bs-interval="10000">
+                <div class="carousel-item {{ $service->id == 2 ? 'active' : '' }}" data-bs-interval="5000">
                     <a href="{{ route('services.show', $service) }}">
                         <div class="text-center">
                             <img src="{{ asset("storage/product/{$service->image}") }}" class="slider-img">
@@ -42,35 +42,7 @@
     <div class="container mb-5 mt-5">
         <div class="col-md-12">
             <h3 class='mb-4'>Trending Services</h3>
-            <div class="row row-cols-1 row-cols-md-6">
-                @if ($services->count())
-                    @foreach ($services as $service)
-                        <div class="col mb-4 link-web">
-                            <a href="{{ route('services.show', $service) }}">
-                                <div class="card h-100 rounded" style="width: 12rem;">
-                                    <img src="{{ asset("storage/product/{$service->image}") }}" class="card-img-top"
-                                        style="width: 12rem; height: 12rem; background-size: cover; background-position: center;">
-                                    <div class="card-body">
-                                        <h6 class="card-title">{{ $service->name }}</h6>
-                                        <h5 class="card-text"> Rp. {{ number_format($service->price) }}</h5>
-                                        <input type="hidden"
-                                            value="{{ $average = $service->ratings->average('rating') }}">
-                                        @if ($average != 0)
-                                            <div class="ratingindex">
-                                                <span class="icon">★</span>
-                                            </div>
-                                            <span class=""><strong> {{ $average }}</strong><span
-                                                    class="text-muted">({{ $service->ratings->count() }})</span></span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                @else
-                    <div class="h4">Service Not Found</div>
-                @endif
-            </div>
+            <x-services :services="$services" />
 
         </div>
     </div>

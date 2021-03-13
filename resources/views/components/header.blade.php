@@ -1,6 +1,6 @@
 <div>
-    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom border-light border-5">
+        <div class="container-fluid" style="width:90%">
             <a class="navbar-brand" href="{{ route('services.index') }}">
                 <img src="{{ asset('img/Logo_text.png') }}" alt="" width="90" height="" class="">
             </a>
@@ -23,19 +23,6 @@
                         </li>
                     @endguest
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach ($categories as $category)
-                                <li><a class="dropdown-item"
-                                        href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
 
                 </ul>
                 <div class="col-md-7 text-center">
@@ -66,22 +53,14 @@
                                 Wishlist</a>
                         </li>
                         @if ($hasSeller)
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Toko
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('sellers.show', auth()->user()->seller) }}">Your
-                                            Toko</a></li>
-
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-success"
+                                    href="{{ route('sellers.show', auth()->user()->seller) }}">Switch To
+                                    Selling</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('sellers.create') }}">Become a seller</a>
+                                <a class="nav-link text-success" href="{{ route('sellers.create') }}">Become a seller</a>
                             </li>
 
                         @endif
@@ -111,48 +90,21 @@
             </div>
         </div>
     </nav>
-    <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column">
-        <header class="mb-auto">
-            <div>
-                {{-- <h3 class="float-md-start mb-0">Cover</h3> --}}
-                <nav class="nav nav-masthead justify-content-center float-md-start">
+    <div class="bg-white">
+        <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
+            <header class="mb-auto">
+                <div>
+                    {{-- <h3 class="float-md-start mb-0">Cover</h3> --}}
+                    <nav class="nav nav-masthead justify-content-center float-md-start">
 
-                    @foreach ($categories as $category)
-                        <a class="nav-link"
-                            href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
-                    @endforeach
-
-                </nav>
-            </div>
-        </header>
-    </div>
-    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    @foreach ($categories as $category)
-                        <li class="nav-item"><a class="nav-link active"
+                        @foreach ($categories as $category)
+                            <a class="nav-link"
                                 href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
-                        </li>
-                    @endforeach
-                    {{-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
-    </ul>
-</div>
-</div>
-</nav> --}}
+                        @endforeach
+
+                    </nav>
+                </div>
+            </header>
+        </div>
+    </div>
 </div>

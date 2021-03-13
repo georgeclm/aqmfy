@@ -32,7 +32,7 @@ Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('a
 
 Route::get('/service/{service}', [ServicesController::class, 'show'])->name('services.show');
 Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show');
-Route::get('/search/{category}', [CategoriesController::class, 'search'])->name('search.category');
+Route::get('/categories/{category}', [CategoriesController::class, 'search'])->name('search.category');
 
 
 
@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');
     });
     Route::prefix('wishlists')->group(function () {
-        Route::get('/{user}/wishlist', [WishlistsController::class, 'show'])->name('wishlists.show');
+        Route::get('/', [WishlistsController::class, 'show'])->name('wishlists.show');
         Route::post('/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
     });
 

@@ -7,7 +7,7 @@ use App\Models\User;
 
 class WishlistsController extends Controller
 {
-    public function show(User $user)
+    public function show()
     {
         return view('wishlist.detail');
     }

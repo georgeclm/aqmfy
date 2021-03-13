@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Seller;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -95,7 +94,7 @@ class ServicesController extends Controller
                 ->with('ratings')
                 ->get();
         }
-        return view('service.search', compact('services'));
+        return view('service.search', compact('services', 'query'));
     }
     public function edit(Service $service)
     {
@@ -112,6 +111,7 @@ class ServicesController extends Controller
             'category' => '',
             'description' => '',
             'image' => 'image',
+            'category_id' => ''
         ]);
         if (request('image')) {
             request('image')->store('product', 'public');

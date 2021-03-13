@@ -10,7 +10,8 @@ class CategoriesController extends Controller
 {
     public function search(Category $category)
     {
-        $services = Service::where('category_id', $category->id)->get();
-        return redirect()->route('search')->with(compact('services'));
+
+        $services = Service::where('category_id', $category->id)->with('ratings')->get();
+        return view('service.categorysearch', compact('services', 'category'));
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', "Search Results for '{$query}'- Colance")
+@section('title', "{$category->name} Services - Colance")
 
 @section('content')
     <div class="container">
@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-12">
             <div class="trending-wrapper m-auto">
-                <div class="h2 my-4">Result for "{{ $query }}"</div>
+                <div class="h2 my-4">{{ $category->name }}</div>
                 <div class="row row-cols-1 row-cols-md-6">
                     @if ($services->count())
                         @foreach ($services as $service)

@@ -61,7 +61,7 @@
                     @else
 
                         <li class="nav-item">
-                            <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show', auth()->user()) }}"> <span
+                            <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show') }}"> <span
                                     class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
                                 Wishlist</a>
                         </li>
@@ -111,4 +111,48 @@
             </div>
         </div>
     </nav>
+    <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                {{-- <h3 class="float-md-start mb-0">Cover</h3> --}}
+                <nav class="nav nav-masthead justify-content-center float-md-start">
+
+                    @foreach ($categories as $category)
+                        <a class="nav-link"
+                            href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
+                    @endforeach
+
+                </nav>
+            </div>
+        </header>
+    </div>
+    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    @foreach ($categories as $category)
+                        <li class="nav-item"><a class="nav-link active"
+                                href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
+                        </li>
+                    @endforeach
+                    {{-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+    </ul>
+</div>
+</div>
+</nav> --}}
 </div>

@@ -26,11 +26,7 @@
                                 href="/messages">Message @include('messenger.unread-count')</a>
 
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if ($chat) active @endif"
-                                href="/messages/create">Create New Message</a>
 
-                        </li>
                         {{-- <li><a href="/messages">Messages @include('messenger.unread-count')</a></li>
                         <li><a href="/messages/create">Create New Message</a></li> --}}
                     @endguest

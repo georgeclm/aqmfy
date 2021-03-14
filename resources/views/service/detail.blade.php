@@ -37,7 +37,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('ratings.store') }}" id="ratingform" method="POST">
+                                    <form action="{{ route('messages.store') }}" id="ratingform" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-2 text-center">
@@ -52,8 +52,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="seller_id" value="#">
-                                        <input type="hidden" name="service_id" value="#">
+                                        <input type="hidden" name="subject" value="{{ $service->name }}">
+                                        <input type="hidden" name="recipients[]"
+                                            value="{{ $service->seller->user->id }}">
                                     </form>
                                 </div>
                                 <div class="modal-footer">

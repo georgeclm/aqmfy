@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -23,7 +24,9 @@ class MessagesController extends Controller
     public function index()
     {
         // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
+        $threads = Thread::getAllLatest()->with('participants')->get();
+        // dd($threads);
+
 
         // All threads that user is participating in
         // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
@@ -81,7 +84,7 @@ class MessagesController extends Controller
      */
     public function store()
     {
-        dd(request()->all());
+        // dd(request()->all());
         $input = request()->all();
 
         $thread = Thread::create([
@@ -149,5 +152,11 @@ class MessagesController extends Controller
         }
 
         return redirect()->route('messages.show', $id);
+    }
+    public static function sellerName($name)
+    {
+        $user = User::where('name', $name)->get();
+        $sellername = $user[0]->seller->sellername;
+        return $sellername;
     }
 }

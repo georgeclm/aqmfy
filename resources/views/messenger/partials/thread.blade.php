@@ -1,4 +1,8 @@
-<?php $class = $thread->isUnread(Auth::id()) ? 'alert-info' : ''; ?>
+<?php
+use App\Http\Controllers\MessagesController;
+$class = $thread->isUnread(Auth::id()) ? 'alert-info' : '';
+$sellername = MessagesController::sellerName($thread->participantsString(Auth::id()));
+?>
 
 <div class="media alert {{ $class }}">
     <h4 class="media-heading">
@@ -9,9 +13,9 @@
         {{ $thread->latestMessage->body }}
     </p>
     <p>
-        <small><strong>Creator:</strong> {{ $thread->creator()->name }}</small>
+        <small><strong>From:</strong> {{ $thread->creator()->name }}</small>
     </p>
     <p>
-        <small><strong>Participants:</strong> {{ $thread->participantsString(Auth::id()) }}</small>
+        <small><strong>To:</strong> {{ $sellername }}</small>
     </p>
 </div>

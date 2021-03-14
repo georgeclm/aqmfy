@@ -24,6 +24,7 @@ class ServicesController extends Controller
     }
     function show(Service $service)
     {
+        // dd($service->seller->user->id);
         $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
         // dd($service->ratings->count());
         $stars = array();

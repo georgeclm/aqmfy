@@ -25,6 +25,45 @@
                     @enderror
                     <a href="{{ route('orders.show', $service) }}" class="btn btn-success">Continue
                         (Rp. {{ number_format($service->price) }})</a>
+                    <button data-bs-toggle="modal" data-bs-target="#message" class="btn btn-outline-secondary">Contact
+                        Seller</button>
+                    <div class="modal fade" id="message" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Send a Message</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('ratings.store') }}" id="ratingform" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-2 text-center">
+                                                <img src="{{ asset($service->seller->sellerImage()) }}"
+                                                    class="rounded-circle mb-1" width="75px" height="75px">
+                                                <h6>{{ $service->seller->sellername }}</h6>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <textarea name="message" placeholder="Your Message" class="form-control"
+                                                        rows="7" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="seller_id" value="#">
+                                        <input type="hidden" name="service_id" value="#">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <input type="submit" form="ratingform" class="btn btn-primary" value="Send Message" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 @else
                     <a href="{{ route('services.edit', $service) }}" class="btn btn-outline-primary mb-4">Edit Your
                         Gig</a>

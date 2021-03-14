@@ -33,8 +33,8 @@
                             <div class="col-sm-2">
                                 <button class="btn btn-outline-success" data-bs-toggle="modal"
                                     data-bs-target="#rating">Finish Order</button>
-
                             </div>
+
                         </div>
                     @endforeach
                 @else

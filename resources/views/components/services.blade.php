@@ -10,14 +10,17 @@
                             <h6 class="card-title">{{ $service->name }}</h6>
                             <h5 class="card-text"> Rp. {{ number_format($service->price) }}</h5>
                             <input type="hidden" value="{{ $average = $service->ratings->average('rating') }}">
-                            @if ($average != 0)
+                        </div>
+
+                        @if ($average != 0)
+                            <div class="card-footer">
                                 <div class="ratingindex">
                                     <span class="icon">★</span>
                                 </div>
                                 <span class=""><strong> {{ $average }}</strong><span
                                         class="text-muted">({{ $service->ratings->count() }})</span></span>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                 </a>
             </div>

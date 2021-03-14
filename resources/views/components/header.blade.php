@@ -1,6 +1,6 @@
 <div>
     <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom border-light border-5">
-        <div class="container-fluid" style="width:90%">
+        <div class="container-fluid" style="width:95%">
             <a class="navbar-brand" href="{{ route('services.index') }}">
                 <img src="{{ asset('img/Logo_text.png') }}" alt="" width="90" height="" class="">
             </a>
@@ -21,11 +21,23 @@
                             <a class="nav-link @if ($order) active @endif"
                                 href="{{ route('orders.index', auth()->user()) }}">Orders</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if ($chat) active @endif"
+                                href="/messages">Message @include('messenger.unread-count')</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if ($chat) active @endif"
+                                href="/messages/create">Create New Message</a>
+
+                        </li>
+                        {{-- <li><a href="/messages">Messages @include('messenger.unread-count')</a></li>
+                        <li><a href="/messages/create">Create New Message</a></li> --}}
                     @endguest
 
 
                 </ul>
-                <div class="col-md-7 text-center">
+                <div class="col-md-6 text-center">
 
                     <form action="/search" class="d-flex container-fluid" autocomplete="off">
                         <input class="typeahead form-control me-2" type="text" placeholder="Find Services" name="query">
@@ -107,4 +119,18 @@
             </header>
         </div>
     </div>
+    @if ($chat)
+        <div class="bg-white">
+            <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
+                <header class="mb-auto">
+                    <div>
+                        <nav class="nav nav-masthead justify-content-center float-md-start">
+                            <a class="nav-link" href="#">Buying</a>
+                            <a class="nav-link" href="#">Selling</a>
+                        </nav>
+                    </div>
+                </header>
+            </div>
+        </div>
+    @endif
 </div>

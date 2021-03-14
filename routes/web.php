@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
+use App\Http\Controllers\MessagesController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +89,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{user}/profile', [ProfilesController::class, 'profileImage']);
         // for profile chat
         Route::get('/{user}/create/room', [ChatController::class, 'chat'])->name('chat.store');
+    });
+    Route::group(['prefix' => 'messages'], function () {
+        Route::get('/', [MessagesController::class, 'index'])->name('messages');
+        Route::get('create', [MessagesController::class, 'create'])->name('messages.create');
+        Route::post('/', [MessagesController::class, 'store'])->name('messages.store');
+        Route::get('{id}', [MessagesController::class, 'show'])->name('messages.show');
+        Route::put('{id}', [MessagesController::class, 'update'])->name('messages.update');
     });
     // to post the new room to the database
     Route::post('/create/room', [ChatController::class, 'store'])->name('room.store');

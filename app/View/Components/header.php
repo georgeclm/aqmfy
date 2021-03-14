@@ -16,6 +16,7 @@ class header extends Component
     public $order;
     public $hasSeller;
     public $categories;
+    public $chat;
     public function __construct()
     {
         $this->categories = Category::all();
@@ -29,6 +30,8 @@ class header extends Component
             $this->wishlist = true;
         } else if ($currentURL == "http://127.0.0.1:8000/orders/" . auth()->id()) {
             $this->order = true;
+        } else if ($currentURL == "http://127.0.0.1:8000/chat") {
+            $this->chat = true;
         }
     }
 

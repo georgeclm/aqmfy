@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Messagable;
 
     /**
      * The attributes that are mass assignable.
@@ -57,5 +58,13 @@ class User extends Authenticatable
     public function following()
     {
         return $this->belongsToMany(Seller::class);
+    }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function chatroom()
+    {
+        return $this->belongsToMany(ChatRoom::class);
     }
 }

@@ -24,7 +24,6 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import WishlistButton from './components/WishlistButton.vue';
 import FollowButton from './components/FollowButton.vue';
-import ChatContainer from './components/ChatContainer.vue';
 
 
 
@@ -38,7 +37,7 @@ import ChatContainer from './components/ChatContainer.vue';
  window.onload = function () {
 const app = new Vue({
     el: '#app',
-    components:{FollowButton,WishlistButton,ChatContainer}
+    components:{FollowButton,WishlistButton}
 
 });
 }

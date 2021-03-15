@@ -51,8 +51,6 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
     Route::post('/follow/{user}', [UsersController::class, 'follow']);
 
-
-
     Route::prefix('sellers')->group(function () {
         Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
@@ -73,23 +71,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('orders.destroy');
     });
     Route::post('/rating', [RatingsController::class, 'store'])->name('ratings.store');
-    Route::group(['prefix' => 'chat'], function () {
-        // Chat Controller Data
-        // the chat template view
-        Route::get('/', [ChatController::class, 'index'])->name('chat');
-        // for the room view
-        Route::get('/rooms', [ChatController::class, 'rooms']);
-        // to take all the messages inside a room
-        Route::get('/room/{roomId}/messages', [ChatController::class, 'messages']);
-        // to post the message to the database
-        Route::post('/room/{roomId}/message', [ChatController::class, 'newMessage']);
-        // to create a room link view
-        Route::get('/create/room', [ChatController::class, 'create']);
-        // to take each profile image
-        Route::get('/{user}/profile', [ProfilesController::class, 'profileImage']);
-        // for profile chat
-        Route::get('/{user}/create/room', [ChatController::class, 'chat'])->name('chat.store');
-    });
     Route::group(['prefix' => 'messages'], function () {
         Route::get('/', [MessagesController::class, 'index'])->name('messages');
         Route::get('create', [MessagesController::class, 'create'])->name('messages.create');

@@ -9,7 +9,8 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
 use App\Http\Controllers\MessagesController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
         Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
     });
-    Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit');
+    Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
     Route::post('/follow/{user}', [UsersController::class, 'follow']);
 
@@ -67,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{user}', [OrdersController::class, 'index'])->name('orders.index');
         Route::get('/{service}/order', [OrdersController::class, 'show'])->name('orders.show');
         Route::post('/{service}/pay', [OrdersController::class, 'pay'])->name('orders.pay');
-        Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
+        Route::post('/', [OrdersController::class, 'store'])->name('orders.store')->middleware(['password.confirm']);
         Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('orders.destroy');
     });
     Route::post('/rating', [RatingsController::class, 'store'])->name('ratings.store');
@@ -81,3 +82,17 @@ Route::middleware(['auth'])->group(function () {
     // to post the new room to the database
     Route::post('/create/room', [ChatController::class, 'store'])->name('room.store');
 });
+// Verify Email
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

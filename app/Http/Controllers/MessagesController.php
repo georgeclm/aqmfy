@@ -29,7 +29,7 @@ class MessagesController extends Controller
 
 
         // All threads that user is participating in
-        // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+        $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
 
         // All threads that user is participating in, with new messages
         // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
@@ -155,8 +155,13 @@ class MessagesController extends Controller
     }
     public static function sellerName($name)
     {
+        // dd($name);
         $user = User::where('name', $name)->get();
-        $sellername = $user[0]->seller->sellername;
+        if ($user->count() != 0) {
+            $sellername = $user[0]->seller->sellername;
+        } else {
+            $sellername = '';
+        }
         return $sellername;
     }
 }

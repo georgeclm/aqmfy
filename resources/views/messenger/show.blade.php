@@ -1,4 +1,5 @@
   @extends('layouts.app')
+  @section('title', "{$thread->subject} - Colance")
 
   @section('content')
       <div class="container">

@@ -15,8 +15,7 @@
                         <a class="nav-link @if ($home) active @endif"
                             aria-current="page" href="/">Home</a>
                     </li> --}}
-                    @guest
-                    @else
+                    @auth
                         <li class="nav-item">
                             <a class="nav-link @if ($order) active @endif"
                                 href="{{ route('orders.index', auth()->user()) }}">Orders</a>
@@ -29,7 +28,7 @@
 
                         {{-- <li><a href="/messages">Messages @include('messenger.unread-count')</a></li>
                         <li><a href="/messages/create">Create New Message</a></li> --}}
-                    @endguest
+                    @endauth
 
 
                 </ul>
@@ -115,18 +114,4 @@
             </header>
         </div>
     </div>
-    @if ($chat)
-        <div class="bg-white">
-            <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
-                <header class="mb-auto">
-                    <div>
-                        <nav class="nav nav-masthead justify-content-center float-md-start">
-                            <a class="nav-link" href="#">Buying</a>
-                            <a class="nav-link" href="#">Selling</a>
-                        </nav>
-                    </div>
-                </header>
-            </div>
-        </div>
-    @endif
 </div>

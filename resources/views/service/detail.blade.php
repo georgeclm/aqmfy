@@ -15,18 +15,16 @@
                 <h4>Revisions: {{ $service->revision_time }}</h4>
                 <br><br>
                 @if (auth()->id() != $service->seller->user_id)
-                    @guest
-                    @else
+                    @auth
                         <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>
-                    @endguest
+                    @endauth
 
                     @error('service_id')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                     <a href="{{ route('orders.show', $service) }}" class="btn btn-success">Continue
                         (Rp. {{ number_format($service->price) }})</a>
-                    <button data-bs-toggle="modal" data-bs-target="#message" class="btn btn-outline-secondary">Contact
-                        Seller</button>
+
                     <div class="modal fade" id="message" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
@@ -108,6 +106,8 @@
                     <strong>{{ $service->seller->followers->count() }}</strong>
                     followers
                 </div>
+                <button data-bs-toggle="modal" data-bs-target="#message" class="btn btn-outline-secondary">Contact
+                    Seller</button>
 
             </div>
         </div>

@@ -1,7 +1,8 @@
 <?php
 use App\Http\Controllers\MessagesController;
 $class = $thread->isUnread(Auth::id()) ? 'alert-info' : '';
-$sellername = MessagesController::sellerName($thread->participantsString(Auth::id()));
+
+$sellername = MessagesController::sellerName($thread->participantsString($thread->creator()->id));
 ?>
 
 <div class="media alert {{ $class }}">

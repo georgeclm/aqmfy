@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function follow(User $user)
+    function follow(User $user)
     {
         return auth()->user()->following()->toggle($user->seller);
     }
-    public function edit(User $user)
+    function edit(User $user)
     {
         return view('profile.edit', compact('user'));
     }
-    public function update(User $user)
+    function update(User $user)
     {
         // dd(request()->all());
         $data = request()->validate(['name' => 'required', 'email' => 'required']);

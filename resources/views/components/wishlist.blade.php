@@ -22,17 +22,14 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
+                                @php
+                                    $favorite = auth()->user()
+                                        ? auth()
+                                            ->user()
+                                            ->favorite->contains($service->id)
+                                        : false;
+                                @endphp
 
-                                {{-- <form action="{{ route('wishlists.destroy', $service->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-warning">Remove from
-                                        Wishlist</button>
-                                </form> --}}
-                                <input type="hidden"
-                                    value="{{ $favorite = auth()->user()
-    ? auth()->user()->favorite->contains($service->id)
-    : false }}">
                                 <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}">
                                 </wishlist-button>
 

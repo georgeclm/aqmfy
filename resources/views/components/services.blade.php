@@ -1,6 +1,9 @@
 <div class="row row-cols-1 row-cols-md-6">
     @if ($services->count())
+        <div class="col-md-12 text-muted mb-3">Found {{ $services->count() }} results</div>
+
         @foreach ($services as $service)
+
             <div class="col mb-4 link-web">
                 <a href="{{ route('services.show', $service) }}">
                     <div class="card h-100 rounded" style="width: 12rem;">
@@ -9,7 +12,9 @@
                         <div class="card-body">
                             <h6 class="card-title">{{ $service->name }}</h6>
                             <h5 class="card-text"> Rp. {{ number_format($service->price) }}</h5>
-                            <input type="hidden" value="{{ $average = $service->ratings->average('rating') }}">
+                            @php
+                                $average = $service->ratings->average('rating');
+                            @endphp
                         </div>
 
                         @if ($average != 0)

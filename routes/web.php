@@ -34,19 +34,21 @@ Route::get("/search", [ServicesController::class, 'search'])->name('search');
 Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('autocomplete');
 
 
-Route::get('/service/{service}', [ServicesController::class, 'show'])->name('services.show');
-Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show');
-Route::get('/categories/{category}', [CategoriesController::class, 'search'])->name('search.category');
+Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('service')->group(function () {
+Route::middleware('auth')->group(function () {
+    // Route::resource('service', [ServicesController::class]);
+    Route::prefix('services')->group(function () {
         Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
+        Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
+
         Route::post('/', [ServicesController::class, 'store'])->name('services.store');
         Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
         Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
         Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
+        Route::get('/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
     });
     Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
@@ -54,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('sellers')->group(function () {
         Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
+
+        Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
         Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
         Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
         Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');

@@ -24,6 +24,8 @@
                     @enderror
                     <a href="{{ route('orders.show', $service) }}" class="btn btn-success">Continue
                         (Rp. {{ number_format($service->price) }})</a>
+                    <a href="{{ route('services.download', $service) }}" class="btn btn-outline-success">Download Image
+                    </a>
 
                     <div class="modal fade" id="message" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -106,9 +108,11 @@
                     <strong>{{ $service->seller->followers->count() }}</strong>
                     followers
                 </div>
-                <button data-bs-toggle="modal" data-bs-target="#message" class="btn btn-outline-secondary">Contact
-                    Seller</button>
+                @if (auth()->id() != $service->seller->user_id)
 
+                    <button data-bs-toggle="modal" data-bs-target="#message" class="btn btn-outline-secondary">Contact
+                        Seller</button>
+                @endif
             </div>
         </div>
         <div class="row">

@@ -29,10 +29,12 @@
 <body>
     <x-header />
     <div id="app">
-        @if (session('error'))
+        @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
-                    <h6>{{ session('error') }}</h6>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
                 </ul>
             </div>
         @endif

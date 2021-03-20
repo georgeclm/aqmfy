@@ -27,7 +27,8 @@ class ServicesController extends Controller
         // dd((boolval("dara")));
         // dd(auth()->user()->seller);
         $services = Service::with('ratings')->get();
-        return view('service.index', compact('services'));
+        $first = $services[0]->id;
+        return view('service.index', compact('services', 'first'));
     }
     function show(Service $service)
     {
@@ -63,7 +64,7 @@ class ServicesController extends Controller
         // dd(request('image'));
 
         request()->validate([
-            'name' => 'required',
+            'name' => 'bail|required',
             'category' => 'required',
             'price' => 'required',
             'description' => 'required',
@@ -71,6 +72,7 @@ class ServicesController extends Controller
             'revision_time' => 'required|numeric',
             'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
+        // dimensions:ratio=3/2
         $extension = $request->image->extension();
         request('image')->store('product', 'public');
         // dd($request->image->hashName());
@@ -83,7 +85,7 @@ class ServicesController extends Controller
         $service->revision_time = $request->revision_time;
         $service->image = request('image')->hashName();
         $service->seller_id = auth()->user()->seller->id;
-        $service->category_id = $request->category;
+        $service->category_id = $request->category_id;
 
         $service->save(); // Finally, save the record.
         return redirect('/');
@@ -106,20 +108,24 @@ class ServicesController extends Controller
     }
     public function update(Service $service)
     {
+        // dd(request()->all());
+        // dd($service);
         $data = request()->validate([
-            'name' => 'required',
-            'price' => '',
-            'delivery_time' => '',
-            'revision_time' => '',
-            'category' => '',
-            'description' => '',
-            'image' => 'image',
-            'category_id' => ''
+            'name' => 'bail|required',
+            'price' => 'required',
+            'description' => 'required',
+            'delivery_time' => 'required|numeric',
+            'revision_time' => 'required|numeric',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
         if (request('image')) {
             request('image')->store('product', 'public');
             $imageArray = ['image' => request('image')->hashName()];
         }
+        // dd(array_merge(
+        //     $data,
+        //     $imageArray ?? []
+        // ));
         $service->update(array_merge(
             $data,
             $imageArray ?? []

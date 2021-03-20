@@ -9,12 +9,12 @@
                 <img src="{{ asset($seller->sellerImage()) }}" class="rounded-circle" width="200px" height="200px">
 
             </div>
-            <div class="col-sm-4">
+            <div class="link-web col-sm-4">
                 <a href="{{ route('services.index') }}" class="btn btn-outline-primary mb-3">Back</a>
                 <h2><strong>{{ $seller->sellername }}</strong></h2>
-                <h3>From {{ $seller->address }}</h3>
-                <h3>Website: {{ $seller->url }}</h3>
-                <div class="h4">
+                <h3>{{ $seller->address }}</h3>
+                <a class="h3" href="{{ $seller->url }}" target="blank">{{ $seller->url }}</a>
+                <div class="h4 mt-2">
                     <strong>{{ $seller->followers->count() }}</strong>
                     followers
                 </div>

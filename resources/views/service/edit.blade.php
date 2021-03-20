@@ -59,11 +59,14 @@
 
                     <div class="mb-3">
                         <label for="exampleInputCategory" class="form-label">Category</label>
-                        <select name="category" class="form-select @error('category') is-invalid @enderror" required>
+                        <select name="category_id" class="form-select @error('category') is-invalid @enderror" disabled>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @if ($service->category_id == $category->id) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        <span class="text-muted">
+                            Category cannot be changed
+                        </span>
                         @error('category')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -26,42 +26,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
-
-Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 // for the search using ajax
 Route::get("/search", [ServicesController::class, 'search'])->name('search');
 Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('autocomplete');
 
-
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 
-
-
 Route::middleware('auth')->group(function () {
-    // Route::resource('service', [ServicesController::class]);
-    Route::prefix('services')->group(function () {
-        Route::get('/create', [ServicesController::class, 'create'])->name('services.create');
-        Route::get('/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
-
-        Route::post('/', [ServicesController::class, 'store'])->name('services.store');
-        Route::get('/{service}/edit', [ServicesController::class, 'edit'])->name('services.edit');
-        Route::patch('/{service}', [ServicesController::class, 'update'])->name('services.update');
-        Route::delete('/{service}', [ServicesController::class, 'destroy'])->name('services.destroy');
-        Route::get('/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
-    });
+    Route::resource('services', ServicesController::class)->except(['index', 'show']);
+    Route::get('/', [ServicesController::class, 'index'])->name('services.index')->withoutMiddleware('auth');
+    Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
+    Route::get('/services/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
     Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
-    Route::post('/follow/{user}', [UsersController::class, 'follow']);
-
-    Route::prefix('sellers')->group(function () {
-        Route::get("/create", [SellersController::class, 'create'])->name('sellers.create');
-
-        Route::get('/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
-        Route::post('/', [SellersController::class, 'store'])->name('sellers.store');
-        Route::get('/{seller}/edit', [SellersController::class, 'edit'])->name('sellers.edit');
-        Route::patch('/{seller}', [SellersController::class, 'update'])->name('sellers.update');
-    });
+    Route::post('/follow/{user}', [UsersController::class, 'follow'])->block();
+    Route::resource('sellers', SellersController::class)->except(['show']);
+    Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::prefix('wishlists')->group(function () {
         Route::get('/', [WishlistsController::class, 'show'])->name('wishlists.show');
         Route::post('/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
@@ -83,8 +63,6 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}', [MessagesController::class, 'show'])->name('messages.show');
         Route::put('{id}', [MessagesController::class, 'update'])->name('messages.update');
     });
-    // to post the new room to the database
-    Route::post('/create/room', [ChatController::class, 'store'])->name('room.store');
 });
 // Verify Email
 Route::get('/email/verify', function () {

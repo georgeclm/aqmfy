@@ -10,9 +10,9 @@
                     @csrf
                     @method('patch')
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Name of seller</label>
+                        <label for="exampleInputName" class="form-label">Name of seller</label>
                         <input type="text" name="sellername" class="form-control @error('sellername')is-invalid @enderror"
-                            id="exampleInputEmail1" value="{{ old('sellername') ?? $seller->sellername }}"
+                            id="exampleInputName" value="{{ old('sellername') ?? $seller->sellername }}"
                             aria-describedby="emailHelp" placeholder="Name">
                         @error('sellername')
                             <span class="invalid-feedback" role="alert">
@@ -32,9 +32,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Website Link</label>
+                        <label for="exampleInputWebsite" class="form-label">Website Link</label>
                         <input type="text" name="url" class="form-control @error('url')is-invalid @enderror"
-                            id="exampleInputEmail1" value="{{ old('url') ?? $seller->url }}" aria-describedby="emailHelp"
+                            id="exampleInputWebsite" value="{{ old('url') ?? $seller->url }}" aria-describedby="emailHelp"
                             placeholder="Website">
                         @error('url')
                             <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Seller Image</label>
                         <input type="file" name="image" class="form-control @error('image')
-                                                                                is-invalid @enderror"
+                                                                                        is-invalid @enderror"
                             id="exampleInputEmail1" value="{{ old('image') }}" aria-describedby="emailHelp">
                         @error('image')
                             <span class="invalid-feedback" role="alert">

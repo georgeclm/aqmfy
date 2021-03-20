@@ -14,7 +14,7 @@
         </ol>
         <div class="carousel-inner">
             @foreach ($services as $service)
-                <div class="carousel-item {{ $service->id == 2 ? 'active' : '' }}" data-bs-interval="5000">
+                <div class="carousel-item {{ $service->id == $first ? 'active' : '' }}" data-bs-interval="5000">
                     <a href="{{ route('services.show', $service) }}">
                         <div class="text-center">
                             <img src="{{ asset("storage/product/{$service->image}") }}" class="slider-img">

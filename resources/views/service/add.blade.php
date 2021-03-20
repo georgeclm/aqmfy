@@ -54,8 +54,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputCategory" class="form-label">Category</label>
-                        <select name="category" class="form-select @error('category') is-invalid @enderror" required>
-                            <option selected>Choose Category</option>
+                        <select name="category_id" class="form-select @error('category') is-invalid @enderror" required>
+                            <option value="" selected disabled hidden>Choose Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach

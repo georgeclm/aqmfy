@@ -14,6 +14,12 @@ class SellersController extends Controller
     }
     function store(Request $request)
     {
+        request()->validate([
+            'sellername' => 'bail|required',
+            'address' => 'bail|required',
+            'url' => 'nullable',
+            'description' => 'nullable'
+        ]);
         // dd($request->all());
         $seller = new Seller;
         $seller->sellername = $request->sellername;
@@ -51,8 +57,8 @@ class SellersController extends Controller
     public function update(Seller $seller)
     {
         $data = request()->validate([
-            'sellername' => 'required',
-            'address' => 'required',
+            'sellername' => 'bail|required',
+            'address' => 'bail|required',
             'url' => '',
             'image' => 'mimes:jpeg,png,jpg,gif,svg',
             'description' => ''

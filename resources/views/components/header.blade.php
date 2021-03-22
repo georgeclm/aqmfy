@@ -22,7 +22,7 @@
                         $order = false;
                         if (auth()->user()) {
                             if (auth()->user()->seller) {
-                                $this->hasSeller = true;
+                                $hasSeller = true;
                             } else {
                                 $hasSeller = false;
                             }

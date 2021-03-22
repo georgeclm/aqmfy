@@ -97,7 +97,7 @@
             </div>
         </div>
     </nav>
-    <div class="bg-white">
+    {{-- <div class="bg-white">
         <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
             <header class="mb-auto">
                 <div>
@@ -111,5 +111,5 @@
                 </div>
             </header>
         </div>
-    </div>
+    </div> --}}
 </div>

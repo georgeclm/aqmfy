@@ -34,7 +34,7 @@
                         <label for="exampleInputUrl" class="form-label">Website Link</label>
                         <input type="text" name="url" class="form-control @error('url')is-invalid @enderror"
                             id="exampleInputUrl" aria-describedby="emailHelp" value="{{ old('url') }}"
-                            placeholder="Website" required>
+                            placeholder="Website">
                         @error('url')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

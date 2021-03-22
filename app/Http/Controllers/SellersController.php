@@ -16,8 +16,8 @@ class SellersController extends Controller
     {
         request()->validate([
             'sellername' => 'bail|required',
-            'address' => 'bail|required',
-            'url' => 'nullable',
+            'address' => 'sometimes',
+            'url' => 'sometimes|url',
             'description' => 'nullable'
         ]);
         // dd($request->all());
@@ -58,10 +58,10 @@ class SellersController extends Controller
     {
         $data = request()->validate([
             'sellername' => 'bail|required',
-            'address' => 'bail|required',
-            'url' => '',
+            'address' => 'sometimes',
+            'url' => 'sometimes|url',
             'image' => 'mimes:jpeg,png,jpg,gif,svg',
-            'description' => ''
+            'description' => 'sometimes'
         ]);
         if (request('image')) {
             request('image')->store('product', 'public');

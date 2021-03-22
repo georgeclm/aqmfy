@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ChatMessage extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
     public function room()
     {
         // second parameter for foreign key and third param is the local key

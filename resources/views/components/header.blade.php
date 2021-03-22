@@ -102,7 +102,7 @@
             <header class="mb-auto">
                 <div>
                     <nav class="nav nav-masthead justify-content-center float-md-start">
-
+                        <div></div>
                         @foreach ($categories as $category)
                             <a class="nav-link"
                                 href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>

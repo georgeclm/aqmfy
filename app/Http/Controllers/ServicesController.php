@@ -65,7 +65,7 @@ class ServicesController extends Controller
 
         request()->validate([
             'name' => 'bail|required',
-            'category' => 'required',
+            'category_id' => 'required',
             'price' => 'required',
             'description' => 'required',
             'delivery_time' => 'required|numeric',

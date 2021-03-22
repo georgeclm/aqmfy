@@ -26,5 +26,14 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->insert([
             'name' => 'Programming',
         ]);
+        DB::table('services')->insert([
+            'name' => 'I will create your website',
+            'category_id' => '3',
+            'price' => '100000',
+            'description' => 'I will create your website using laravel and react trust me it works',
+            'delivery_time' => '3',
+            'revision_time' => '5',
+            'image' => 'Q9mKsJMGTeRbYwJiHxzT86lN4rZ5tTvjXdEeOLvp.jpg'
+        ]);
     }
 }

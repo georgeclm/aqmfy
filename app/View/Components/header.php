@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\View\Component;
 
 class header extends Component
@@ -19,7 +20,7 @@ class header extends Component
     public $chat;
     public function __construct()
     {
-        $this->categories = Category::all();
+        $this->categories = User::categories();
         if (auth()->user()) {
             if (auth()->user()->seller) {
                 $this->hasSeller = true;

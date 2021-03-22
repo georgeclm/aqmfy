@@ -67,4 +67,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(ChatRoom::class);
     }
+    static function categories()
+    {
+        return Category::all();
+    }
 }

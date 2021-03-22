@@ -26,8 +26,22 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->insert([
             'name' => 'Programming',
         ]);
+        DB::table('users')->insert([
+            'name' => 'Trial User',
+            'email' => 'test@test.com',
+            'password' => bcrypt('123456789')
+        ]);
+        DB::table('sellers')->insert([
+            'user_id' => '1',
+            'sellername' => 'Trial Seller',
+            'address' => 'Semarang',
+            'url' => 'http://youtube.com',
+            'image' => 'tXVh9GNK7ipE13C9q2LBz3d51TiEgJ7kfDflUdin.jpg',
+            'description' => 'This is my Toko Legitimate Tokoo'
+        ]);
         DB::table('services')->insert([
             'name' => 'I will create your website',
+            'seller_id' => '1',
             'category_id' => '3',
             'price' => '100000',
             'description' => 'I will create your website using laravel and react trust me it works',

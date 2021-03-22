@@ -16,12 +16,12 @@ class header extends Component
     public $wishlist;
     public $order;
     public $hasSeller;
-    public $categories;
+    // public $categories;
     public $chat;
     public function __construct()
     {
-        $this->categories = User::categories();
-        dd($this->categories);
+        // $this->categories = User::categories();
+        // dd($this->categories);
         if (auth()->user()) {
             if (auth()->user()->seller) {
                 $this->hasSeller = true;

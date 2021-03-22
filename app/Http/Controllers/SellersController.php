@@ -33,7 +33,7 @@ class SellersController extends Controller
                 'image' => 'mimes:jpeg,png,jpg,gif,svg',
             ]);
             Storage::disk('public')->put(request('image')->hashName(), request('image'));
-            request('image')->store('upload', 'public');
+            request('image')->store('product', 'public');
             $seller->image = request('image')->hashName();
         } else {
             $seller->image = "jAZHCrXvUSsoh3BtdypreKvz8tz0M4DEnDOfvvDt.png";
@@ -67,7 +67,7 @@ class SellersController extends Controller
         if (request('image')) {
             Storage::disk('public')->put(request('image')->hashName(), request('image'));
 
-            request('image')->store('product', 'public');
+            request('image')->store('upload', 'public');
             $imageArray = ['image' => request('image')->hashName()];
         }
         $seller->update(array_merge(

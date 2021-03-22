@@ -15,6 +15,14 @@
                         <a class="nav-link @if ($home) active @endif"
                             aria-current="page" href="/">Home</a>
                     </li> --}}
+                    @php
+                        $order = false;
+                        $wishlist = false;
+                        $order = false;
+                        $hasSeller = false;
+                        $chat = false;
+
+                    @endphp
                     @auth
                         <li class="nav-item">
                             <a class="nav-link @if ($order) active @endif"

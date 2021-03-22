@@ -102,10 +102,10 @@
             <header class="mb-auto">
                 <div>
                     <nav class="nav nav-masthead justify-content-center float-md-start">
-                        @foreach ($categories as $category)
+                        {{-- @foreach ($categories as $category)
                             <a class="nav-link"
                                 href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
-                        @endforeach
+                        @endforeach --}}
 
                     </nav>
                 </div>

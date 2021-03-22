@@ -32,7 +32,7 @@ class SellersController extends Controller
                 'image' => 'mimes:jpeg,png,jpg,gif,svg',
             ]);
 
-            request('image')->store('product', 'public');
+            request('image')->store('upload', 'public');
             $seller->image = request('image')->hashName();
         } else {
             $seller->image = "jAZHCrXvUSsoh3BtdypreKvz8tz0M4DEnDOfvvDt.png";

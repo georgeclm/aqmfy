@@ -14,6 +14,7 @@ class AddQuantityToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
+            $table->foreignId('service_id')->constrained('services');
             $table->integer('quantity')->nullable();
         });
     }

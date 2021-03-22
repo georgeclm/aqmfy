@@ -44,7 +44,11 @@ class header extends Component
      */
     public function render()
     {
-        $this->categories = User::categories();
-        return view('components.header', ['categories' => $this->categories]);
+        $wishlist = false;
+        $order = false;
+        $hasSeller = false;
+        $chat = false;
+        $categories = User::categories();
+        return view('components.header', compact('categories', 'wishlist', 'order', 'hasSeller', 'chat'));
     }
 }

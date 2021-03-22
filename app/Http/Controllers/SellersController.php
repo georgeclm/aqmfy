@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Seller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SellersController extends Controller
 {
@@ -31,7 +32,7 @@ class SellersController extends Controller
             request()->validate([
                 'image' => 'mimes:jpeg,png,jpg,gif,svg',
             ]);
-
+            Storage::disk('public')->put(request('image')->hashName(), request('image'));
             request('image')->store('upload', 'public');
             $seller->image = request('image')->hashName();
         } else {

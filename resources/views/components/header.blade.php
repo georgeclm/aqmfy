@@ -20,7 +20,13 @@
                         $order = false;
                         $wishlist = false;
                         $order = false;
-                        $hasSeller = false;
+                        if (auth()->user()) {
+                            if (auth()->user()->seller) {
+                                $this->hasSeller = true;
+                            } else {
+                                $hasSeller = false;
+                            }
+                        }
                         $chat = false;
                         $categories = User::categories();
 

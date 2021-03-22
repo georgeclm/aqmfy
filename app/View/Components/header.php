@@ -44,6 +44,7 @@ class header extends Component
      */
     public function render()
     {
-        return view('components.header');
+        $this->categories = User::categories();
+        return view('components.header', ['categories' => $this->categories]);
     }
 }

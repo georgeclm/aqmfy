@@ -65,6 +65,8 @@ class SellersController extends Controller
             'description' => 'sometimes'
         ]);
         if (request('image')) {
+            Storage::disk('public')->put(request('image')->hashName(), request('image'));
+
             request('image')->store('product', 'public');
             $imageArray = ['image' => request('image')->hashName()];
         }

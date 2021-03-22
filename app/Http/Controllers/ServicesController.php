@@ -28,7 +28,6 @@ class ServicesController extends Controller
         // dd((boolval("dara")));
         // dd(auth()->user()->seller);
         $categories = Category::all();
-        dd($categories);
         $services = Service::with('ratings')->get();
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first', 'categories'));

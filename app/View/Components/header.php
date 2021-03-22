@@ -21,6 +21,7 @@ class header extends Component
     public function __construct()
     {
         $this->categories = User::categories();
+        dd($this->categories);
         if (auth()->user()) {
             if (auth()->user()->seller) {
                 $this->hasSeller = true;

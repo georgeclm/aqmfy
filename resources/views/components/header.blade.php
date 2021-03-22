@@ -16,11 +16,13 @@
                             aria-current="page" href="/">Home</a>
                     </li> --}}
                     @php
+                        use App\Models\User;
                         $order = false;
                         $wishlist = false;
                         $order = false;
                         $hasSeller = false;
                         $chat = false;
+                        $categories = User::categories();
 
                     @endphp
                     @auth
@@ -105,7 +107,7 @@
             </div>
         </div>
     </nav>
-    {{-- <div class="bg-white">
+    <div class="bg-white">
         <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
             <header class="mb-auto">
                 <div>
@@ -119,5 +121,5 @@
                 </div>
             </header>
         </div>
-    </div> --}}
+    </div>
 </div>

@@ -69,7 +69,8 @@
                                                     <div class="ratingindex">
                                                         <span class="icon">★</span>
                                                     </div>
-                                                    <span class=""><strong> {{ $average }}</strong><span
+                                                    <span class=""><strong>
+                                                            {{ number_format($average, 1) }}</strong><span
                                                             class="text-muted">({{ $service->ratings->count() }})</span></span>
                                                 </div>
                                             @endif

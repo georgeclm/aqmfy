@@ -15,6 +15,12 @@ class CategoriesController extends Controller
     public function __invoke(Category $category)
     {
         $services = Service::where('category_id', $category->id)->with('ratings')->get();
+        // group by category id
+        // $servicess = Service::with('ratings')->get();
+        // $grouped = $servicess->mapToGroups(function ($item, $key) {
+        //     return [$item['category_id'] => $item];
+        // });
+        // $services = $grouped[$category->id];
         return view('service.categorysearch', compact('services', 'category'));
     }
 }

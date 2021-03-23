@@ -38,8 +38,8 @@ class ServicesController extends Controller
         $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
         // dd($service->ratings->count());
         $stars = array();
-        if ($service->ratings->count() != 0) {
-            $average = $service->ratings->average('rating');
+        if ($service->ratings()->count() != 0) {
+            $average = $service->ratings()->average('rating');
             $stars[0] = $service->ratings->where('rating', 5)->count();
             $stars[1] =  $stars[0] / $service->ratings->count() * 100;
             $stars[2] = $service->ratings->where('rating', 4)->count();

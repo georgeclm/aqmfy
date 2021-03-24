@@ -11,8 +11,8 @@ class Seller extends Model
     public function sellerImage()
     {
         // folder inside the public path for default image
-        $imagePath = ($this->image) ? $this->image : 'jAZHCrXvUSsoh3BtdypreKvz8tz0M4DEnDOfvvDt.png';
-        return 'uploads/' . $imagePath;
+        $imagePath = ($this->image) ? $this->image : 'no-image.png';
+        return 'uploads/profile/' . $imagePath;
     }
 
     protected $guarded = [];

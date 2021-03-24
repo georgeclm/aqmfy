@@ -5,7 +5,7 @@
     <div class="container" width="65%">
         <div class="row">
             <div class="col-sm-6 m-auto text-center">
-                <img class="detail-img" src="{{ asset("storage/product/{$service->image}") }}" alt="">
+                <img class="detail-img" src="{{ asset($service->serviceImage()) }}" alt="">
             </div>
             <div class="col-sm-6">
                 <h2>{{ $service->name }}</h2>

@@ -13,7 +13,7 @@
                 <h1>Customize Your Package</h1><br>
                 <div class="row">
                     <div class="col-md-3">
-                        <img width="150" src="{{ asset("storage/product/{$service->image}") }}" alt="">
+                        <img width="150" src="{{ asset($service->serviceImage()) }}" alt="">
                     </div>
                     <div class="col-md-5">
                         <div class="">

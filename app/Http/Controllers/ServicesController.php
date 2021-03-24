@@ -76,7 +76,9 @@ class ServicesController extends Controller
         ]);
         // dimensions:ratio=3/2
         $extension = $request->image->extension();
-        request('image')->store('product', 'public');
+        // change the public to s3
+        request('image')->storeAs('service', request('image')->hashName(), 'public');
+
         // dd($request->image->hashName());
 
         $service = new Service;
@@ -121,7 +123,8 @@ class ServicesController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
         if (request('image')) {
-            request('image')->store('product', 'public');
+            // change the public to s3
+            request('image')->storeAs('service', request('image')->hashName(), 'public');
             $imageArray = ['image' => request('image')->hashName()];
         }
         // dd(array_merge(

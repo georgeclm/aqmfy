@@ -10,6 +10,13 @@ class Service extends Model
 
     use HasFactory;
     protected $guarded = [];
+    public function serviceImage()
+    {
+        // folder inside the public path for default image
+        $imagePath = ($this->image) ? $this->image : 'no-image.png';
+        return 'uploads/service/' . $imagePath;
+    }
+
     public function seller()
     {
         return $this->belongsTo(Seller::class);

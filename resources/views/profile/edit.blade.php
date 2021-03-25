@@ -24,7 +24,7 @@
                         <label for="exampleInputEmail1" class="form-label">Email</label>
                         <input type="text" name="email" class="form-control @error('email')is-invalid @enderror"
                             id="exampleInputEmail1" value="{{ old('email') ?? $user->email }}"
-                            aria-describedby="emailHelp" placeholder="Email">
+                            aria-describedby="emailHelp" placeholder="Email" disabled>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

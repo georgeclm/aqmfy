@@ -22,7 +22,7 @@
                         </div>
                         <div class="carousel-caption d-none d-md-block slider-text text-light">
                             <h5>{{ $service->name }}</h5>
-                            <p>{{ Str::limit($service->description, 50) }}</p>
+                            <p>{{ Str::of($service->description)->title()->words(7) }}</p>
                         </div>
                     </a>
                 </div>

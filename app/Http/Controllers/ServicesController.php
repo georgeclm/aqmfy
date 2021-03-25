@@ -40,16 +40,12 @@ class ServicesController extends Controller
         $stars = array();
         if ($service->ratings()->count() != 0) {
             $average = $service->ratings()->average('rating');
-            $stars[0] = $service->ratings->where('rating', 5)->count();
-            $stars[1] =  $stars[0] / $service->ratings->count() * 100;
-            $stars[2] = $service->ratings->where('rating', 4)->count();
-            $stars[3] =  $stars[2] / $service->ratings->count() * 100;
-            $stars[4] = $service->ratings->where('rating', 3)->count();
-            $stars[5] =  $stars[4] / $service->ratings->count() * 100;
-            $stars[6] = $service->ratings->where('rating', 2)->count();
-            $stars[7] =  $stars[6] / $service->ratings->count() * 100;
-            $stars[8] = $service->ratings->where('rating', 1)->count();
-            $stars[9] =  $stars[8] / $service->ratings->count() * 100;
+            $rating = 5;
+            for ($i = 0; $i < 10; $i += 2) {
+                $stars[$i] = $service->ratings->where('rating', $rating)->count();
+                $stars[$i + 1] = $stars[$i] / $service->ratings->count() * 100;
+                $rating--;
+            }
         } else {
             $average = 0;
         }

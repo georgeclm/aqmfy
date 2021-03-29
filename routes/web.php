@@ -31,17 +31,18 @@ Route::get("/search", [ServicesController::class, 'search'])->name('search');
 Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('autocomplete');
 
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
+Route::get('/', [ServicesController::class, 'index'])->name('services.index');
+Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::resource('services', ServicesController::class)->except(['index', 'show']);
-    Route::get('/', [ServicesController::class, 'index'])->name('services.index')->withoutMiddleware('auth');
-    Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
+
     Route::get('/services/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
     Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
     Route::post('/follow/{user}', [UsersController::class, 'follow'])->block();
     Route::resource('sellers', SellersController::class)->except(['show']);
-    Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::prefix('wishlists')->group(function () {
         Route::get('/', [WishlistsController::class, 'show'])->name('wishlists.show');
         Route::post('/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
@@ -71,10 +72,10 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
 
     return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');;

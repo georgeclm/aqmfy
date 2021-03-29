@@ -3,6 +3,7 @@
         <div class="container-fluid" style="width:95%">
             <a class="navbar-brand" href="{{ route('services.index') }}">
                 <img src="{{ asset('img/Logo_text.png') }}" alt="" width="90" height="" class="">
+
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -11,10 +12,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {{-- <li class="nav-item">
-                        <a class="nav-link @if ($home) active @endif"
-                            aria-current="page" href="/">Home</a>
-                    </li> --}}
                     @php
                         use App\Models\User;
                         $order = false;
@@ -52,8 +49,6 @@
 
                     <form action="/search" class="d-flex container-fluid" autocomplete="off">
                         <input class="typeahead form-control me-2" type="text" placeholder="Find Services" name="query">
-                        {{-- <input class="form-control me-2" name="query" type="search" placeholder="Find Services"
-                            aria-label="Search"> --}}
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 
@@ -122,7 +117,6 @@
                             <a class="nav-link"
                                 href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
                         @endforeach
-
                     </nav>
                 </div>
             </header>

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SellersController;

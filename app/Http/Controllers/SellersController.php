@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Seller;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SellersController extends Controller
 {

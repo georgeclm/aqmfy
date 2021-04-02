@@ -32,7 +32,7 @@ Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('a
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
-Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
+Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::resource('services', ServicesController::class)->except(['index', 'show']);

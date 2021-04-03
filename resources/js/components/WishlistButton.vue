@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  props: ["serviceId", "favorite"],
+  props: ["favorite", "route"],
 
   data: function () {
     return {
@@ -18,7 +18,7 @@ export default {
   methods: {
     followUser() {
       axios
-        .post("/wishlists/" + this.serviceId)
+        .post(this.route)
         .then((response) => {
           this.status = !this.status;
         })

@@ -33,7 +33,8 @@
                         Profile</a>
                 </div>
             @else
-                <follow-button user-id={{ $seller->id }} follows="{{ $follows }}"></follow-button>
+                <follow-button route={{ route('follows.add', $seller->id) }} follows="{{ $follows }}">
+                </follow-button>
             @endif
 
         </div>

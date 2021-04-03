@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    function follow(User $user)
+    function follow(Seller $seller)
     {
-        return auth()->user()->following()->toggle($user->seller);
+        return auth()->user()->following()->toggle($seller);
     }
     function edit(User $user)
     {

@@ -35,7 +35,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @if ($chat) active @endif"
-                                href="/messages">Message @include('messenger.unread-count')</a>
+                                href="{{ route('messages') }}">Message @include('messenger.unread-count')</a>
 
                         </li>
 
@@ -47,7 +47,7 @@
                 </ul>
                 <div class="col-md-6 text-center">
 
-                    <form action="/search" class="d-flex container-fluid" autocomplete="off">
+                    <form action="{{ route('search') }}" class="d-flex container-fluid" autocomplete="off">
                         <input class="typeahead form-control me-2" type="text" placeholder="Find Services" name="query">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>

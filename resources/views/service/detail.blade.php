@@ -16,7 +16,8 @@
                 <br><br>
                 @if (auth()->id() != $service->seller->user_id)
                     @auth
-                        <wishlist-button service-id="{{ $service->id }}" favorite="{{ $favorite }}"></wishlist-button>
+                        <wishlist-button route={{ route('wishlists.add', $service->id) }}" favorite="{{ $favorite }}">
+                        </wishlist-button>
                     @endauth
 
                     @error('service_id')

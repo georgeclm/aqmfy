@@ -23,8 +23,7 @@
                 <div class="h4"><strong> Description</strong></div>
                 <div class="h5">{{ $seller->description }}</div>
             </div>
-
-            @if ($seller->user_id == auth()->id())
+            @if ($seller->user()->is(auth()->user()))
                 <div class="col-sm-2 align-self-end">
                     <a href="{{ route('services.create') }}" class="btn btn-outline-success mb-3">Add
                         Service</a>
@@ -42,7 +41,7 @@
             <div class="container trending-wrapper mb-5">
                 @if ($services->count())
                     <h3 class='mb-4 text-center'>
-                    @if (auth()->id() == $seller->user_id)Your Services @else
+                    @if ($seller->user()->is(auth()->user()))Your Services @else
                             {{ $seller->sellername }} Services @endif
                     </h3>
                     <div class="row row-cols-1 row-cols-md-6">
@@ -85,7 +84,7 @@
 
                 @else
                     <h3>
-                        @if (auth()->id() == $seller->user_id)You didn't Sell any
+                        @if ($seller->user()->is(auth()->user()))You didn't Sell any
                             Service
                         Yet @else
                             {{ $seller->sellername }} Didn't Have any Services Yet @endif

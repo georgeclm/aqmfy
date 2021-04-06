@@ -14,7 +14,7 @@
                 <h4>Delivery Time: {{ $service->delivery_time }} day</h4>
                 <h4>Revisions: {{ $service->revision_time }}</h4>
                 <br><br>
-                @if (auth()->id() != $service->seller->user_id)
+                @if ($service->seller->user()->isNot(auth()->user()))
                     @auth
                         <wishlist-button route={{ route('wishlists.add', $service->id) }}" favorite="{{ $favorite }}">
                         </wishlist-button>
@@ -109,7 +109,7 @@
                     <strong>{{ $service->seller->followers->count() }}</strong>
                     followers
                 </div>
-                @if (auth()->id() != $service->seller->user_id)
+                @if ($service->seller->user()->isNot(auth()->user()))
 
                     <button data-bs-toggle="modal" data-bs-target="#message" class="btn btn-outline-secondary">Contact
                         Seller</button>

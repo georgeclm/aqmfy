@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SellersController;
@@ -32,6 +34,10 @@ Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('a
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('sellers', SellersController::class)->except(['show']);
@@ -55,13 +61,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('orders.destroy');
     });
     Route::post('/rating', [RatingsController::class, 'store'])->name('ratings.store');
-    Route::prefix('messages')->group(function(){
+    Route::prefix('messages')->group(function () {
         Route::get('/', [MessagesController::class, 'index'])->name('messages');
         Route::get('create', [MessagesController::class, 'create'])->name('messages.create');
         Route::post('/', [MessagesController::class, 'store'])->name('messages.store');
         Route::get('{id}', [MessagesController::class, 'show'])->name('messages.show');
         Route::put('{id}', [MessagesController::class, 'update'])->name('messages.update');
-
     });
 });
 // Verify Email

@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
+                                <div class="col-md-8 offset-md-4 mb-3">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
                                     </button>
@@ -68,6 +68,16 @@
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="row text-center justify-content-center">
+                                <div class="col-md-3">
+                                    <a class="btn btn-outline-dark" href="{{ url('auth/google') }}" role="button"
+                                        style="text-transform:none">
+                                        <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                                        Login with Google
+                                    </a>
                                 </div>
                             </div>
                         </form>

@@ -10,6 +10,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\TwitterController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,8 @@ Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+Route::get('auth/twitter', [TwitterController::class, 'redirectToTwitter']);
+Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('sellers', SellersController::class)->except(['show']);

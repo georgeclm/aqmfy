@@ -165,6 +165,12 @@
         background-color: #ea4335;
     }
 
+    .btn-twitter {
+        color: white;
+        background-color: #6ca0ca;
+    }
+
+
     .btn-facebook {
         color: white;
         background-color: #3b5998;

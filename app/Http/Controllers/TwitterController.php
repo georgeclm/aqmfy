@@ -9,40 +9,41 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class FacebookController extends Controller
+
+class TwitterController extends Controller
 {
-    public function redirectToFacebook()
+
+    public function redirectToTwitter()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('twitter')->redirect();
     }
 
-    public function handleFacebookCallback()
+    public function handleTwitterCallback()
     {
         try {
 
-            $user = Socialite::driver('facebook')->user();
+            $user = Socialite::driver('twitter')->user();
 
-            $finduser = User::firstWhere('facebook_id', $user->id);
+            $finduser = User::firstWhere('twitter_id', $user->id);
             $emailuser = User::firstWhere('email', $user->email);
-
             if ($finduser) {
-
                 Auth::login($finduser);
 
                 return redirect()->route('services.index');
             } else {
                 if ($emailuser) {
-                    $emailuser->update(['facebook_id' => $user->id, 'name' => $user->name]);
+                    $emailuser->update(['twitter_id' => $user->id, 'name' => $user->name]);
                     Auth::login($emailuser);
                 } else {
                     $newUser = User::create([
                         'name' => $user->name,
                         'email' => $user->email,
-                        'facebook_id' => $user->id,
+                        'twitter_id' => $user->id,
                         'password' => encrypt(Str::random(10))
                     ]);
                     Auth::login($newUser);
                 }
+
                 return redirect()->route('services.index');
             }
         } catch (Exception $e) {

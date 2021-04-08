@@ -10,7 +10,9 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TwitterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +45,8 @@ Route::get('auth/twitter', [TwitterController::class, 'redirectToTwitter']);
 Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
 
 Route::middleware('auth')->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
     Route::resource('sellers', SellersController::class)->except(['show']);
     Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::resource('services', ServicesController::class)->except(['index', 'show']);

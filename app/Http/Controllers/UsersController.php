@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Seller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -19,7 +20,7 @@ class UsersController extends Controller
     function update(User $user)
     {
         // dd(request()->all());
-        $data = request()->validate(['name' => 'required', 'email' => 'required']);
+        $data = request()->validate(['name' => 'required', 'email' => 'required|email|unique:users,email']);
         $user->update($data);
         return redirect()->route('profiles.edit', auth()->user())->with('success', 'Profile have been updated');
     }

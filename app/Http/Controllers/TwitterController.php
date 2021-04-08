@@ -8,6 +8,8 @@ use Exception;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
+
 
 
 class TwitterController extends Controller
@@ -41,6 +43,8 @@ class TwitterController extends Controller
                         'twitter_id' => $user->id,
                         'password' => encrypt(Str::random(10))
                     ]);
+                    $newUser->assignRole([Role::firstWhere('name', 'Buyer')->id]);
+
                     Auth::login($newUser);
                 }
 

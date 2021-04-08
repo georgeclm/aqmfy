@@ -26,7 +26,7 @@ class TwitterController extends Controller
 
             $user = Socialite::driver('twitter')->user();
 
-            $finduser = User::firstWhere('twitter_id', $user->id);
+            $finduser = User::where('twitter_id', $user->id)->first();
             $emailuser = User::firstWhere('email', $user->email);
             if ($finduser) {
                 Auth::login($finduser);
@@ -43,7 +43,7 @@ class TwitterController extends Controller
                         'twitter_id' => $user->id,
                         'password' => encrypt(Str::random(10))
                     ]);
-                    $newUser->assignRole([Role::firstWhere('name', 'Buyer')->id]);
+                    $newUser->assignRole('Buyer');
 
                     Auth::login($newUser);
                 }

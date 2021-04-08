@@ -25,10 +25,8 @@ class GoogleController extends Controller
         try {
 
             $user = Socialite::driver('google')->user();
-
-            $finduser = User::firstWhere('google_id', $user->id);
-            $emailuser = User::firstWhere('email', $user->email);
-
+            $finduser = User::firstWhere('google_id', $user->getId());
+            $emailuser = User::firstWhere('email', $user->getEmail());
             if ($finduser) {
 
                 Auth::login($finduser);
@@ -36,17 +34,17 @@ class GoogleController extends Controller
                 return redirect()->route('services.index');
             } else {
                 if ($emailuser) {
-                    $emailuser->update(['google_id' => $user->id, 'name' => $user->name]);
+                    $emailuser->update(['google_id' => $user->getId(), 'name' => $user->getName()]);
                     Auth::login($emailuser);
                 } else {
 
                     $newUser = User::create([
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'google_id' => $user->id,
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail(),
+                        'google_id' => $user->getId(),
                         'password' => encrypt(Str::random(10))
                     ]);
-                    $newUser->assignRole([Role::firstWhere('name', 'Buyer')->id]);
+                    $newUser->assignRole('Buyer');
 
                     Auth::login($newUser);
                 }

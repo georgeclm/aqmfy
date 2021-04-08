@@ -44,7 +44,7 @@ class FacebookController extends Controller
                         'password' => encrypt(Str::random(10))
                     ]);
 
-                    $newUser->assignRole([Role::firstWhere('name', 'Buyer')->id]);
+                    $newUser->assignRole('Buyer');
 
                     Auth::login($newUser);
                 }

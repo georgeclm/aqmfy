@@ -36,7 +36,6 @@ Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('a
 
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
-Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
@@ -50,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('sellers', SellersController::class)->except(['show']);
     Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::resource('services', ServicesController::class)->except(['index', 'show']);
+    Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
+
     Route::get('/services/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
     Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');

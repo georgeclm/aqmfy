@@ -23,33 +23,31 @@ class TwitterController extends Controller
     public function handleTwitterCallback()
     {
         try {
-
             $user = Socialite::driver('twitter')->user();
-
-            $finduser = User::where('twitter_id', $user->id)->first();
+            $finduser = User::firstWhere('twitter_id', $user->id);
             $emailuser = User::firstWhere('email', $user->email);
+
             if ($finduser) {
                 Auth::login($finduser);
-
-                return redirect()->route('services.index');
-            } else {
-                if ($emailuser) {
-                    $emailuser->update(['twitter_id' => $user->id, 'name' => $user->name]);
-                    Auth::login($emailuser);
-                } else {
-                    $newUser = User::create([
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'twitter_id' => $user->id,
-                        'password' => encrypt(Str::random(10))
-                    ]);
-                    $newUser->assignRole('Buyer');
-
-                    Auth::login($newUser);
-                }
-
-                return redirect()->route('services.index');
+                return redirect()->route('services.index')->with('success', 'Twitter Account Logged In');
             }
+
+            if ($emailuser) {
+                $emailuser->update(['twitter_id' => $user->id, 'name' => $user->name]);
+                Auth::login($emailuser);
+                return redirect()->route('services.index')->with('success', 'Acoount has been changed with Twitter');
+            }
+
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'twitter_id' => $user->id,
+                'password' => encrypt(Str::random(10))
+            ]);
+
+            $newUser->assignRole('Buyer');
+            Auth::login($newUser);
+            return redirect()->route('services.index')->with('success', 'Twitter Account Created');
         } catch (Exception $e) {
             dd($e->getMessage());
         }

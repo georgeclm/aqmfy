@@ -15,11 +15,12 @@ class SellersController extends Controller
     function store(Request $request)
     {
         request()->validate([
-            'sellername' => 'bail|required',
+            'sellername' => ['bail', 'required'],
             'address' => 'sometimes',
-            'url' => 'sometimes|url',
+            'url' => ['sometimes', 'url'],
             'description' => 'nullable'
         ]);
+
         // dd($request->all());
         $seller = new Seller;
         $seller->sellername = $request->sellername;
@@ -27,6 +28,7 @@ class SellersController extends Controller
         $seller->url = $request->url;
         $seller->description = $request->description;
         $seller->user_id = auth()->id();
+
         if (request('image')) {
             request()->validate([
                 'image' => 'mimes:jpeg,png,jpg,gif,svg',
@@ -51,6 +53,7 @@ class SellersController extends Controller
 
         $services = Service::where('seller_id', $seller->id)->get();
         $follows = (auth()->user()) ? auth()->user()->following->contains($seller->id) : false;
+
         return view('seller.detail', compact('seller', 'services', 'follows'));
     }
     public function edit(Seller $seller)
@@ -60,22 +63,25 @@ class SellersController extends Controller
     public function update(Seller $seller)
     {
         $data = request()->validate([
-            'sellername' => 'bail|required',
+            'sellername' => ['bail', 'required'],
             'address' => 'sometimes',
-            'url' => 'sometimes|url',
+            'url' => ['sometimes', 'url'],
             'image' => 'mimes:jpeg,png,jpg,gif,svg',
             'description' => 'sometimes'
         ]);
+
         if (request('image')) {
             // Storage::putFileAs('profile', request()->file('image'), request('image')->hashName(), 'public');
             // change the public to s3
             request('image')->storeAs('profile', request('image')->hashName(), 'public');
             $imageArray = ['image' => request('image')->hashName()];
         }
+
         $seller->update(array_merge(
             $data,
             $imageArray ?? []
         ));
+
         return redirect()->route('sellers.show', $seller)->with('success', 'Seller Profile Have Been Updated');
     }
 }

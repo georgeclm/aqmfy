@@ -7,12 +7,12 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SellersController;
 use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TwitterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,6 @@ Auth::routes();
 // for the search using ajax
 Route::get("/search", [ServicesController::class, 'search'])->name('search');
 Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('autocomplete');
-
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);

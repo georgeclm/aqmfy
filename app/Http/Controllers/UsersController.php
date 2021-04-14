@@ -13,15 +13,17 @@ class UsersController extends Controller
     {
         return auth()->user()->following()->toggle($seller);
     }
+
     function edit(User $user)
     {
         return view('profile.edit', compact('user'));
     }
+
     function update(User $user)
     {
         // dd(request()->all());
-        $data = request()->validate(['name' => 'required', 'email' => 'required|email|unique:users,email']);
+        $data = request()->validate(['name' => 'required', 'email' => ['required', 'email', 'unique:users']]);
         $user->update($data);
-        return redirect()->route('profiles.edit', auth()->user())->with('success', 'Profile have been updated');
+        return redirect()->back()->with('success', 'Profile have been updated');
     }
 }

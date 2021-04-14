@@ -17,17 +17,18 @@ class ServicesController extends Controller
     // }
     function getDownload(Service $service)
     {
-        $file = public_path() . "/storage/product/{$service->image}";
+        $file = public_path() . "/uploads/service/{$service->image}";
         // to show the file
         // return response()->file($file);
         return response()->download($file, $service->name . ".jpg");
     }
+
     public function autocomplete()
     {
-
         $services = Service::all();
         return response()->json($services);
     }
+
     function index()
     {
         // dd((boolval("dara")));
@@ -38,12 +39,14 @@ class ServicesController extends Controller
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first', 'categories'));
     }
+
     function show(Service $service)
     {
         // dd($service->seller->user->id);
         $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
         // dd($service->ratings->count());
         $stars = array();
+
         if ($service->ratings()->count() != 0) {
             $average = $service->ratings()->average('rating');
             $rating = 5;
@@ -58,29 +61,30 @@ class ServicesController extends Controller
 
         return view('service.detail', compact('service', 'favorite', 'average', 'stars'));
     }
+
     public function create()
     {
         $categories = Category::all();
         return view('service.add', compact('categories'));
     }
+
     public function store(Request $request)
     {
         // dd(request('image'));
-
         request()->validate([
-            'name' => 'bail|required',
+            'name' => ['bail', 'required'],
             'category_id' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'delivery_time' => 'required|numeric',
-            'revision_time' => 'required|numeric',
+            'delivery_time' => ['required', 'numeric'],
+            'revision_time' => ['required', 'numeric'],
             'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
+
         // dimensions:ratio=3/2
         $extension = $request->image->extension();
         // change the public to s3
         request('image')->storeAs('service', request('image')->hashName(), 'public');
-
         // dd($request->image->hashName());
 
         $service = new Service;
@@ -92,26 +96,31 @@ class ServicesController extends Controller
         $service->image = request('image')->hashName();
         $service->seller_id = auth()->user()->seller->id;
         $service->category_id = $request->category_id;
+        $service->save();
 
-        $service->save(); // Finally, save the record.
-        return redirect('/');
+        return redirect()->route('services.index');
     }
+
     function search(Request $request)
     {
         // for the search engine inside database search all the name like to following value
         // dd(Session::get('services'));
         $query = $request->input('query');
+
         $services = Service::where('name', 'LIKE', '%' . $query . '%')
             ->orWhere('description', 'LIKE', '%' . $query . '%')
             ->with('ratings')
             ->get();
+
         return view('service.search', compact('services', 'query'));
     }
+
     public function edit(Service $service)
     {
         $categories = Category::all();
         return view('service.edit', compact('service', 'categories'));
     }
+
     public function update(Service $service)
     {
         // dd(request()->all());
@@ -124,21 +133,21 @@ class ServicesController extends Controller
             'revision_time' => 'required|numeric',
             'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
+
         if (request('image')) {
             // change the public to s3
             request('image')->storeAs('service', request('image')->hashName(), 'public');
             $imageArray = ['image' => request('image')->hashName()];
         }
-        // dd(array_merge(
-        //     $data,
-        //     $imageArray ?? []
-        // ));
+
         $service->update(array_merge(
             $data,
             $imageArray ?? []
         ));
+
         return redirect()->route('services.show', $service)->with('success', 'Gig Have Been Updated');
     }
+
     public function destroy(Service $service)
     {
         Service::destroy($service->id);

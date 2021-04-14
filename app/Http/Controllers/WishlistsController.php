@@ -11,6 +11,7 @@ class WishlistsController extends Controller
     {
         return view('wishlist.detail');
     }
+
     public function add(Service $service)
     {
         return auth()->user()->favorite()->toggle($service);

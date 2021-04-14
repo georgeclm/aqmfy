@@ -16,6 +16,6 @@ class Order extends Model
     }
     public function service()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsTo(Service::class);
     }
 }

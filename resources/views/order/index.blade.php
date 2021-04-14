@@ -17,7 +17,7 @@
                         <div class="row searched-item cart-list-divider">
                             <div class="col-sm-3">
                                 <a href="{{ route('services.show', $order->service_id) }}">
-                                    <img width="150" src="{{ asset("storage/product/{$order->image}") }}">
+                                    <img width="150" src="{{ asset("uploads/service/{$order->image}") }}">
                                 </a>
                             </div>
                             <div class="col-sm-7">
@@ -31,12 +31,13 @@
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <button class="btn btn-outline-success" data-bs-toggle="modal"
+                                <button class="btn btn-outline-success" data-bs-toggle="modal" type="button"
                                     data-bs-target="#rating">Finish Order</button>
                             </div>
 
                         </div>
                     @endforeach
+
                 @else
                     <div class="d-grid gap-2 col-5 mx-auto text-center">
                         <br><br>

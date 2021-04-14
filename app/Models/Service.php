@@ -33,4 +33,8 @@ class Service extends Model
     {
         return $this->hasMany(Rating::class)->orderBy('created_at', 'DESC');
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

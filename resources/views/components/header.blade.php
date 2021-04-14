@@ -16,38 +16,45 @@
                         use App\Models\User;
                         $order = false;
                         $wishlist = false;
-                        $order = false;
-                        if (auth()->user()) {
-                            if (auth()->user()->seller) {
-                                $hasSeller = true;
-                            } else {
-                                $hasSeller = false;
-                            }
-                        }
                         $chat = false;
+                        $role = false;
+                        $user = false;
+                        if (url()->current() == env('APP_URL') . '/wishlists') {
+                            $wishlist = true;
+                        } elseif (url()->current() == env('APP_URL') . '/orders/' . auth()->id()) {
+                            $order = true;
+                        } elseif (url()->current() == env('APP_URL') . '/messages') {
+                            $chat = true;
+                        } elseif (url()->current() == env('APP_URL') . '/roles') {
+                            $role = true;
+                        } elseif (url()->current() == env('APP_URL') . '/users') {
+                            $user = true;
+                        }
                         $categories = User::categories();
 
                     @endphp
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link @if ($order) active @endif"
-                                href="{{ route('orders.index', auth()->user()) }}">Orders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if ($chat) active @endif"
-                                href="/messages">Message @include('messenger.unread-count')</a>
+                        @if (auth()->user()->roles->first() != null &&
+        auth()->user()->roles->first()->name == 'Admin')
+                            <li class="nav-item">
+                                <a class="nav-link @if ($role) active @endif" href="{{ route('roles.index') }}">Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if ($user) active @endif" href="{{ route('users.index') }}">Manage Users</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link @if ($order) active @endif" href="{{ route('orders.index', auth()->user()) }}">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if ($chat) active @endif" href="{{ route('messages') }}">Message @include('messenger.unread-count')</a>
+                            </li>
+                        @endif
 
-                        </li>
-
-                        {{-- <li><a href="/messages">Messages @include('messenger.unread-count')</a></li>
-                        <li><a href="/messages/create">Create New Message</a></li> --}}
                     @endauth
-
-
                 </ul>
                 <div class="col-md-6 text-center">
-
-                    <form action="/search" class="d-flex container-fluid" autocomplete="off">
+                    <form action="{{ route('search') }}" class="d-flex container-fluid" autocomplete="off">
                         <input class="typeahead form-control me-2" type="text" placeholder="Find Services" name="query">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -64,25 +71,28 @@
                         </li>
 
                     @else
-
-                        <li class="nav-item">
-                            <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show') }}"> <span
-                                    class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
-                                Wishlist</a>
-                        </li>
-                        @if ($hasSeller)
-                            <li class="nav-item">
-                                <a class="nav-link text-success"
-                                    href="{{ route('sellers.show', auth()->user()->seller) }}">Switch To
-                                    Selling</a>
-                            </li>
+                        @if (auth()->user()->roles->first() != null &&
+        auth()->user()->roles->first()->name == 'Admin')
                         @else
                             <li class="nav-item">
-                                <a class="nav-link text-success" href="{{ route('sellers.create') }}">Become a seller</a>
+                                <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show') }}"> <span
+                                        class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
+                                    Wishlist</a>
                             </li>
+                            @if (auth()->user()->seller)
+                                <li class="nav-item">
+                                    <a class="nav-link text-success"
+                                        href="{{ route('sellers.show', auth()->user()->seller) }}">Switch To
+                                        Selling</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link text-success" href="{{ route('sellers.create') }}">Become a
+                                        seller</a>
+                                </li>
 
+                            @endif
                         @endif
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">

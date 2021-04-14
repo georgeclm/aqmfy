@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\SellersController;
@@ -8,6 +10,9 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\WishlistsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TwitterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,17 +36,25 @@ Route::get('autocomplete', [ServicesController::class, 'autocomplete'])->name('a
 
 Route::get('/categories/{category}', CategoriesController::class)->name('search.category');
 Route::get('/', [ServicesController::class, 'index'])->name('services.index');
-Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show');
-Route::get('/seller/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+Route::get('auth/twitter', [TwitterController::class, 'redirectToTwitter']);
+Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
 
 Route::middleware('auth')->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('sellers', SellersController::class)->except(['show']);
+    Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::resource('services', ServicesController::class)->except(['index', 'show']);
+    Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
 
     Route::get('/services/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
     Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');
-    Route::post('/follow/{user}', [UsersController::class, 'follow'])->block();
-    Route::resource('sellers', SellersController::class)->except(['show']);
+    Route::post('/follow/{seller}', [UsersController::class, 'follow'])->name('follows.add');
     Route::prefix('wishlists')->group(function () {
         Route::get('/', [WishlistsController::class, 'show'])->name('wishlists.show');
         Route::post('/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
@@ -56,7 +69,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{order}', [OrdersController::class, 'destroy'])->name('orders.destroy');
     });
     Route::post('/rating', [RatingsController::class, 'store'])->name('ratings.store');
-    Route::group(['prefix' => 'messages'], function () {
+    Route::prefix('messages')->group(function () {
         Route::get('/', [MessagesController::class, 'index'])->name('messages');
         Route::get('create', [MessagesController::class, 'create'])->name('messages.create');
         Route::post('/', [MessagesController::class, 'store'])->name('messages.store');

@@ -40,6 +40,8 @@ class SellersController extends Controller
         }
 
         $seller->save();
+        $seller->user->removeRole('Buyer');
+        $seller->user->assignRole('Seller');
 
 
         return redirect('/');

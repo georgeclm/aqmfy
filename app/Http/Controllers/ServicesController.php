@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
+    // function __construct()
+    // {
+    //     $this->middleware('permission:service-list|service-create|service-edit|service-delete', ['only' => ['index', 'show']]);
+    //     $this->middleware('permission:service-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:service-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:service-delete', ['only' => ['destroy']]);
+    // }
     function getDownload(Service $service)
     {
         $file = public_path() . "/storage/product/{$service->image}";
@@ -26,7 +33,8 @@ class ServicesController extends Controller
         // dd((boolval("dara")));
         // dd(auth()->user()->seller);
         $categories = Category::all();
-        $services = Service::with('ratings')->get();
+        $services = Service::with('ratings')->paginate(30);
+        // dd(auth()->user()->roles->first()->name);
         $first = $services[0]->id;
         return view('service.index', compact('services', 'first', 'categories'));
     }

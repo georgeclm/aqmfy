@@ -31,7 +31,7 @@
                             $user = true;
                         }
                         $categories = User::categories();
-                        
+
                     @endphp
                     @auth
                         @if (auth()->user()->roles->first() != null &&
@@ -79,7 +79,7 @@
                                         class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
                                     Wishlist</a>
                             </li>
-                            {{-- @if (auth()->user()->seller)
+                            @if (auth()->user()->seller)
                                 <li class="nav-item">
                                     <a class="nav-link text-success"
                                         href="{{ route('sellers.show', auth()->user()->seller) }}">Switch To
@@ -91,7 +91,7 @@
                                         seller</a>
                                 </li>
 
-                            @endif --}}
+                            @endif
                         @endif
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

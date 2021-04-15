@@ -29,13 +29,10 @@
     <x-header />
     <div id="app">
 
-        @if (count($errors) > 0)
+        @if (session('error'))
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <h6>{{ session('error') }}</h6>
                 </ul>
             </div>
         @endif

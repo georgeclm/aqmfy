@@ -41,17 +41,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputRevisionTime" class="form-label">Revision Time</label>
-                        <input type="number" name="revision_time"
-                            class="form-control @error('revision_time') is-invalid @enderror" id="exampleInputRevisionTime"
-                            value="{{ old('revision_time') }}" aria-describedby="emailHelp" placeholder="0" required>
-                        @error('revision_time')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+
                     <div class="mb-3">
                         <label for="exampleInputCategory" class="form-label">Category</label>
                         <select name="category_id" class="form-select @error('category') is-invalid @enderror" required>

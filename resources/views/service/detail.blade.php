@@ -12,7 +12,6 @@
                 <h3>Price: Rp. {{ number_format($service->price) }}</h3>
                 <h4>Category: {{ $service->category->name }}</h4>
                 <h4>Delivery Time: {{ $service->delivery_time }} day</h4>
-                <h4>Revisions: {{ $service->revision_time }}</h4>
                 <br><br>
                 @if ($service->seller->user()->isNot(auth()->user()))
                     @auth

@@ -64,41 +64,47 @@ class ServicesController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        return view('service.add', compact('categories'));
+        if (auth()->user()->seller) {
+            $categories = Category::all();
+            return view('service.add', compact('categories'));
+        }
+        return redirect()->route('sellers.create')->with('error', 'You are not a seller please registered Yourself First');
     }
 
     public function store(Request $request)
     {
         // dd(request('image'));
-        request()->validate([
-            'name' => ['bail', 'required'],
-            'category_id' => 'required',
-            'price' => 'required',
-            'description' => 'required',
-            'delivery_time' => ['required', 'numeric'],
-            'revision_time' => ['required', 'numeric'],
-            'image' => 'mimes:jpeg,png,jpg,gif,svg'
-        ]);
+        if (auth()->user()->seller) {
+            request()->validate([
+                'name' => ['bail', 'required'],
+                'category_id' => 'required',
+                'price' => 'required',
+                'description' => 'required',
+                'delivery_time' => ['required', 'numeric'],
+                'revision_time' => ['required', 'numeric'],
+                'image' => 'mimes:jpeg,png,jpg,gif,svg'
+            ]);
 
-        // dimensions:ratio=3/2
-        $extension = $request->image->extension();
-        // change the public to s3
-        request('image')->storeAs('service', request('image')->hashName(), 'public');
-        // dd($request->image->hashName());
+            // dimensions:ratio=3/2
+            $extension = $request->image->extension();
+            // change the public to s3
+            request('image')->storeAs('service', request('image')->hashName(), 'public');
+            // dd($request->image->hashName());
 
-        $service = new Service;
-        $service->name = $request->name;
-        $service->price = $request->price;
-        $service->description = $request->description;
-        $service->delivery_time = $request->delivery_time;
-        $service->revision_time = $request->revision_time;
-        $service->image = request('image')->hashName();
-        $service->seller_id = auth()->user()->seller->id;
-        $service->category_id = $request->category_id;
-        $service->save();
+            $service = new Service;
+            $service->name = $request->name;
+            $service->price = $request->price;
+            $service->description = $request->description;
+            $service->delivery_time = $request->delivery_time;
+            $service->revision_time = $request->revision_time;
+            $service->image = request('image')->hashName();
+            $service->seller_id = auth()->user()->seller->id;
+            $service->category_id = $request->category_id;
+            $service->save();
 
-        return redirect()->route('services.index');
+            return redirect()->route('services.index');
+        }
+        return redirect()->route('sellers.create')->with('error', 'You are not a seller please registered Yourself First');
     }
 
     function search(Request $request)
@@ -117,6 +123,9 @@ class ServicesController extends Controller
 
     public function edit(Service $service)
     {
+        if (auth()->id() != $service->seller->user_id) {
+            return redirect()->route('services.index')->with('error', 'You are not the author of the photos');
+        }
         $categories = Category::all();
         return view('service.edit', compact('service', 'categories'));
     }
@@ -125,6 +134,10 @@ class ServicesController extends Controller
     {
         // dd(request()->all());
         // dd($service);
+        if (auth()->id() != $service->seller->user_id) {
+            return redirect()->route('services.index')->with('error', 'You are not the author of the photos');
+        }
+
         $data = request()->validate([
             'name' => 'bail|required',
             'price' => 'required',
@@ -150,6 +163,9 @@ class ServicesController extends Controller
 
     public function destroy(Service $service)
     {
+        if (auth()->id() != $service->seller->user_id) {
+            return redirect()->route('services.index')->with('error', 'You are not the author of the photos');
+        }
         Service::destroy($service->id);
         return redirect()->route('sellers.show', auth()->user())->with('success', 'Gig Have Been Removed');
     }

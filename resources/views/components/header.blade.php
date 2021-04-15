@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom border-light border-5">
         <div class="container-fluid" style="width:95%">
             <a class="navbar-brand" href="{{ route('services.index') }}">
-                <img src="{{ asset('img/Logo_text.png') }}" alt="" width="90" height="" class="">
+                <img src="{{ asset('img/textaqmfy.png') }}" alt="" width="170" height="" class="">
 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -16,22 +16,22 @@
                         use App\Models\User;
                         $order = false;
                         $wishlist = false;
-                        $chat = false;
+                        $workspace = false;
                         $role = false;
                         $user = false;
                         if (url()->current() == env('APP_URL') . '/wishlists') {
                             $wishlist = true;
                         } elseif (url()->current() == env('APP_URL') . '/orders/' . auth()->id()) {
                             $order = true;
-                        } elseif (url()->current() == env('APP_URL') . '/messages') {
-                            $chat = true;
+                        } elseif (url()->current() == env('APP_URL') . '/workspace') {
+                            $workspace = true;
                         } elseif (url()->current() == env('APP_URL') . '/roles') {
                             $role = true;
                         } elseif (url()->current() == env('APP_URL') . '/users') {
                             $user = true;
                         }
                         $categories = User::categories();
-
+                        
                     @endphp
                     @auth
                         @if (auth()->user()->roles->first() != null &&
@@ -47,7 +47,7 @@
                                 <a class="nav-link @if ($order) active @endif" href="{{ route('orders.index', auth()->user()) }}">Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @if ($chat) active @endif" href="{{ route('messages') }}">Message @include('messenger.unread-count')</a>
+                                <a class="nav-link @if ($workspace) active @endif" href="#">Workspace </a>
                             </li>
                         @endif
 
@@ -55,8 +55,8 @@
                 </ul>
                 <div class="col-md-6 text-center">
                     <form action="{{ route('search') }}" class="d-flex container-fluid" autocomplete="off">
-                        <input class="typeahead form-control me-2" type="text" placeholder="Find Services" name="query">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="typeahead form-control me-2" type="text" placeholder="Find Photos" name="query">
+                        <button class="btn btn-outline-dark" type="submit">Search</button>
                     </form>
 
                 </div>
@@ -79,7 +79,7 @@
                                         class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
                                     Wishlist</a>
                             </li>
-                            @if (auth()->user()->seller)
+                            {{-- @if (auth()->user()->seller)
                                 <li class="nav-item">
                                     <a class="nav-link text-success"
                                         href="{{ route('sellers.show', auth()->user()->seller) }}">Switch To
@@ -91,7 +91,7 @@
                                         seller</a>
                                 </li>
 
-                            @endif
+                            @endif --}}
                         @endif
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -115,17 +115,24 @@
                         </li>
                     @endguest
                 </ul>
+                <hr>
+
             </div>
+
         </div>
+
     </nav>
-    <div class="bg-white">
+
+    <div class="bg-white">.
+
         <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
             <header class="mb-auto">
                 <div>
                     <nav class="nav nav-masthead justify-content-center float-md-start">
                         @foreach ($categories as $category)
-                            <a class="nav-link"
+                            <a class="btn btn-outline-dark btn-sm"
                                 href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
+                            <div class="divider"></div>
                         @endforeach
                     </nav>
                 </div>

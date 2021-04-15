@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', "{$user->name} - Colance")
+@section('title', "{$user->name} - Aqmfy")
 
 @section('content')
     <div class="container">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Secure Checkout - Colance')
+@section('title', 'Secure Checkout - Aqmfy')
 
 @section('content')
     <div class="container">
@@ -11,7 +11,11 @@
                         <li class="breadcrumb-item text-success">Confirm & Pay</li>
                     </ol>
                 </div><br>
-                <h1>Confirm and Pay</h1><br>
+                <h1>ORDER FORM</h1>
+                <div class="h5">
+                    Please Fill in your information and we'll send your order in no time
+                </div>
+                <br>
                 <form action="{{ route('orders.store') }}" method="POST" id="orderform">
                     @csrf
                     <div class="form-group">
@@ -20,21 +24,27 @@
                     </div><br>
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1"
-                                value="Gopay">
-                            <label class="form-check-label h3" for="flexRadioDefault1"> Gopay
+                            <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1" value="SD">
+                            <label class="form-check-label h3" for="flexRadioDefault1"> SD (480p)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1" value="OVO">
-                            <label class="form-check-label h3" for="flexRadioDefault1"> OVO
+                            <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1" value="HD">
+                            <label class="form-check-label h3" for="flexRadioDefault1"> HD (720p)
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1"
-                                value="Credit">
-                            <label class="form-check-label h3" for="flexRadioDefault1"> Credit
-                                & Debit Card
+                                value="Full HD">
+                            <label class="form-check-label h3" for="flexRadioDefault1"> Full HD (1080p)
+
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="flexRadioDefault1"
+                                value="Ultra HD">
+                            <label class="form-check-label h3" for="flexRadioDefault1"> Ultra HD (2560p)
+
                             </label>
                         </div>
                     </div>

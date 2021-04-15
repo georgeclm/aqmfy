@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" href="{{ asset('img/Logo.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('img/aqmfy.jpg') }}" />
 
     <title>@yield('title')</title>
     <!-- Scripts -->
@@ -49,8 +49,9 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <x-footer />
     </div>
+    @yield('home')
+    <x-footer />
 </body>
 <script type="text/javascript">
     var path = "{{ route('autocomplete') }}";
@@ -64,9 +65,130 @@
             });
         }
     });
+    $(function() {
+        $('div.fadeshop').hover(
+            function() {
+                $(this).find('div.captionshop').fadeIn(150);
+            },
+            function() {
+                $(this).find('div.captionshop').fadeOut(150);
+            }
+        );
+    });
 
 </script>
 <style>
+    .divider {
+        width: 15px;
+        height: auto;
+        display: inline-block;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    /*Product Box*/
+    .maxproduct {
+        max-height: 300px;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .productbox {
+        background: #fff;
+        padding: 13px;
+        border: 1px solid #e4e4e4;
+        margin-bottom: 30px;
+    }
+
+    .productbox h1 {
+        display: block;
+        font-size: 17px;
+        text-transform: uppercase;
+        margin-top: 15px;
+        border-bottom: double medium #eee;
+        padding-bottom: 15px;
+        margin-bottom: 10px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .productbox .price {
+        font-weight: 400;
+    }
+
+    .shopsection .productbox {
+        margin-bottom: 30px;
+    }
+
+    .fadeshop {
+        position: relative;
+        max-height: 300px;
+    }
+
+    .captionshop {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #00bba7;
+        width: 100%;
+        height: 100%;
+    }
+
+
+
+    .captionshop h3,
+    .captionshop p {
+        color: #fff;
+        margin: 20px;
+    }
+
+    .captionshop h3 {
+        margin: 30px 20px 10px;
+    }
+
+    .captionshop p {
+        font-size: 15px;
+        margin: 0 20px 15px;
+    }
+
+    .captionshop a.learn-more {
+        padding: 8px 12px;
+        background: transparent;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        border: 1px solid;
+        display: inline-block;
+        min-width: 120px;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    .captionshop a.learn-more.detailslearn {
+        margin-left: -1px;
+    }
+
+    .captionshop a.learn-more:hover {
+        background: #fff;
+        color: #00bba7;
+        display: inline-block;
+        border: 1px solid #fff;
+    }
+
+    .product-details {
+        padding: 6px 0 0 0;
+        text-align: center;
+        color: #444;
+    }
+
+
     :root {
         --input-padding-x: 1.5rem;
         --input-padding-y: .75rem;

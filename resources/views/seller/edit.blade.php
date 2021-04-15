@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Seller Profile - Colance')
+@section('title', 'Edit Seller Profile - Aqmfy')
 @section('content')
 
     <div class="container">
@@ -56,7 +56,7 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Seller Image</label>
                         <input type="file" name="image" class="form-control @error('image')
-                                                                                                is-invalid @enderror"
+                                                                                                    is-invalid @enderror"
                             id="exampleInputEmail1" value="{{ old('image') }}" aria-describedby="emailHelp">
                         @error('image')
                             <span class="invalid-feedback" role="alert">

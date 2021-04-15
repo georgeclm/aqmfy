@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', "{$category->name} Services - Colance")
+@section('title', "{$category->name} Services - Aqmfy")
 
-@section('content')
+@section('home')
     <div class="container">
         <div class="col-sm-4">
             <a href="#" class="btn btn-outline-secondary">Filter</a>

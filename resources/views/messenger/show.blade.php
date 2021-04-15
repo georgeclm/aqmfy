@@ -1,5 +1,5 @@
   @extends('layouts.app')
-  @section('title', "{$thread->subject} - Colance")
+  @section('title', "{$thread->subject} - Aqmfy")
 
   @section('content')
       <div class="container">

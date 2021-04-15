@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Your Wishlist - Colance')
+@section('title', 'Your Wishlist - Aqmfy')
 @section('content')
     <div class="container">
         <div class="col-sm-10">
@@ -11,7 +11,7 @@
                     $services = Service::whereIn('id', $wishlists)
                         ->latest()
                         ->get();
-
+                    
                 @endphp
                 @if ($services->count() != 0)
                     <h2 class="mb-3">Your Wishlist</h2>

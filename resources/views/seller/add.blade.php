@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Seller - Colance')
+@section('title', 'Seller - Aqmfy')
 @section('content')
 
     <div class="container custom-login">

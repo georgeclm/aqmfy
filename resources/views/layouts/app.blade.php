@@ -13,6 +13,11 @@
     <title>@yield('title')</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
+    <script src="{{ asset('js/sequence.js') }}" defer></script>
+    <script src="{{ asset('js/sequence-theme.modern-slide-in.js') }}" defer></script>
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,9 +25,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sequence-theme.modern-slide-in.css') }}" rel="stylesheet" media="all">
+
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
     </script>
+
 </head>
 
 <body>
@@ -36,6 +46,7 @@
                 </ul>
             </div>
         @endif
+
         @if (session('success'))
             <div class="alert alert-success">
                 <ul>
@@ -43,7 +54,7 @@
                 </ul>
             </div>
         @endif
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
@@ -343,11 +354,17 @@
     /*
  * Base structure
  */
-
-    body {
-        text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-        box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    a {
+        text-decoration: none;
+        color: #333333;
     }
+
+    a:hover,
+    a:focus {
+        outline: none;
+        text-decoration: none;
+    }
+
 
     .cover-container {
         max-width: 42em;

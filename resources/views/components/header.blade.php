@@ -1,142 +1,206 @@
-<div>
-    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top border-bottom border-light border-5">
-        <div class="container-fluid" style="width:95%">
-            <a class="navbar-brand" href="{{ route('services.index') }}">
-                <img src="{{ asset('img/textaqmfy.png') }}" alt="" width="170" height="" class="">
+  <!-- Start header section -->
+  <div>
+      <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
 
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @php
-                        use App\Models\User;
-                        $order = false;
-                        $wishlist = false;
-                        $workspace = false;
-                        $role = false;
-                        $user = false;
-                        if (url()->current() == env('APP_URL') . '/wishlists') {
-                            $wishlist = true;
-                        } elseif (url()->current() == env('APP_URL') . '/orders/' . auth()->id()) {
-                            $order = true;
-                        } elseif (url()->current() == env('APP_URL') . '/workspace') {
-                            $workspace = true;
-                        } elseif (url()->current() == env('APP_URL') . '/roles') {
-                            $role = true;
-                        } elseif (url()->current() == env('APP_URL') . '/users') {
-                            $user = true;
-                        }
-                        $categories = User::categories();
+      <header id="aa-header">
+          @php
+              use App\Models\User;
+              $order = false;
+              $wishlist = false;
+              $chat = false;
+              $role = false;
+              $user = false;
+              if (url()->current() == env('APP_URL') . '/wishlists') {
+                  $wishlist = true;
+              } elseif (url()->current() == env('APP_URL') . '/orders/' . auth()->id()) {
+                  $order = true;
+              } elseif (url()->current() == env('APP_URL') . '/messages') {
+                  $chat = true;
+              } elseif (url()->current() == env('APP_URL') . '/roles') {
+                  $role = true;
+              } elseif (url()->current() == env('APP_URL') . '/users') {
+                  $user = true;
+              }
+              $categories = User::categories();
 
-                    @endphp
-                    @auth
-                        @if (auth()->user()->roles->first() != null &&
+          @endphp
+
+          <!-- start header top  -->
+          <div class="aa-header-top">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="aa-header-top-area">
+                              <!-- start header top left -->
+                              <div class="aa-header-top-left">
+                                  <!-- start language -->
+                                  <div class="aa-language">
+                                      <div class="dropdown">
+                                          <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1"
+                                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <img src="{{ asset('img/indonesia.png') }}" alt="english flag">INDONESIA
+                                              <span class="caret"></span>
+                                          </a>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                              <li><a href="#"><img src="{{ asset('img/indonesia.png') }}"
+                                                          alt="">INDONESIA</a></li>
+                                              <li><a href="#"><img src="{{ asset('img/english.jpg') }}"
+                                                          alt="">ENGLISH</a>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <!-- / language -->
+
+
+                                  <!-- start cellphone -->
+                                  <div class="cellphone hidden-xs">
+                                      <p><span class="fa fa-phone"></span>+62 812-989-8998</p>
+                                  </div>
+                                  <!-- / cellphone -->
+                              </div>
+                              <!-- / header top left -->
+                              <div class="aa-header-top-right">
+                                  <ul class="aa-head-top-nav-right">
+
+                                      @guest
+                                          <li class="hidden-xs"><a href="{{ route('login') }}">Login</a></li>
+                                          <li><a href="{{ route('register') }}">Register</a></li>
+                                      @else
+                                          @if (auth()->user()->roles->first() != null &&
         auth()->user()->roles->first()->name == 'Admin')
-                            <li class="nav-item">
-                                <a class="nav-link @if ($role) active @endif" href="{{ route('roles.index') }}">Roles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if ($user) active @endif" href="{{ route('users.index') }}">Manage Users</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link @if ($order) active @endif" href="{{ route('orders.index', auth()->user()) }}">Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if ($workspace) active @endif" href="#">Workspace </a>
-                            </li>
-                        @endif
+                                              <li><a href="{{ route('roles.index') }}">Roles</a>
+                                              </li>
+                                              <li class="hidden-xs"><a href="{{ route('users.index') }}">Manage Users</a>
+                                              </li>
 
-                    @endauth
-                </ul>
-                <div class="col-md-6 text-center">
-                    <form action="{{ route('search') }}" class="d-flex container-fluid" autocomplete="off">
-                        <input class="typeahead form-control me-2" type="text" placeholder="Find Photos" name="query">
-                        <button class="btn btn-outline-dark" type="submit">Search</button>
-                    </form>
+                                          @else
+                                              <li><a
+                                                      href="{{ route('profiles.edit', auth()->user()) }}">{{ Auth::user()->name }}</a>
+                                              </li>
+                                              <li class="hidden-xs"><a href="{{ route('wishlists.show') }}">Wishlist</a>
+                                              </li>
+                                              <li class="hidden-xs"><a
+                                                      href="{{ route('orders.index', auth()->user()) }}">Orders</a></li>
+                                              <li><a href="{{ route('logout') }}"
+                                                      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                              </li>
+                                              <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                  class="d-none">
+                                                  @csrf
+                                              </form>
+                                          @endif
+                                      @endguest
 
-                </div>
 
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Sign In') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
-                        </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- / header top  -->
 
-                    @else
-                        @if (auth()->user()->roles->first() != null &&
-        auth()->user()->roles->first()->name == 'Admin')
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link @if ($wishlist) active @endif" href="{{ route('wishlists.show') }}"> <span
-                                        class="badge badge-pill bg-danger">{{ auth()->user()->favorite->count() }}</span>
-                                    Wishlist</a>
-                            </li>
-                            @if (auth()->user()->seller)
-                                <li class="nav-item">
-                                    <a class="nav-link text-success"
-                                        href="{{ route('sellers.show', auth()->user()->seller) }}">Switch To
-                                        Selling</a>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <a class="nav-link text-success" href="{{ route('sellers.create') }}">Become a
-                                        seller</a>
-                                </li>
+          <!-- start header bottom  -->
+          <div class="aa-header-bottom">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="aa-header-bottom-area">
+                              <!-- logo  -->
+                              <div class="aa-logo">
+                                  <!-- Text based logo -->
 
-                            @endif
-                        @endif
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item"
-                                        href="{{ route('profiles.edit', auth()->user()) }}">Profile</a>
-                                </li>
+                                  <!-- img based logo -->
+                                  <a href="{{ route('services.index') }}"><img class="mt-4"
+                                          src="{{ asset('img/textaqmfy.png') }}" alt="logo img" width="220"></a>
+                              </div>
+                              <!-- / logo  -->
+                              <!-- workspace -->
+                              <div class="aa-workspace">
+                                  @auth
+                                      <a class="aa-workspace-link" href="" data-toggle="modal" data-target="#login-modal">
+                                          <span class="aa-workspace-title">WORKSPACE</span>
+                                      </a>
+                                  @endauth
 
-                                <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endguest
-                </ul>
-                <hr>
+                              </div>
+                              <!-- cart box -->
+                              <div class="aa-cartbox">
+                                  @auth
 
-            </div>
+                                      <a class="aa-cart-link" href="#">
+                                          <span class="fa fa-shopping-basket"></span>
+                                          <span class="aa-cart-title">SHOPPING CART</span>
+                                          <span class="aa-cart-notify">2</span>
+                                      </a>
+                                  @endauth
 
-        </div>
-
-    </nav>
-
-    <div class="bg-white">.
-
-        <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
-            <header class="mb-auto">
-                <div>
-                    <nav class="nav nav-masthead justify-content-center float-md-start">
-                        @foreach ($categories as $category)
-                            <a class="btn btn-outline-dark btn-sm"
-                                href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
-                            <div class="divider"></div>
-                        @endforeach
-                    </nav>
-                </div>
-            </header>
-        </div>
-    </div>
-</div>
+                                  <div class="aa-cartbox-summary">
+                                      <ul>
+                                          <li>
+                                              <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg"
+                                                      alt="img"></a>
+                                              <div class="aa-cartbox-info">
+                                                  <h4><a href="#">Product Name</a></h4>
+                                                  <p>1 x $250</p>
+                                              </div>
+                                              <a class="aa-remove-product" href="#"><span
+                                                      class="fa fa-times"></span></a>
+                                          </li>
+                                          <li>
+                                              <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg"
+                                                      alt="img"></a>
+                                              <div class="aa-cartbox-info">
+                                                  <h4><a href="#">Product Name</a></h4>
+                                                  <p>1 x $250</p>
+                                              </div>
+                                              <a class="aa-remove-product" href="#"><span
+                                                      class="fa fa-times"></span></a>
+                                          </li>
+                                          <li>
+                                              <span class="aa-cartbox-total-title">
+                                                  Total
+                                              </span>
+                                              <span class="aa-cartbox-total-price">
+                                                  $500
+                                              </span>
+                                          </li>
+                                      </ul>
+                                      <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">Checkout</a>
+                                  </div>
+                              </div>
+                              <!-- / cart box -->
+                              <!-- search box -->
+                              <div class="aa-search-box">
+                                  <form action="{{ route('search') }}" autocomplete="off">
+                                      <input class="typeahead" type="text" name="" id=""
+                                          placeholder="Search here ex. 'photography' " name="query">
+                                      <button type="submit" style="background-color: black"><span
+                                              class="fa fa-search"></span></button>
+                                  </form>
+                              </div>
+                              <!-- / search box -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- / header bottom  -->
+      </header>
+      <div class="bg-white">
+          <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
+              <header class="mb-auto">
+                  <div>
+                      <nav class="nav nav-masthead justify-content-center float-md-start">
+                          @foreach ($categories as $category)
+                              <a class="nav-link"
+                                  href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
+                          @endforeach
+                      </nav>
+                  </div>
+              </header>
+          </div>
+      </div>
+  </div>

@@ -75,4 +75,8 @@ class User extends Authenticatable
     {
         return Category::all();
     }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

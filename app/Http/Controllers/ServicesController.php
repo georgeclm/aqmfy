@@ -132,14 +132,14 @@ class ServicesController extends Controller
 
     public function update(Service $service)
     {
-        // dd(request()->all());
         // dd($service);
+
         if (auth()->id() != $service->seller->user_id) {
             return redirect()->route('services.index')->with('error', 'You are not the author of the photos');
         }
 
         $data = request()->validate([
-            'name' => 'bail|required',
+            'name' => 'required',
             'price' => 'required',
             'description' => 'required',
             'delivery_time' => 'required|numeric',

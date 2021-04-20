@@ -2,48 +2,40 @@
 @section('title', 'Aqmfy - Best Photostock You Can Get')
 
 @section('home')
-    <div class="container">
-        <h3 class='mb-4'>Trending Photos</h3>
-    </div>
 
-    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="1"></li>
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="2"></li>
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="3"></li>
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="4"></li>
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="5"></li>
-            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="6"></li>
-        </ol>
-        <div class="carousel-inner">
-            @foreach ($services as $service)
-                <div class="carousel-item {{ $service->id == $first ? 'active' : '' }}" data-bs-interval="5000">
-                    <a href="{{ route('services.show', $service) }}">
-                        <div class="text-center">
-                            <img src="{{ asset($service->serviceImage()) }}" class="slider-img">
-
-                        </div>
-                        <div class="carousel-caption d-none d-md-block slider-text text-light">
-                            <h5>{{ $service->name }}</h5>
-                            <p>{{ Str::of($service->description)->title()->words(7) }}</p>
-                        </div>
-                    </a>
+    <!-- Start slider -->
+    <section id="aa-slider">
+        <div class="aa-slider-area">
+            <div id="sequence" class="seq">
+                <div class="seq-screen">
+                    <ul class="seq-canvas">
+                        @foreach ($services as $service)
+                            <li>
+                                <div class="seq-model">
+                                    <img data-seq src="{{ asset($service->serviceImage()) }}">
+                                </div>
+                                <div class="seq-title text-light">
+                                    <h2 data-seq style="color: white">{{ $service->name }}</h2>
+                                    <p data-seq>{{ Str::of($service->description)->title()->words(20) }}</p>
+                                    <a data-seq href="{{ route('services.show', $service) }}"
+                                        class="aa-shop-now-btn aa-secondary-btn">CHECK IT OUT</a>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
-            @endforeach
+                <!-- slider navigation btn -->
+                <fieldset class="seq-nav" aria-controls="sequence" aria-label="Slider buttons">
+                    <a type="button" class="seq-prev" aria-label="Previous"><span class="fa fa-angle-left"></span></a>
+                    <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
+                </fieldset>
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleDark" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleDark" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
-
+    </section>
+    <!-- / slider -->
 
     <div class="container mb-5 mt-5">
+        <h3 class='mb-4'>Trending Photos</h3>
         <div class="col-md-12">
             <div class="row row-cols-1 row-cols-md-6">
                 @if ($services->count())

@@ -43,7 +43,18 @@
                             </span>
                         @enderror
                     </div>
-
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Revision Time</label>
+                        <input type="number" name="revision_time"
+                            class="form-control @error('revision_time') is-invalid @enderror" id="exampleInputEmail1"
+                            value="{{ old('revision_time') ?? $service->revision_time }}" aria-describedby="emailHelp"
+                            placeholder="0" required>
+                        @error('revision_time')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
 
                     <div class="mb-3">

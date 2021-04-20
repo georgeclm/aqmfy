@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\GoogleController;
@@ -45,6 +46,7 @@ Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCal
 Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('carts', CartController::class);
     Route::resource('sellers', SellersController::class)->except(['show']);
     Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::resource('services', ServicesController::class)->except(['index', 'show']);

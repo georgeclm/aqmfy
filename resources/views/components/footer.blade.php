@@ -1,34 +1,113 @@
 <div>
-    <br><br><br><br><br><br><br><br>
-
-    <footer class="bg-light text-center text-lg-start mt-5">
-        <div class="container p-4">
+    <!-- Subscribe section -->
+    <section id="aa-subscribe">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h3 class="text-uppercase">I'd love to hear from you</h3>
-                    <div class="mt-5">
-                        <a href="https://www.instagram.com/george_clm/" class="card-link" target="_blank"><img
-                                src="{{ asset('img/instagram.png') }}" style="width: 1.5rem; height: 1.5rem;"></a>
-                        <a href="https://www.linkedin.com/in/epafroditus-george-5b66bb1b7/" class="card-link"
-                            target="_blank"><img src="{{ asset('img/linkedin.png') }}"
-                                style="width: 1.5rem; height: 1.5rem;"></a>
-                        <a href="https://github.com/georgeclm" class="card-link" target="_blank"><img
-                                src="{{ asset('img/github.png') }}" style="width: 1.5rem; height: 1.5rem;"></a>
-                        <a href="https://api.whatsapp.com/send/?phone=6289647590083&text&app_absent=0" class="card-link"
-                            target="_blank"><img src="{{ asset('img/whatsapp.png') }}"
-                                style="width: 1.5rem; height: 1.5rem;"></a>
+                <div class="col-md-12">
+                    <div class="aa-subscribe-area">
+                        <h3>Subscribe our newsletter </h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
+                        <form action="" class="aa-subscribe-form">
+                            <input type="email" name="" id="" placeholder="Enter your Email">
+                            <input type="submit" value="Subscribe">
+                        </form>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">cavidjaja@gmail.com</h5>
-                    <h5 class="text-uppercase mb-4">089647590083</h5>
-                    <a class="btn btn-outline-dark btn-lg" href="https://georgeclm.github.io/" target="_blank">Visit My
-                        Website</a>
                 </div>
             </div>
         </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            © 2021 By Epafroditus George
+    </section>
+    <!-- / Subscribe section -->
+    <!-- footer -->
+    <footer id="aa-footer">
+        <!-- footer bottom -->
+        <div class="aa-footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-top-area">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <h3>Main Menu</h3>
+                                        <ul class="aa-footer-nav">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">Our Services</a></li>
+                                            <li><a href="#">Our Products</a></li>
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Contact Us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <div class="aa-footer-widget">
+                                            <h3>Knowledge Base</h3>
+                                            <ul class="aa-footer-nav">
+                                                <li><a href="#">Delivery</a></li>
+                                                <li><a href="#">Returns</a></li>
+                                                <li><a href="#">Services</a></li>
+                                                <li><a href="#">Discount</a></li>
+                                                <li><a href="#">Special Offer</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <div class="aa-footer-widget">
+                                            <h3>Useful Links</h3>
+                                            <ul class="aa-footer-nav">
+                                                <li><a href="#">Site Map</a></li>
+                                                <li><a href="#">Search</a></li>
+                                                <li><a href="#">Advanced Search</a></li>
+                                                <li><a href="#">Suppliers</a></li>
+                                                <li><a href="#">FAQ</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <div class="aa-footer-widget">
+                                            <h3>Contact Us</h3>
+                                            <address>
+                                                <p>Palembang, Jln. Way Hitam No.55</p>
+                                                <p><span class="fa fa-phone"></span>+62 812-989-8998</p>
+                                                <p><span class="fa fa-envelope"></span>aqmfystock@gmail.com</p>
+                                            </address>
+                                            <div class="aa-footer-social">
+                                                <a href="#"><span class="fa fa-facebook"></span></a>
+                                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                                <a href="#"><span class="fa fa-google-plus"></span></a>
+                                                <a href="#"><span class="fa fa-youtube"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom -->
+        <div class="aa-footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-bottom-area">
+                            <p>Designed by Aqmfy Stock</a></p>
+                            <div class="aa-footer-payment">
+                                <span class="fa fa-cc-mastercard"></span>
+                                <span class="fa fa-cc-visa"></span>
+                                <span class="fa fa-paypal"></span>
+                                <span class="fa fa-cc-discover"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+    <!-- / footer -->
 </div>

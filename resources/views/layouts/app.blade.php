@@ -11,25 +11,27 @@
     <link rel="shortcut icon" href="{{ asset('img/aqmfy.jpg') }}" />
 
     <title>@yield('title')</title>
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/custom.js') }}" defer></script>
-    <script src="{{ asset('js/sequence.js') }}" defer></script>
-    <script src="{{ asset('js/sequence-theme.modern-slide-in.js') }}" defer></script>
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.smartmenus.bootstrap.css') }}" rel="stylesheet">
+    <!-- Product view slider -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.simpleLens.css') }}">
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/slick.css') }}">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/nouislider.css') }}">
+    <!-- Theme color -->
+    <link id="switcher" href="{{ asset('css/theme-color/default-theme.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sequence-theme.modern-slide-in.css') }}" rel="stylesheet" media="all">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">
     </script>
 
@@ -60,6 +62,20 @@
     </div>
     @yield('home')
     <x-footer />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.smartmenus.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.smartmenus.bootstrap.js') }}"></script>
+    <script src="{{ asset('js/sequence.js') }}"></script>
+    <script src="{{ asset('js/sequence-theme.modern-slide-in.js') }}"></script>
+    <script src="{{ asset('js/jquery.simpleGallery.js') }}"></script>
+    <script src="{{ asset('js/jquery.simpleLens.js') }}"></script>
+    <!-- slick slider -->
+    <script type="text/javascript" src="{{ asset('js/slick.js') }}"></script>
+    <!-- Price picker slider -->
+    <script type="text/javascript" src="{{ asset('js/nouislider.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+
 </body>
 <script type="text/javascript">
     var path = "{{ route('autocomplete') }}";

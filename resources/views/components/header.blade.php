@@ -189,18 +189,40 @@
           </div>
           <!-- / header bottom  -->
       </header>
-      <div class="bg-white">
-          <div class="container d-flex w-100 h-100 p-1 mx-auto flex-column border-bottom border-light border-5">
-              <header class="mb-auto">
-                  <div>
-                      <nav class="nav nav-masthead justify-content-center float-md-start">
-                          @foreach ($categories as $category)
-                              <a class="nav-link"
-                                  href="{{ route('search.category', $category->id) }}">{{ $category->name }}</a>
-                          @endforeach
-                      </nav>
+      <section id="menu">
+          <div class="container">
+              <div class="menu-area">
+                  <!-- Navbar -->
+                  <div class="navbar navbar-default" role="navigation">
+                      <div class="navbar-header">
+                          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                              data-target=".navbar-collapse">
+                              <span class="sr-only">Toggle navigation</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                          </button>
+                      </div>
+                      <div class="navbar-collapse collapse">
+                          <!-- Left nav -->
+                          <ul class="nav navbar-nav">
+                              <li><a href="index.html">Home</a></li>
+                              <li><a href="contact.html">Contact</a></li>
+                              @foreach ($categories as $category)
+
+                                  <li><a href="{{ route('search.category', $category->id) }}">{{ $category->name }}
+                                      </a>
+                                  </li>
+                              @endforeach
+
+
+
+                          </ul>
+                      </div>
+                      <!--/.nav-collapse -->
                   </div>
-              </header>
+              </div>
           </div>
-      </div>
+      </section>
+      <!-- / menu -->
   </div>

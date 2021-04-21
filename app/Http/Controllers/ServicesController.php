@@ -32,12 +32,9 @@ class ServicesController extends Controller
     function index()
     {
         // dd((boolval("dara")));
-        // dd(auth()->user()->seller);
-        $categories = Category::all();
-        $services = Service::with('ratings')->paginate(30);
-        // dd(auth()->user()->roles->first()->name);
-        $first = $services[0]->id;
-        return view('service.index', compact('services', 'first', 'categories'));
+        $categories = Category::with('services')->get();
+        $services = Service::all();
+        return view('service.index', compact('categories', 'services'));
     }
 
     function show(Service $service)

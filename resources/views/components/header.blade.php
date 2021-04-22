@@ -5,11 +5,14 @@
       <header id="aa-header">
           @php
               use App\Models\User;
+              use App\Models\Cart;
               $order = false;
               $wishlist = false;
               $chat = false;
               $role = false;
               $user = false;
+              $carts = Cart::where('user_id', auth()->id())->get();
+
               if (url()->current() == env('APP_URL') . '/wishlists') {
                   $wishlist = true;
               } elseif (url()->current() == env('APP_URL') . '/orders/' . auth()->id()) {
@@ -113,14 +116,15 @@
                                   <!-- Text based logo -->
 
                                   <!-- img based logo -->
-                                  <a href="{{ route('services.index') }}"><img class="mt-4"
-                                          src="{{ asset('img/textaqmfy.png') }}" alt="logo img" width="220"></a>
+                                  <a href="{{ route('services.index') }}"><img
+                                          src="{{ asset('img/textaqmfy.png') }}" alt="logo img" width="180"
+                                          style="margin-top: 40px"></a>
                               </div>
                               <!-- / logo  -->
                               <!-- workspace -->
                               <div class="aa-workspace">
                                   @auth
-                                      <a class="aa-workspace-link" href="" data-toggle="modal" data-target="#login-modal">
+                                      <a class="aa-workspace-link" href="#" data-toggle="modal" data-target="#login-modal">
                                           <span class="aa-workspace-title">WORKSPACE</span>
                                       </a>
                                   @endauth
@@ -133,42 +137,51 @@
                                       <a class="aa-cart-link" href="#">
                                           <span class="fa fa-shopping-basket"></span>
                                           <span class="aa-cart-title">SHOPPING CART</span>
-                                          <span class="aa-cart-notify">2</span>
+                                          <span class="aa-cart-notify">{{ auth()->user()->carts->count() }}</span>
                                       </a>
                                   @endauth
-
                                   <div class="aa-cartbox-summary">
-                                      <ul>
-                                          <li>
-                                              <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg"
-                                                      alt="img"></a>
-                                              <div class="aa-cartbox-info">
-                                                  <h4><a href="#">Product Name</a></h4>
-                                                  <p>1 x $250</p>
-                                              </div>
-                                              <a class="aa-remove-product" href="#"><span
-                                                      class="fa fa-times"></span></a>
-                                          </li>
-                                          <li>
-                                              <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg"
-                                                      alt="img"></a>
-                                              <div class="aa-cartbox-info">
-                                                  <h4><a href="#">Product Name</a></h4>
-                                                  <p>1 x $250</p>
-                                              </div>
-                                              <a class="aa-remove-product" href="#"><span
-                                                      class="fa fa-times"></span></a>
-                                          </li>
-                                          <li>
-                                              <span class="aa-cartbox-total-title">
-                                                  Total
-                                              </span>
-                                              <span class="aa-cartbox-total-price">
-                                                  $500
-                                              </span>
-                                          </li>
-                                      </ul>
-                                      <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">Checkout</a>
+                                      @if ($carts->count() == 0)
+
+                                          <div class="h4">Nothing Here</div>
+
+                                      @else
+
+                                          <ul>
+                                              @foreach ($carts as $cart)
+                                                  <li>
+                                                      <a class="aa-cartbox-img"
+                                                          href="{{ route('services.show', $cart->service) }}">
+                                                          <div style="width: 100px;
+                                                          height: 100px;
+                                                          overflow: hidden;"><img
+                                                                  src="{{ asset($cart->service->serviceImage()) }}"
+                                                                  alt="img" class="img-rounded"></div>
+                                                      </a>
+                                                      <div class="aa-cartbox-info">
+                                                          <h4><a
+                                                                  href="{{ route('services.show', $cart->service) }}">{{ $cart->service->name }}</a>
+                                                          </h4>
+                                                          <p>{{ $cart->quantity }} x Rp.
+                                                              {{ number_format($cart->service->price) }}
+                                                          </p>
+                                                      </div>
+                                                      <form action="{{ route('carts.destroy', $cart->id) }}"
+                                                          method="POST">
+                                                          @csrf
+                                                          @method('DELETE')
+                                                          <button class="aa-remove-product"><span
+                                                                  class="fa fa-times"></span></button>
+                                                      </form>
+
+                                                  </li>
+                                              @endforeach
+
+                                          </ul>
+                                          <a class="aa-cartbox-checkout aa-primary-btn"
+                                              href="checkout.html">Checkout</a>
+                                      @endif
+
                                   </div>
                               </div>
                               <!-- / cart box -->
@@ -206,17 +219,13 @@
                       <div class="navbar-collapse collapse">
                           <!-- Left nav -->
                           <ul class="nav navbar-nav">
-                              <li><a href="index.html">Home</a></li>
-                              <li><a href="contact.html">Contact</a></li>
+                              <li><a href="{{ route('services.index') }}">Home</a></li>
+                              <li><a href="{{ route('contact') }}">Contact</a></li>
                               @foreach ($categories as $category)
-
                                   <li><a href="{{ route('search.category', $category->id) }}">{{ $category->name }}
                                       </a>
                                   </li>
                               @endforeach
-
-
-
                           </ul>
                       </div>
                       <!--/.nav-collapse -->

@@ -4,7 +4,7 @@
 @section('home')
 
     <!-- Start slider -->
-    <section id="aa-slider">
+    <section id="aa-slider" style="margin-bottom: 5px">
         <div class="aa-slider-area">
             <div id="sequence" class="seq">
                 <div class="seq-screen">
@@ -66,8 +66,17 @@
                                                             <a class="aa-product-img"
                                                                 href="{{ route('services.show', $service) }}"><img
                                                                     src="{{ asset($service->serviceImage()) }}"></a>
-                                                            <a class="aa-add-card-btn" href="#"><span
-                                                                    class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                            <form action="{{ route('carts.store') }}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="service_id"
+                                                                    value="{{ $service->id }}">
+                                                                <input type="hidden" name="price"
+                                                                    value="{{ $service->price }}">
+
+                                                                <button class="aa-add-card-btn btn-block"><span
+                                                                        class="fa fa-shopping-cart"></span>Add To
+                                                                    Cart</button>
+                                                            </form>
                                                             <figcaption>
                                                                 <h4 class="aa-product-title"><a
                                                                         href="#">{{ $service->name }}</a>

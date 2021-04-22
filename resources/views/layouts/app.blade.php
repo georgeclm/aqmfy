@@ -41,22 +41,28 @@
     <x-header />
     <div id="app">
 
-        @if (session('error'))
-            <div class="alert alert-danger">
-                <ul>
-                    <h6>{{ session('error') }}</h6>
-                </ul>
-            </div>
-        @endif
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                <ul>
-                    <h6>{{ session('success') }}</h6>
-                </ul>
-            </div>
-        @endif
         <main>
+            @if (session('error'))
+                <br><br><br><br><br><br><br><br><br><br><br>
+
+                <div class="alert alert-danger">
+                    <ul>
+                        <h6>{{ session('error') }}</h6>
+                    </ul>
+                </div>
+            @endif
+
+
+            @if (session('success'))
+                <br><br><br><br><br><br><br><br><br><br><br>
+
+                <div class="alert alert-success">
+                    <ul>
+                        <h6>{{ session('success') }}</h6>
+                    </ul>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>

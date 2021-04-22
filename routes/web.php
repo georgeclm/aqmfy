@@ -42,7 +42,9 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('auth/twitter', [TwitterController::class, 'redirectToTwitter']);
 Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
-
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

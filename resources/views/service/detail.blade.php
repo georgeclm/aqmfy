@@ -1,8 +1,76 @@
 @extends('layouts.app')
 @section('title', "{$service->name} by {$service->seller->sellername}")
 @section('content')
-    <br>
-    <div class="container" width="65%">
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+                        <br><br>
+                        <div class="preview-pic tab-content">
+                            <div class="tab-pane active" id="pic-1"><img src="{{ asset($service->serviceImage()) }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details col-md-6">
+                        <br><br>
+                        <h3 class="product-title">{{ $service->name }}</h3>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star @if ($average>= 1) checked @endif"></span>
+                                <span class="fa fa-star @if ($average>= 2) checked @endif"></span>
+                                <span class="fa fa-star @if ($average>= 3) checked @endif"></span>
+                                <span class="fa fa-star @if ($average>= 4) checked @endif"></span>
+                                <span class="fa fa-star @if ($average>= 5) checked @endif"></span>
+                            </div>
+                            <span class="review-no" style="font-size: 14px">{{ number_format($average, 1) }}
+                                reviews</span>
+                        </div>
+                        <div class="product-description">{{ $service->description }}</div>
+                        <h4 class="price">current price: <span>Rp. {{ number_format($service->price) }}</span></h4>
+                        <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+                        {{-- <h5 class="sizes">sizes:
+                            <span class="size" data-toggle="tooltip" title="small">s</span>
+                            <span class="size" data-toggle="tooltip" title="medium">m</span>
+                            <span class="size" data-toggle="tooltip" title="large">l</span>
+                            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+                        </h5>
+                        <h5 class="colors">colors:
+                            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+                            <span class="color green"></span>
+                            <span class="color blue"></span>
+                        </h5> --}}
+                        @if ($service->seller->user()->isNot(auth()->user()))
+                            <form action="{{ route('carts.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                                <input type="hidden" name="price" value="{{ $service->price }}">
+                                <div class="action">
+                                    <button class="add-to-cart btn btn-secondary" type="submit">add
+                                        to cart</button>
+
+                                    <a href="{{ route('wishlists.wish', $service->id) }}"
+                                        class="like btn btn-secondary"><span class="fa fa-heart"></span></a>
+
+                                </div>
+                            </form>
+                        @else
+                            <div class="action">
+                                <a href="{{ route('services.edit', $service) }}" class="add-to-cart btn btn-secondary"
+                                    type="submit">Edit Your Photo</a>
+                                <form action="{{ route('services.destroy', $service) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="add-to-cart btn btn-secondary">Remove Photo</button>
+                                </form>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="container" width="65%">
         <div class="row">
             <div class="col-sm-6 m-auto text-center">
                 <img class="detail-img" src="{{ asset($service->serviceImage()) }}" alt="">
@@ -15,7 +83,7 @@
                 <br><br>
                 @if ($service->seller->user()->isNot(auth()->user()))
                     @auth
-                        <wishlist-button route={{ route('wishlists.add', $service->id) }}" favorite="{{ $favorite }}">
+                        <wishlist-button route="{{ route('wishlists.add', $service->id) }}" favorite="{{ $favorite }}">
                         </wishlist-button>
                     @endauth
 
@@ -119,11 +187,11 @@
             <div class="col-sm-6">
                 @if (count($stars) != 0)
                     <span class="heading"><strong>{{ $service->ratings->count() }} Reviews</strong></span>
-                    <span class="fa fa-star @if ($average>= 1) checked @endif"></span>
-                    <span class="fa fa-star @if ($average>= 2) checked @endif"></span>
-                    <span class="fa fa-star @if ($average>= 3) checked @endif"></span>
-                    <span class="fa fa-star @if ($average>= 4) checked @endif"></span>
-                    <span class="fa fa-star @if ($average>= 5) checked @endif"></span>
+                    <span class="fa fa-star @if ($average >= 1) checked @endif"></span>
+                    <span class="fa fa-star @if ($average >= 2) checked @endif"></span>
+                    <span class="fa fa-star @if ($average >= 3) checked @endif"></span>
+                    <span class="fa fa-star @if ($average >= 4) checked @endif"></span>
+                    <span class="fa fa-star @if ($average >= 5) checked @endif"></span>
                     <span class="heading"><strong> {{ number_format($average, 1) }}</strong></span>
 
                     <hr style="border:3px solid #f1f1f1">
@@ -204,5 +272,5 @@
                 @endif
 
             </div>
-        </div>
-    @endsection
+        </div> --}}
+@endsection

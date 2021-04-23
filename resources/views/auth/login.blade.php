@@ -3,66 +3,46 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ __('Sign In') }}</h5>
-                        <form class="form-signin" method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <div class="form-label-group">
-                                <input type="email" id="inputEmail"
-                                    class="form-control @error('email') is-invalid @enderror" placeholder="Email address"
-                                    required autofocus name="email" value="{{ old('email') }}">
-                                <label for="inputEmail">{{ __('E-Mail Address') }}</label>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-label-group">
-                                <input type="password" id="inputPassword"
-                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    name="password" required>
-                                <label for="inputPassword">{{ __('Password') }}</label>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-
-                            <div class="custom-control custom-checkbox mb-3">
-                                <input type="checkbox" class="custom-control-input" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
-                                <label class="custom-control-label" for="customCheck1">{{ __('Remember Me') }}</label>
-                                @if (Route::has('password.request'))
-                                    <div class="text-end">
-                                        <a class="" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    </div>
-
-                                @endif
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-lg btn-outline-primary text-uppercase"
-                                    type="submit">{{ __('Sign In') }}</button>
-
-                                <hr class="my-4">
-                                <a class="btn btn-lg btn-google text-uppercase" href="{{ url('auth/google') }}"><i
-                                        class="fa fa-google mr-4"></i> {{ __('Sign In With Google') }}</a>
-                                <a class="btn btn-lg btn-facebook text-uppercase" href="{{ url('auth/facebook') }}"><i
-                                        class="fa fa-facebook-f mr-4"></i> {{ __('Sign In With Facebook') }}</a>
-                                <a class="btn btn-lg btn-twitter text-uppercase" href="{{ url('auth/twitter') }}"><i
-                                        class="fa fa-twitter mr-4"></i> {{ __('Sign In With Twitter') }}</a>
-                            </div>
-
-                        </form>
-                    </div>
+            <div class="col-sm-6 col-md-4 col-md-offset-4" style="margin-top: 60px; margin-bottom:60px;">
+                <h1 class=" text-center login-title">{{ __('Sign in to continue to Aqmfy Stock') }}</h1>
+                <div class="account-wall">
+                    <img class="profile-img"
+                        src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                        alt="">
+                    <form class="form-signin" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="@error('email') has-error @enderror">
+                            <input type="email" class="form-control " placeholder="Email address" required autofocus
+                                name="email" value="{{ old('email') }}">
+                            @error('email')
+                                <span id="helpBlock2" class="help-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="@error('password') has-error @enderror" style="margin-bottom: 10px">
+                            <input type="password" class="form-control" placeholder="Password" required name="password">
+                            @error('password')
+                                <span id="helpBlock2" class="help-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">
+                            {{ __('Sign in') }}</button>
+                        <label class="checkbox pull-left">
+                            <input type="checkbox" value="remember-me" name="remember" id="remember"
+                                {{ old('remember') ? 'checked' : '' }}>
+                            {{ __('Remember me') }}
+                        </label>
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}"
+                                class="pull-right need-help">{{ __('Forgot Your Password?') }} </a><span
+                                class="clearfix"></span>
+                        @endif
+                        <a class="btn btn-lg  btn-block btn-google" href="{{ url('auth/google') }}">
+                            <i class="fa fa-google"></i>{{ __('SIGN IN WITH GOOGLE') }}</a>
+                        <a class="btn btn-lg  btn-block btn-twitter" href="{{ url('auth/twitter') }}">
+                            <i class="fa fa-twitter"></i>{{ __('SIGN IN WITH TWITTER') }}</a>
+                    </form>
                 </div>
+                <a href="{{ route('register') }}" class="text-center new-account">{{ __('Create an account') }} </a>
             </div>
         </div>
     </div>

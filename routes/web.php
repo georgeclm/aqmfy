@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('carts', CartController::class);
+    Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::resource('sellers', SellersController::class)->except(['show']);
     Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::resource('services', ServicesController::class)->except(['index', 'show']);
@@ -61,6 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('wishlists')->group(function () {
         Route::get('/', [WishlistsController::class, 'show'])->name('wishlists.show');
         Route::post('/{service}', [WishlistsController::class, 'add'])->name('wishlists.add');
+        Route::get('/{service}', [WishlistsController::class, 'wish'])->name('wishlists.wish');
+        Route::post('/{service}/destroy', [WishlistsController::class, 'destroy'])->name('wishlists.destroy');
     });
 
     Route::prefix('orders')->group(function () {

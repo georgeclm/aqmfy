@@ -14,7 +14,20 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::where('user_id', auth()->id())->get();
+        $subtotal = $carts->sum('price');
+        $tax = $subtotal * 10 / 100;
+        $total = $subtotal + $tax;
+        return view('cart.index', compact('carts', 'subtotal', 'tax', 'total'));
+    }
+
+    public function checkout()
+    {
+        $carts = Cart::where('user_id', auth()->id())->get();
+        $subtotal = $carts->sum('price');
+        $tax = $subtotal * 10 / 100;
+        $total = $subtotal + $tax;
+        return view('cart.checkout', compact('carts', 'subtotal', 'tax', 'total'));
     }
 
     /**
@@ -44,6 +57,7 @@ class CartController extends Controller
         $cart->save();
         return redirect()->back()->with('success', 'Photo Added to cart');
     }
+
 
     /**
      * Display the specified resource.

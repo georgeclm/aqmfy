@@ -1,106 +1,101 @@
 @extends('layouts.app')
-@section('title', 'Edit Service - Aqmfy')
+@section('title', 'Edit Photo - Aqmfy')
 @section('content')
-
+    <br><br><br><br><br><br><br>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-4 col-sm-offset-4">
-                <h4>Edit your Gig</h4>
-                <form action="{{ route('services.update', $service) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('patch')
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Name of Service</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                            id="exampleInputEmail1" value="{{ old('name') ?? $service->name }}"
-                            aria-describedby="emailHelp" placeholder="Name" required>
+        <form class="well form-horizontal" action="{{ route('services.update', $service) }} " method="POST"
+            id="contact_form" style="background-color:white !important; border:none !important;">
+            @csrf
+            @method('patch')
+            <!-- Form Name -->
+            <legend>
+                <br><br><br>
+                <div style="text-align: center">
+                    <h2><b>Update your Photo</b></h2>
+                </div>
+            </legend><br>
+            <!-- Text input-->
+            <div class="form-group @error('name') has-error @enderror">
+                <label class="col-md-4 control-label">Name</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <input name="name" placeholder="Name" class="form-control" type="text"
+                            value="{{ old('name') ?? $service->name }}">
                         @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <span id="helpBlock2" class="help-block"
+                                style="font-size: 12px;color:red">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror"
-                            id="exampleInputEmail1" value="{{ old('price') ?? $service->price }}"
-                            aria-describedby="emailHelp" placeholder="0" required>
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group @error('price') has-error @enderror">
+                <label class="col-md-4 control-label">Price</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <input name="price" placeholder="Price" class="form-control" type="number"
+                            value="{{ old('price') ?? $service->price }}">
                         @error('price')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <span id="helpBlock2" class="help-block"
+                                style="font-size: 12px;color:red">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Delivery Time (Days)</label>
-                        <input type="number" name="delivery_time"
-                            class="form-control @error('delivery_time') is-invalid @enderror" id="exampleInputEmail1"
-                            value="{{ old('delivery_time') ?? $service->delivery_time }}" aria-describedby="emailHelp"
-                            placeholder="0" required>
-                        @error('delivery_time')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Revision Time</label>
-                        <input type="number" name="revision_time"
-                            class="form-control @error('revision_time') is-invalid @enderror" id="exampleInputEmail1"
-                            value="{{ old('revision_time') ?? $service->revision_time }}" aria-describedby="emailHelp"
-                            placeholder="0" required>
-                        @error('revision_time')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-
-                    <div class="mb-3">
-                        <label for="exampleInputCategory" class="form-label">Category</label>
-                        <select name="category_id" class="form-select @error('category') is-invalid @enderror" disabled>
+                </div>
+            </div>
+            <div class=" form-group @error('category') has-error @enderror">
+                <label class="col-md-4 control-label">Category</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <select name="category" class="form-control selectpicker">
+                            <option value="" selected disabled hidden>Choose Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @if ($service->category_id == $category->id) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
-                        <span class="text-muted">
-                            Category cannot be changed
-                        </span>
                         @error('category')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <span id="helpBlock2" class="help-block"
+                                style="font-size: 12px;color:red">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Description</label>
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror"
-                            id="exampleInputEmail1" rows=5 value="{{ old('description') ?? $service->description }}"
-                            aria-describedby="emailHelp" placeholder="Description"
-                            required>{{ old('description') ?? $service->description }}</textarea>
-                        @error('description')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Service Image</label>
-                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
-                            id="exampleInputEmail1" value="{{ old('image') }}" aria-describedby="emailHelp">
-                        @error('image')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-outline-primary">Update Service</button>
-                </form>
-
+                </div>
             </div>
-        </div>
-    </div>
+            <!-- Text input-->
+            <div class="form-group @error('description') has-error @enderror">
+                <label class="col-md-4 control-label">Description</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="aa-checkout-single-bill">
+                        <textarea name="description" cols="30" rows="3"
+                            placeholder="Description">{{ old('description') ?? $service->description }}</textarea>
+                        @error('description')
+                            <span id="helpBlock2" class="help-block"
+                                style="font-size: 12px;color:red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group @error('image') has-error @enderror">
+                <label class="col-md-4 control-label">Image</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <input name="image" class="form-control" type="file"
+                            value="{{ old('image') ?? $service->image }}">
+                        @error('image')
+                            <span id="helpBlock2" class="help-block"
+                                style="font-size: 12px;color:red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4"><br>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit"
+                        class="btn btn-warning">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUPDATE
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+                </div>
+            </div>
+        </form>
+    </div><!-- /.container -->
 @endsection

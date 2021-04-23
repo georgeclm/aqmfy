@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -18,12 +19,9 @@ class OrdersController extends Controller
         } else {
             $ratingserviceid = null;
         }
-        $orders = DB::table('orders')
-            ->join('services', 'orders.service_id', '=', 'services.id')
-            ->where('orders.user_id', auth()->id())
-            ->select('services.*', 'orders.*')
-            ->get();
-        // dd($orders);
+
+        $orders = Order::where('user_id', auth()->id())->with('service')->get();
+        // dd($orders[0]->service);
         return view('order.index', compact('orders', 'ratingserviceid'));
     }
     function show(Service $service)
@@ -39,16 +37,25 @@ class OrdersController extends Controller
     }
     public function store(Request $request)
     {
-        $order = new Order;
-        $order->quantity = $request->quantity;
-        $order->service_id = $request->service_id;
-        $order->user_id = auth()->id();
-        $order->status = 'Pending';
-        $order->payment_method = $request->payment;
-        $order->payment_status = 'Done';
-        $order->description = $request->description;
-        $order->save();
-        return redirect('/')->with('success', 'Service have been ordered');
+        dd(request()->all());
+        $carts = Cart::where('user_id', auth()->id())->get();
+        foreach ($carts as $cart) {
+            $order = new Order;
+            $order->user_id = auth()->id();
+            $order->status = 'Pending';
+            $order->payment_method = $request->payment;
+            $order->payment_status = 'Done';
+            $order->service_id = $cart->service_id;
+            $order->first_name = $request->first_name;
+            $order->last_name = $request->last_name;
+            $order->phone_num = $request->phone;
+            $order->notes = $request->notes;
+            $order->country = $request->country;
+            if ($order->save()) {
+                $cart->delete();
+            };
+        };
+        return redirect('/')->with('success', 'Photos have been ordered');
     }
     function changeQuantity(Service $service)
     {

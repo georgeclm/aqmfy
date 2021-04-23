@@ -28,7 +28,7 @@ class SellersController extends Controller
         $seller->url = $request->url;
         $seller->description = $request->description;
         $seller->user_id = auth()->id();
-
+        $seller->phone_num = $request->phone_num;
         if (request('image')) {
             request()->validate([
                 'image' => 'mimes:jpeg,png,jpg,gif,svg',
@@ -63,11 +63,12 @@ class SellersController extends Controller
     public function update(Seller $seller)
     {
         $data = request()->validate([
-            'sellername' => ['bail', 'required'],
+            'sellername' => 'required',
             'address' => 'sometimes',
             'url' => ['sometimes', 'url'],
             'image' => 'mimes:jpeg,png,jpg,gif,svg',
-            'description' => 'sometimes'
+            'description' => 'sometimes',
+            'phone_num' => 'numeric'
         ]);
 
         if (request('image')) {

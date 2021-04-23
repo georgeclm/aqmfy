@@ -52,10 +52,16 @@
                                             <tbody>
                                                 @foreach ($services as $service)
                                                     <tr>
-                                                        <td><a class="remove" href="#">
+
+
+                                                        <td>
+                                                            <a class="remove"
+                                                                href="{{ route('wishlists.wish', $service->id) }}">
                                                                 <fa class="fa fa-close"></fa>
-                                                            </a></td>
+                                                            </a>
+                                                        </td>
                                                         <td><a href="{{ route('services.show', $service) }}"><img
+                                                                    style="width: 150px"
                                                                     src="{{ asset($service->serviceImage()) }}"
                                                                     alt="img"></a>
                                                         </td>

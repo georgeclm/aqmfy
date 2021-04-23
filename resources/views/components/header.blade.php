@@ -1,7 +1,6 @@
   <!-- Start header section -->
   <div>
       <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
-
       <header id="aa-header">
           @php
               use App\Models\User;
@@ -54,8 +53,6 @@
                                       </div>
                                   </div>
                                   <!-- / language -->
-
-
                                   <!-- start cellphone -->
                                   <div class="cellphone hidden-xs">
                                       <p><span class="fa fa-phone"></span>+62 812-989-8998</p>
@@ -65,7 +62,6 @@
                               <!-- / header top left -->
                               <div class="aa-header-top-right">
                                   <ul class="aa-head-top-nav-right">
-
                                       @guest
                                           <li class="hidden-xs"><a href="{{ route('login') }}">Login</a></li>
                                           <li><a href="{{ route('register') }}">Register</a></li>
@@ -76,11 +72,20 @@
                                               </li>
                                               <li class="hidden-xs"><a href="{{ route('users.index') }}">Manage Users</a>
                                               </li>
-
                                           @else
                                               <li><a
                                                       href="{{ route('profiles.edit', auth()->user()) }}">{{ Auth::user()->name }}</a>
                                               </li>
+                                              @if (auth()->user()->seller)
+                                                  <li class="hidden-xs"><a
+                                                          href="{{ route('sellers.show', auth()->user()->seller) }}">Seller
+                                                          Profile</a>
+                                                  </li>
+                                              @else
+                                                  <li class="hidden-xs"><a href="{{ route('sellers.create') }}">Become a
+                                                          Seller</a>
+                                                  </li>
+                                              @endif
                                               <li class="hidden-xs"><a href="{{ route('wishlists.show') }}">Wishlist</a>
                                               </li>
                                               <li class="hidden-xs"><a
@@ -134,7 +139,7 @@
                               <div class="aa-cartbox">
                                   @auth
 
-                                      <a class="aa-cart-link" href="#">
+                                      <a class="aa-cart-link" href="{{ route('carts.index') }}">
                                           <span class="fa fa-shopping-basket"></span>
                                           <span class="aa-cart-title">SHOPPING CART</span>
                                           <span class="aa-cart-notify">{{ auth()->user()->carts->count() }}</span>
@@ -148,7 +153,7 @@
                                       @else
 
                                           <ul>
-                                              @foreach ($carts as $cart)
+                                              @foreach ($carts->take(3) as $cart)
                                                   <li>
                                                       <a class="aa-cartbox-img"
                                                           href="{{ route('services.show', $cart->service) }}">
@@ -179,7 +184,7 @@
 
                                           </ul>
                                           <a class="aa-cartbox-checkout aa-primary-btn"
-                                              href="checkout.html">Checkout</a>
+                                              href="{{ route('checkout') }}">Checkout</a>
                                       @endif
 
                                   </div>

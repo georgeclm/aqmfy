@@ -4,69 +4,57 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card card-signin my-5">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ __('Sign Up') }}</h5>
-                        <form class="form-signin" method="POST" action="{{ route('register') }}">
-                            @csrf
-                            <div class="form-label-group">
-                                <input type="text" id="inputName" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="Username" required autofocus name="name" value="{{ old('name') }}">
-                                <label for="inputName">{{ __('Username') }}</label>
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-label-group">
-                                <input type="email" id="inputEmail"
-                                    class="form-control @error('email') is-invalid @enderror" placeholder="Email address"
-                                    required autofocus name="email" value="{{ old('email') }}">
-                                <label for="inputEmail">{{ __('E-Mail Address') }}</label>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-label-group">
-                                <input type="password" id="inputPassword"
-                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    name="password" required>
-                                <label for="inputPassword">{{ __('Password') }}</label>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-
-                            <div class="form-label-group">
-                                <input type="password" id="inputPassword-confirmation" class="form-control "
-                                    placeholder="Password" name="password_confirmation" required>
-                                <label for="inputPassword-confirmation">{{ __('Confirm Password') }}</label>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-lg btn-outline-primary text-uppercase"
-                                    type="submit">{{ __('Sign Up') }}</button>
-                                <a class="d-block text-center mt-2 small" href="{{ route('login') }}">Sign In</a>
-                                <hr class="my-4">
-                                <a class="btn btn-lg btn-google text-uppercase" href="{{ url('auth/google') }}"><i
-                                        class="fa fa-google mr-4"></i> {{ __('Sign Up With Google') }}</a>
-                                <a class="btn btn-lg btn-facebook text-uppercase" href="{{ url('auth/facebook') }}"><i
-                                        class="fa fa-facebook-f mr-4"></i> {{ __('Sign Up With Facebook') }}</a>
-                                <a class="btn btn-lg btn-twitter text-uppercase" href="{{ url('auth/twitter') }}"><i
-                                        class="fa fa-twitter mr-4"></i> {{ __('Sign Up With Twitter') }}</a>
-                            </div>
-
-                        </form>
-                    </div>
+            <div class="col-sm-6 col-md-4 col-md-offset-4" style="margin-top: 60px; margin-bottom:60px;">
+                <h1 class=" text-center login-title">{{ __('Sign Up to continue to Aqmfy Stock') }}</h1>
+                <div class="account-wall">
+                    <img class="profile-img"
+                        src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                        alt="">
+                    <form class="form-signin" method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <div class="@error('name') has-error @enderror">
+                            <input type="text" class="form-control " placeholder="Username" required autofocus name="name"
+                                value="{{ old('name') }}">
+                            @error('name')
+                                <span id="helpBlock2" class="help-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="@error('email') has-error @enderror">
+                            <input type="email" class="form-control " placeholder="Email address" required autofocus
+                                name="email" value="{{ old('email') }}">
+                            @error('email')
+                                <span id="helpBlock2" class="help-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="@error('password') has-error @enderror">
+                            <input type="password" class="form-control" placeholder="Password" required name="password">
+                            @error('password')
+                                <span id="helpBlock2" class="help-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <input type="password" class="form-control" placeholder="Confirm Password" required
+                            style="margin-bottom: 10px" name="password_confirmation">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">
+                            {{ __('Sign Up') }}</button>
+                        <label class="checkbox pull-left">
+                            <input type="checkbox" value="remember-me" name="remember" id="remember"
+                                {{ old('remember') ? 'checked' : '' }}>
+                            {{ __('Remember me') }}
+                        </label>
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}"
+                                class="pull-right need-help">{{ __('Forgot Your Password?') }} </a><span
+                                class="clearfix"></span>
+                        @endif
+                        <a class="btn btn-lg  btn-block btn-google" href="{{ url('auth/google') }}">
+                            <i class="fa fa-google"></i>{{ __('SIGN UP WITH GOOGLE') }}</a>
+                        <a class="btn btn-lg  btn-block btn-twitter" href="{{ url('auth/twitter') }}">
+                            <i class="fa fa-twitter"></i>{{ __('SIGN UP WITH TWITTER') }}</a>
+                    </form>
                 </div>
+                <a href="{{ route('login') }}" class="text-center new-account">{{ __('Have an account?') }} </a>
             </div>
         </div>
     </div>
+
 @endsection

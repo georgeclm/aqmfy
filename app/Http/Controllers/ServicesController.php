@@ -78,8 +78,6 @@ class ServicesController extends Controller
                 'category_id' => 'required',
                 'price' => 'required',
                 'description' => 'required',
-                'delivery_time' => ['required', 'numeric'],
-                'revision_time' => ['required', 'numeric'],
                 'image' => 'mimes:jpeg,png,jpg,gif,svg'
             ]);
 
@@ -93,8 +91,6 @@ class ServicesController extends Controller
             $service->name = $request->name;
             $service->price = $request->price;
             $service->description = $request->description;
-            $service->delivery_time = $request->delivery_time;
-            $service->revision_time = $request->revision_time;
             $service->image = request('image')->hashName();
             $service->seller_id = auth()->user()->seller->id;
             $service->category_id = $request->category_id;
@@ -140,8 +136,6 @@ class ServicesController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'delivery_time' => 'required|numeric',
-            'revision_time' => 'required|numeric',
             'image' => 'mimes:jpeg,png,jpg,gif,svg'
         ]);
 

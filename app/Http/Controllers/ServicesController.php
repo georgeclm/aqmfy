@@ -37,6 +37,29 @@ class ServicesController extends Controller
         $services = Service::all();
         return view('service.index', compact('categories', 'services'));
     }
+    function indexall(Request $request)
+    {
+        $categories = Category::all();
+        $search = false;
+        $word = null;
+        $category_search = false;
+        $category_word = null;
+        if ($request->has('query') && $request->input('query') !== '') {
+            $search = true;
+            $word = $request->input('query');
+        }
+        if ($request->has('category') && $request->input('category') !== '') {
+            $category_search = true;
+            $category_word = Category::firstWhere('id', $request->input('category'))->name;
+        }
+        $services = Service::query()->when($search, function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->input('query')}%")
+                ->orWhere('description', 'like', "%{$request->input('query')}%");
+        })->when($category_search, function ($cquery) use ($request) {
+            $cquery->where('category_id', $request->input('category'));
+        })->with('ratings')->paginate(12);
+        return view('service.indexall', compact('categories', 'services', 'word', 'category_word'));
+    }
 
     function show(Service $service)
     {
@@ -44,7 +67,7 @@ class ServicesController extends Controller
         $favorite = (auth()->user()) ? auth()->user()->favorite->contains($service->id) : false;
         // dd($service->ratings->count());
         $stars = array();
-
+        $services = Service::all();
         if ($service->ratings()->count() != 0) {
             $average = $service->ratings()->average('rating');
             $rating = 5;
@@ -57,7 +80,7 @@ class ServicesController extends Controller
             $average = 0;
         }
 
-        return view('service.detail', compact('service', 'favorite', 'average', 'stars'));
+        return view('service.detail', compact('service', 'favorite', 'average', 'stars', 'services'));
     }
 
     public function create()
@@ -74,7 +97,7 @@ class ServicesController extends Controller
         // dd(request('image'));
         if (auth()->user()->seller) {
             request()->validate([
-                'name' => ['bail', 'required'],
+                'name' =>  'required',
                 'category_id' => 'required',
                 'price' => 'required',
                 'description' => 'required',
@@ -101,19 +124,7 @@ class ServicesController extends Controller
         return redirect()->route('sellers.create')->with('error', 'You are not a seller please registered Yourself First');
     }
 
-    function search(Request $request)
-    {
-        // for the search engine inside database search all the name like to following value
-        // dd(Session::get('services'));
-        $query = $request->input('query');
 
-        $services = Service::where('name', 'LIKE', '%' . $query . '%')
-            ->orWhere('description', 'LIKE', '%' . $query . '%')
-            ->with('ratings')
-            ->get();
-
-        return view('service.search', compact('services', 'query'));
-    }
 
     public function edit(Service $service)
     {

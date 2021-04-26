@@ -1,7 +1,9 @@
 <template>
-  <div class="mb-4">
-    <button :class="classText" @click="followUser" v-text="buttonText"></button>
-  </div>
+  <button
+    class="aa-add-to-cart-btn"
+    @click="followUser"
+    v-text="buttonText"
+  ></button>
 </template>
 
 <script>

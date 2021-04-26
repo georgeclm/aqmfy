@@ -4955,6 +4955,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["follows", "route"],
   data: function data() {
@@ -5007,6 +5009,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -41185,13 +41189,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-sm-2" }, [
-    _c("button", {
-      class: _vm.classText,
-      domProps: { textContent: _vm._s(_vm.buttonText) },
-      on: { click: _vm.followUser }
-    })
-  ])
+  return _c("button", {
+    staticClass: "profile__contact-btn btn btn-lg btn-block btn-info",
+    domProps: { textContent: _vm._s(_vm.buttonText) },
+    on: { click: _vm.followUser }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41216,13 +41218,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mb-4" }, [
-    _c("button", {
-      class: _vm.classText,
-      domProps: { textContent: _vm._s(_vm.buttonText) },
-      on: { click: _vm.followUser }
-    })
-  ])
+  return _c("button", {
+    staticClass: "aa-add-to-cart-btn",
+    domProps: { textContent: _vm._s(_vm.buttonText) },
+    on: { click: _vm.followUser }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53481,7 +53481,7 @@ Vue.compile = compileToFunctions;
 /******/ 			return checkDeferredModules();
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkcolance_app"] = self["webpackChunkcolance_app"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkaqmfy_app"] = self["webpackChunkaqmfy_app"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 		

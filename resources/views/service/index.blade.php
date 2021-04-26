@@ -233,7 +233,8 @@
                                                         </form>
                                                     @endif
                                                     <figcaption>
-                                                        <h4 class="aa-product-title"><a href="#">{{ $service->name }}</a>
+                                                        <h4 class="aa-product-title"><a
+                                                                href="{{ route('services.show', $service) }}">{{ $service->name }}</a>
                                                         </h4>
                                                         <span class="aa-product-price">Rp.
                                                             {{ number_format($service->price) }}</span>

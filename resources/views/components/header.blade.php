@@ -5,28 +5,9 @@
           @php
               use App\Models\User;
               use App\Models\Cart;
-              $order = false;
-              $wishlist = false;
-              $chat = false;
-              $role = false;
-              $user = false;
               $carts = Cart::where('user_id', auth()->id())->get();
-
-              if (url()->current() == env('APP_URL') . '/wishlists') {
-                  $wishlist = true;
-              } elseif (url()->current() == env('APP_URL') . '/orders/' . auth()->id()) {
-                  $order = true;
-              } elseif (url()->current() == env('APP_URL') . '/messages') {
-                  $chat = true;
-              } elseif (url()->current() == env('APP_URL') . '/roles') {
-                  $role = true;
-              } elseif (url()->current() == env('APP_URL') . '/users') {
-                  $user = true;
-              }
               $categories = User::categories();
-
           @endphp
-
           <!-- start header top  -->
           <div class="aa-header-top">
               <div class="container">
@@ -192,8 +173,8 @@
                               <!-- / cart box -->
                               <!-- search box -->
                               <div class="aa-search-box">
-                                  <form action="{{ route('search') }}" autocomplete="off">
-                                      <input class="typeahead" type="text" name="" id=""
+                                  <form action="{{ route('services.all') }}" autocomplete="off" action="GET">
+                                      <input class="typeahead" type="text" id=""
                                           placeholder="Search here ex. 'photography' " name="query">
                                       <button type="submit" style="background-color: black"><span
                                               class="fa fa-search"></span></button>
@@ -227,8 +208,8 @@
                               <li><a href="{{ route('services.index') }}">Home</a></li>
                               <li><a href="{{ route('contact') }}">Contact</a></li>
                               @foreach ($categories as $category)
-                                  <li><a href="{{ route('search.category', $category->id) }}">{{ $category->name }}
-                                      </a>
+                                  <li><a
+                                          href="{{ route('services.all', "category={$category->id}") }}">{{ $category->name }}</a>
                                   </li>
                               @endforeach
                           </ul>

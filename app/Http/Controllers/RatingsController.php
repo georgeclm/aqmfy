@@ -14,7 +14,7 @@ class RatingsController extends Controller
         Order::destroy($request->order_id);
 
         $data = request()->validate([
-            'comment' => ['bail', 'required'],
+            'comment' =>  'required',
             'rating' => 'required'
         ]);
 

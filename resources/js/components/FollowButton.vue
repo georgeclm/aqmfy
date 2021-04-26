@@ -1,7 +1,9 @@
 <template>
-  <div class="col-sm-2">
-    <button :class="classText" @click="followUser" v-text="buttonText"></button>
-  </div>
+  <button
+    class="profile__contact-btn btn btn-lg btn-block btn-info"
+    @click="followUser"
+    v-text="buttonText"
+  ></button>
 </template>
 
 <script>

@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/sellers/{seller}', [SellersController::class, 'show'])->name('sellers.show')->withoutMiddleware('auth');
     Route::resource('services', ServicesController::class)->except(['index', 'show']);
     Route::get('/services/{service}', [ServicesController::class, 'show'])->name('services.show')->withoutMiddleware('auth');
-
+    Route::get('/services', [ServicesController::class, 'indexall'])->name('services.all')->withoutMiddleware('auth');
     Route::get('/services/{service}/download', [ServicesController::class, 'getDownload'])->name('services.download');
     Route::get('/profile/{user}', [UsersController::class, 'edit'])->name('profiles.edit')->middleware('verified');
     Route::patch('/{user}', [UsersController::class, 'update'])->name('profiles.update');

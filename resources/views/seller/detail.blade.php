@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', "{$seller->sellername} - Aqmfy")
 
-@section('home')
+@section('content')
     <div class="container">
 
         <div class="row">

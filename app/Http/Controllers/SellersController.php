@@ -15,7 +15,7 @@ class SellersController extends Controller
     function store(Request $request)
     {
         request()->validate([
-            'sellername' => ['bail', 'required'],
+            'sellername' =>  'required',
             'address' => 'sometimes',
             'url' => ['sometimes', 'url'],
             'description' => 'nullable'

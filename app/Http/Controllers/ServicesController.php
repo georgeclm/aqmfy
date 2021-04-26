@@ -161,7 +161,7 @@ class ServicesController extends Controller
             $imageArray ?? []
         ));
 
-        return redirect()->route('services.show', $service)->with('success', 'Gig Have Been Updated');
+        return redirect()->route('services.show', $service)->with('success', 'Photo Have Been Updated');
     }
 
     public function destroy(Service $service)
@@ -170,6 +170,6 @@ class ServicesController extends Controller
             return redirect()->route('services.index')->with('error', 'You are not the author of the photos');
         }
         Service::destroy($service->id);
-        return redirect()->route('sellers.show', auth()->user())->with('success', 'Gig Have Been Removed');
+        return redirect()->route('sellers.show', auth()->user())->with('success', 'Photo Have Been Removed');
     }
 }

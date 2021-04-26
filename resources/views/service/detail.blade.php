@@ -371,11 +371,11 @@
 
                 @else
                     <a href="{{ route('services.edit', $service) }}" class="btn btn-outline-primary mb-4">Edit Your
-                        Gig</a>
+                        Photo</a>
                     <form action="{{ route('services.destroy', $service) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-warning">Remove Gig</button>
+                        <button class="btn btn-warning">Remove Photo</button>
                     </form>
 
 
@@ -386,7 +386,7 @@
         </div><br>
         <div class="row">
             <div class="col-sm-6 ">
-                <h2 class="text-center">About This Gig</h2> <br>
+                <h2 class="text-center">About This Photo</h2> <br>
             </div>
             <div class="col-sm-6 ">
                 <h2 class="text-center">About The Seller</h2> <br>

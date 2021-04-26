@@ -50,75 +50,177 @@
                         </table>
                     </div>
                 </div>
+                <!-- product category -->
+                @if ($seller->user()->isNot(auth()->user()))
+                    <section id="aa-product-category">
+                        <div class="container">
+                            <h2> {{ $seller->sellername }} Photo</h2>
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-sm-8">
+                                    <div class="aa-product-catg-content">
+                                        <br>
+                                        <div class="aa-product-catg-body">
+                                            <ul class="aa-product-catg">
+                                                <!-- start single product item -->
+                                                @if ($services->count() != 0)
 
+                                                    @foreach ($services as $service)
 
-                <!-- Latest posts -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">Latest posts</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class="profile__comments">
-                            <div class="profile-comments__item">
-                                <div class="profile-comments__controls">
-                                    <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                    <a href="#"><i class="fa fa-edit"></i></a>
-                                    <a href="#"><i class="fa fa-trash-o"></i></a>
-                                </div>
-                                <div class="profile-comments__avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
-                                </div>
-                                <div class="profile-comments__body">
-                                    <h5 class="profile-comments__sender">
-                                        Richard Roe <small>2 hours ago</small>
-                                    </h5>
-                                    <div class="profile-comments__content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, corporis.
-                                        Voluptatibus odio perspiciatis non quisquam provident, quasi eaque officia.
+                                                        <li>
+                                                            <figure>
+                                                                <a class="aa-product-img"
+                                                                    href="{{ route('services.show', $service) }}"><img
+                                                                        src="{{ asset($service->serviceImage()) }}"></a>
+                                                                @if ($service->seller->user()->isNot(auth()->user()))
+                                                                    <form action="{{ route('carts.store') }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" name="service_id"
+                                                                            value="{{ $service->id }}">
+                                                                        <input type="hidden" name="price"
+                                                                            value="{{ $service->price }}">
+                                                                        <button class="aa-add-card-btn btn-block"><span
+                                                                                class="fa fa-shopping-cart"></span>Add To
+                                                                            Cart</button>
+                                                                    </form>
+                                                                @endif
+                                                                <figcaption>
+                                                                    <h4 class="aa-product-title"><a
+                                                                            href="{{ route('services.show', $service) }}">{{ $service->name }}</a>
+                                                                    </h4>
+                                                                    <span class="aa-product-price">Rp.
+                                                                        {{ number_format($service->price) }}</span>
+                                                                    {{-- class="aa-product-price"><del>$65.50</del></span> --}} <p class="aa-product-descrip">
+                                                                        {{ Str::of($service->description)->title()->words(20) }}
+                                                                    </p>
+                                                                    @php
+                                                                        $average = $service->ratings->average('rating');
+                                                                    @endphp
+                                                                    @if ($average != 0)
+                                                                        <div class="price" style="margin-top: 5px">
+                                                                            <span class="edd_price"><span
+                                                                                    class="icon">★</span><strong>
+                                                                                    {{ number_format($average, 1) }}</strong>
+                                                                                <span
+                                                                                    class="text-muted">({{ $service->ratings->count() }})</span></span>
+                                                                        </div>
+
+                                                                    @endif
+                                                                </figcaption>
+                                                            </figure>
+                                                            <div class="aa-product-hvr-content">
+                                                                @if ($service->seller->user()->isNot(auth()->user()))
+                                                                    <a href="{{ route('wishlists.wish', $service->id) }}"
+                                                                        data-toggle="tooltip" data-placement="top"
+                                                                        title="Add to Wishlist"><span
+                                                                            class="fa fa-heart-o"></span></a>
+                                                                @endif
+                                                                <a href="{{ route('services.download', $service) }}"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Download"><span
+                                                                        class="fa fa-download"></span></a>
+                                                                <a href="{{ route('services.show', $service) }}"><span
+                                                                        class="fa fa-search"></span></a>
+                                                            </div>
+                                                            <!-- product badge -->
+                                                            <span class="aa-badge aa-sale" href="#">SALE!</span>
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    <div class="d-grid gap-2 col-5 mx-auto text-center">
+                                                        <br><br>
+                                                        <h2 class="mb-3 fs-1">This Seller Hasn't Sell Any Photo Yet</h2>
+
+                                                    </div>
+                                                @endif
+
+                                            </ul>
+
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            {{ $services->links() }}
+                                        </div>
+
                                     </div>
                                 </div>
+
+
                             </div>
-                            <div class="profile-comments__item">
-                                <div class="profile-comments__controls">
-                                    <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                    <a href="#"><i class="fa fa-edit"></i></a>
-                                    <a href="#"><i class="fa fa-trash-o"></i></a>
-                                </div>
-                                <div class="profile-comments__avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="...">
-                                </div>
-                                <div class="profile-comments__body">
-                                    <h5 class="profile-comments__sender">
-                                        Richard Roe <small>5 hours ago</small>
-                                    </h5>
-                                    <div class="profile-comments__content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero itaque dolor
-                                        laboriosam dolores magnam mollitia, voluptatibus inventore accusamus illo.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile-comments__item">
-                                <div class="profile-comments__controls">
-                                    <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                    <a href="#"><i class="fa fa-edit"></i></a>
-                                    <a href="#"><i class="fa fa-trash-o"></i></a>
-                                </div>
-                                <div class="profile-comments__avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
-                                </div>
-                                <div class="profile-comments__body">
-                                    <h5 class="profile-comments__sender">
-                                        Richard Roe <small>1 day ago</small>
-                                    </h5>
-                                    <div class="profile-comments__content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, esse, magni
-                                        aliquam quisquam modi delectus veritatis est ut culpa minus repellendus.
+                        </div>
+                    </section>
+                    <!-- / product category -->
+                @else
+                    <!-- Cart view section -->
+                    <section id="cart-view">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="cart-view-area">
+                                        <div class="cart-view-table aa-wishlist-table">
+                                            @if ($services->count() != 0)
+
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th></th>
+                                                                <th>Product</th>
+                                                                <th>Price</th>
+                                                                <th>Stock Status</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($services as $service)
+                                                                <tr>
+
+
+                                                                    <td>
+                                                                        <form
+                                                                            action="{{ route('services.destroy', $service) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                class="fa fa-close"></button>
+                                                                        </form>
+
+                                                                    </td>
+                                                                    <td><a href="{{ route('services.show', $service) }}"><img
+                                                                                style="width: 150px"
+                                                                                src="{{ asset($service->serviceImage()) }}"
+                                                                                alt="img"></a>
+                                                                    </td>
+                                                                    <td><a class="aa-cart-title"
+                                                                            href="{{ route('services.show', $service) }}">{{ $service->name }}</a>
+                                                                    </td>
+                                                                    <td>Rp. {{ number_format($service->price) }}</td>
+                                                                    <td>In Stock</td>
+                                                                    <td><a href="{{ route('services.edit', $service) }}"
+                                                                            class="aa-add-to-cart-btn">Edit Photo</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                        <div class="d-flex justify-content-center">
+                                                            {{ $services->links() }}
+                                                        </div>
+                                                    </table>
+                                                </div>
+                                            @else
+                                                <div class="d-grid gap-2 col-5 mx-auto text-center">
+                                                    <br><br>
+                                                    <h2 class="mb-3 fs-1">Start Selling Now</h2>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </section>
+                @endif
             </div>
             <div class="col-xs-12 col-sm-3">
                 <br><br><br><br>

@@ -89,22 +89,22 @@
                                                             href="{{ route('services.show', $service) }}">{{ $service->name }}</a>
                                                     </h4>
                                                     <span class="aa-product-price">Rp.
-                                                        {{ number_format($service->price) }}</span><span
-                                                        {{-- class="aa-product-price"><del>$65.50</del></span> --}} <p
-                                                        class="aa-product-descrip">{{ Str::of($service->description)->title()->words(20) }}
-                                                        </p>
-                                                        @php
-                                                            $average = $service->ratings->average('rating');
-                                                        @endphp
-                                                        @if ($average != 0)
-                                                            <div class="price" style="margin-top: 5px">
-                                                                <span class="edd_price"><span class="icon">★</span><strong>
-                                                                        {{ number_format($average, 1) }}</strong>
-                                                                    <span
-                                                                        class="text-muted">({{ $service->ratings->count() }})</span></span>
-                                                            </div>
+                                                        {{ number_format($service->price) }}</span>
+                                                    {{-- class="aa-product-price"><del>$65.50</del></span> --}} <p class="aa-product-descrip">
+                                                        {{ Str::of($service->description)->title()->words(20) }}
+                                                    </p>
+                                                    @php
+                                                        $average = $service->ratings->average('rating');
+                                                    @endphp
+                                                    @if ($average != 0)
+                                                        <div class="price" style="margin-top: 5px">
+                                                            <span class="edd_price"><span class="icon">★</span><strong>
+                                                                    {{ number_format($average, 1) }}</strong>
+                                                                <span
+                                                                    class="text-muted">({{ $service->ratings->count() }})</span></span>
+                                                        </div>
 
-                                                        @endif
+                                                    @endif
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">

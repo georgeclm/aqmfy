@@ -18,7 +18,7 @@
                 <div class="aa-catg-head-banner-content">
                     <h2>Wishlist Page</h2>
                     <ol class="breadcrumb">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('services.index') }}">Home</a></li>
                         <li class="active" style="color:rgb(189, 158, 158)">Wishlist</li>
                     </ol>
                 </div>

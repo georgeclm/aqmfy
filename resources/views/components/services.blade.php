@@ -81,8 +81,8 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    <a class="aa-browse-btn" href="product.html">Browse all Product <span
-                                            class="fa fa-long-arrow-right"></span></a>
+                                    <a class="aa-browse-btn" href="{{ route('services.all') }}">Browse all Product
+                                        <span class="fa fa-long-arrow-right"></span></a>
                                 </div>
                             @else
                                 <div class="h4">Photos Not Found</div>

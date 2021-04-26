@@ -119,7 +119,7 @@
                                             </ul>
                                         </div>
                                     @endforeach
-                                    <a class="aa-browse-btn" href="product.html">Browse all Product <span
+                                    <a class="aa-browse-btn" href="{{ route('services.all') }}">Browse all Product <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <a class="aa-browse-btn" href="product.html">Browse all Product <span
+                                    <a class="aa-browse-btn" href="{{ route('services.all') }}">Browse all Product <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / popular product category -->
@@ -272,7 +272,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <a class="aa-browse-btn" href="product.html">Browse all Product <span
+                                    <a class="aa-browse-btn" href="{{ route('services.all') }}l">Browse all Product <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / featured product category -->
@@ -338,7 +338,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <a class="aa-browse-btn" href="product.html">Browse all Product <span
+                                    <a class="aa-browse-btn" href="{{ route('services.all') }}">Browse all Product <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / latest product category -->

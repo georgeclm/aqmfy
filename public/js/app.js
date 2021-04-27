@@ -4953,10 +4953,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["follows", "route"],
   data: function data() {
@@ -4984,11 +4980,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     classText: function classText() {
       if (this.status) {
-        this.className = "btn btn-outline-secondary";
+        this.className = "profile__contact-btn btn btn-lg btn-block btn-danger";
         var classdata = this.className;
         return classdata;
       } else {
-        this.className = "btn btn-outline-primary";
+        this.className = "profile__contact-btn btn btn-lg btn-block btn-info";
         var classdata = this.className;
         return classdata;
       }
@@ -5009,10 +5005,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
 //
 //
 //
@@ -5044,11 +5036,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     classText: function classText() {
       if (this.status) {
-        this.className = "btn btn-outline-secondary";
+        this.className = "profile__contact-btn btn btn-danger";
         var classdata = this.className;
         return classdata;
       } else {
-        this.className = "btn btn-outline-primary";
+        this.className = "profile__contact-btn btn btn-info";
         var classdata = this.className;
         return classdata;
       }
@@ -41190,7 +41182,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("button", {
-    staticClass: "profile__contact-btn btn btn-lg btn-block btn-info",
+    class: _vm.classText,
     domProps: { textContent: _vm._s(_vm.buttonText) },
     on: { click: _vm.followUser }
   })
@@ -41219,7 +41211,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("button", {
-    staticClass: "aa-add-to-cart-btn",
+    class: _vm.classText,
     domProps: { textContent: _vm._s(_vm.buttonText) },
     on: { click: _vm.followUser }
   })

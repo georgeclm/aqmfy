@@ -141,20 +141,40 @@
             });
         }
     });
-    $(function() {
-        $('div.fadeshop').hover(
-            function() {
-                $(this).find('div.captionshop').fadeIn(150);
-            },
-            function() {
-                $(this).find('div.captionshop').fadeOut(150);
-            }
-        );
-    });
-    s
 
 </script>
 <style>
+    .glyphicon {
+        margin-right: 5px;
+    }
+
+    .rating .glyphicon {
+        font-size: 22px;
+    }
+
+    .rating-num {
+        margin-top: 0px;
+        font-size: 54px;
+    }
+
+    .progress {
+        margin-bottom: 5px;
+    }
+
+    .progress-bar {
+        text-align: left;
+    }
+
+    .rating-desc .col-md-3 {
+        padding-right: 0px;
+    }
+
+    .sr-only {
+        margin-left: 5px;
+        overflow: visible;
+        clip: auto;
+    }
+
     .preview {
         display: -webkit-box;
         display: -webkit-flex;

@@ -11,6 +11,7 @@ class RatingsController extends Controller
 
     public function store(Request $request)
     {
+        // dd(request()->all());
         Order::destroy($request->order_id);
 
         $data = request()->validate([

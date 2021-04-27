@@ -1,9 +1,5 @@
 <template>
-  <button
-    class="profile__contact-btn btn btn-lg btn-block btn-info"
-    @click="followUser"
-    v-text="buttonText"
-  ></button>
+  <button :class="classText" @click="followUser" v-text="buttonText"></button>
 </template>
 
 <script>
@@ -38,11 +34,11 @@ export default {
     },
     classText() {
       if (this.status) {
-        this.className = "btn btn-outline-secondary";
+        this.className = "profile__contact-btn btn btn-lg btn-block btn-danger";
         var classdata = this.className;
         return classdata;
       } else {
-        this.className = "btn btn-outline-primary";
+        this.className = "profile__contact-btn btn btn-lg btn-block btn-info";
         var classdata = this.className;
         return classdata;
       }

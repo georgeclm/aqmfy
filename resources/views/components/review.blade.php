@@ -2,13 +2,14 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Please Rate The Service</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Please Rate The Photo</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
             </div>
             <div class="modal-body">
                 <form action="{{ route('ratings.store') }}" id="ratingform" method="POST">
                     @csrf
-                    <div class="rating" style="text-shadow: none">
+                    <div class="rating" style="font-size:40px">
                         <label>
                             <input type="radio" name="rating" value="1" required />
                             <span class="icon">★</span>

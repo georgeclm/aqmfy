@@ -14,15 +14,15 @@ class OrdersController extends Controller
     function index()
     {
         // $orders = auth()->user()->order;
-        if (Session::has('rating')) {
-            $ratingserviceid = Session::get('rating')['order']->service_id;
-        } else {
-            $ratingserviceid = null;
-        }
+        // if (Session::has('rating')) {
+        //     $ratingserviceid = Session::get('rating')['order']->service_id;
+        // } else {
+        //     $ratingserviceid = null;
+        // }
 
         $orders = Order::where('user_id', auth()->id())->with('service')->get();
         // dd($orders[0]->service);
-        return view('order.index', compact('orders', 'ratingserviceid'));
+        return view('order.index', compact('orders'));
     }
     function show(Service $service)
     {

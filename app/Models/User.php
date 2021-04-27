@@ -45,7 +45,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function userImage()
+    {
+        // folder inside the public path for default image
+        return 'uploads/service/no-image.png';
+    }
     public function seller()
     {
         return $this->hasOne(Seller::class);

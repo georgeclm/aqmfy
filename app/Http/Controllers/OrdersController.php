@@ -37,7 +37,7 @@ class OrdersController extends Controller
     }
     public function store(Request $request)
     {
-        dd(request()->all());
+        // dd(request()->all());
         $carts = Cart::where('user_id', auth()->id())->get();
         foreach ($carts as $cart) {
             $order = new Order;

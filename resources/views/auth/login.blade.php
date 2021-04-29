@@ -36,10 +36,10 @@
                                 class="pull-right need-help">{{ __('Forgot Your Password?') }} </a><span
                                 class="clearfix"></span>
                         @endif
-                        <a class="btn btn-lg  btn-block btn-google" href="{{ url('auth/google') }}">
+                        {{-- <a class="btn btn-lg  btn-block btn-google" href="{{ url('auth/google') }}">
                             <i class="fa fa-google"></i>{{ __('SIGN IN WITH GOOGLE') }}</a>
                         <a class="btn btn-lg  btn-block btn-twitter" href="{{ url('auth/twitter') }}">
-                            <i class="fa fa-twitter"></i>{{ __('SIGN IN WITH TWITTER') }}</a>
+                            <i class="fa fa-twitter"></i>{{ __('SIGN IN WITH TWITTER') }}</a> --}}
                     </form>
                 </div>
                 <a href="{{ route('register') }}" class="text-center new-account">{{ __('Create an account') }} </a>

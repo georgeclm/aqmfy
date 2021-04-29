@@ -39,6 +39,8 @@ class ServicesController extends Controller
     function indexall(Request $request)
     {
         $categories = Category::all();
+        $sort_by = false;
+        $sort_id = null;
         $search = false;
         $word = null;
         $category_search = false;
@@ -51,13 +53,24 @@ class ServicesController extends Controller
             $category_search = true;
             $category_word = Category::firstWhere('id', $request->input('category'))->name;
         }
+        if ($request->has('sort_by') && $request->input('sort_by') !== '') {
+            $sort_by = true;
+            $sort_id = $request->input('sort_by');
+        }
         $services = Service::query()->when($search, function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->input('query')}%")
                 ->orWhere('description', 'like', "%{$request->input('query')}%");
         })->when($category_search, function ($cquery) use ($request) {
             $cquery->where('category_id', $request->input('category'));
-        })->with('ratings')->paginate(12);
-        return view('service.indexall', compact('categories', 'services', 'word', 'category_word'));
+        })->when($sort_by, function ($aquery) use ($request) {
+            if ($request->input('sort_by') == 2) {
+                $aquery->orderBy('name');
+            } else if ($request->input('sort_by') == 3) {
+                $aquery->orderBy('price');
+            }
+        })
+            ->with('ratings')->paginate(12);
+        return view('service.indexall', compact('categories', 'services', 'word', 'category_word', 'sort_id'));
     }
 
     function show(Service $service)

@@ -37,10 +37,10 @@
                                     <form action="{{ route('services.all') }}" method="GET" class="aa-sort-form">
                                         <label for="">Sort by</label>
                                         <select name="sort_by" onchange="this.form.submit()">
-                                            <option value="1" selected="Default">Default</option>
-                                            <option value="2">Name</option>
-                                            <option value="3">Price</option>
-                                            <option value="4">Date</option>
+                                            <option value="" selected disabled hidden>Default</option>
+                                            <option value="2" @if ($sort_id == 2) selected @endif>Name</option>
+                                            <option value="3" @if ($sort_id == 3) selected @endif>Price</option>
+                                            <option value="4" @if ($sort_id == 4) selected @endif>Date</option>
                                         </select>
                                     </form>
                                     <form action="" class="aa-show-form">

@@ -57,7 +57,7 @@
                                               <li><a
                                                       href="{{ route('profiles.edit', auth()->user()) }}">{{ Auth::user()->name }}</a>
                                               </li>
-                                              @if (auth()->user()->seller)
+                                              {{-- @if (auth()->user()->seller)
                                                   <li class="hidden-xs"><a
                                                           href="{{ route('sellers.show', auth()->user()->seller) }}">Seller
                                                           Profile</a>
@@ -66,7 +66,7 @@
                                                   <li class="hidden-xs"><a href="{{ route('sellers.create') }}">Become a
                                                           Seller</a>
                                                   </li>
-                                              @endif
+                                              @endif --}}
                                               <li class="hidden-xs"><a href="{{ route('wishlists.show') }}">Wishlist</a>
                                               </li>
                                               <li class="hidden-xs"><a
@@ -110,7 +110,7 @@
                               <!-- workspace -->
                               <div class="aa-workspace">
                                   @auth
-                                      <a class="aa-workspace-link" href="#" data-toggle="modal" data-target="#login-modal">
+                                      <a class="aa-workspace-link" href="@if (auth()->user()->seller) {{ route('sellers.show', auth()->user()->seller) }}@else{{ route('sellers.create') }} @endif">
                                           <span class="aa-workspace-title">WORKSPACE</span>
                                       </a>
                                   @endauth

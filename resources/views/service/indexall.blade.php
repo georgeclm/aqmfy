@@ -10,15 +10,15 @@
     @section('home')
         <!-- catg header banner section -->
         <section id="aa-catg-head-banner">
-            <img src="http://bappeda.bengkuluselatankab.go.id/wp-content/uploads/2019/09/cropped-background-keren-8.jpg"
-                alt="fashion img">
+            <img src="{{ asset('img/background.jpeg') }}" alt="fashion img">
+
             <div class="aa-catg-head-banner-area">
                 <div class="container">
                     <div class="aa-catg-head-banner-content">
                         <h2>All Photos</h2>
                         <ol class="breadcrumb">
                             <li><a href="{{ route('services.index') }}">Home</a></li>
-                            <li class="active" style="color:rgb(189, 158, 158)">Photos</li>
+                            <li class="active">Photos</li>
                         </ol>
                     </div>
                 </div>
@@ -254,7 +254,8 @@
                     <div class="col-md-12">
                         <div class="aa-subscribe-area">
                             <h3>Subscribe our newsletter </h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
+                            <p>Support Our Website</p>
+
                             <form action="" class="aa-subscribe-form">
                                 <input type="email" name="" id="" placeholder="Enter your Email">
                                 <input type="submit" value="Subscribe">

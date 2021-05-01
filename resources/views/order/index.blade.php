@@ -3,14 +3,15 @@
 
 @section('content')
     <section id="aa-catg-head-banner">
-        <img src="http://bappeda.bengkuluselatankab.go.id/wp-content/uploads/2019/09/cropped-background-keren-8.jpg">
+        <img src="{{ asset('img/background.jpeg') }}">
+
         <div class="aa-catg-head-banner-area">
             <div class="container">
                 <div class="aa-catg-head-banner-content">
                     <h2>Orders Page</h2>
                     <ol class="breadcrumb">
                         <li><a href="{{ route('services.index') }}">Home</a></li>
-                        <li class="active" style="color:rgb(189, 158, 158)">Order</li>
+                        <li class="active">Order</li>
                     </ol>
                 </div>
             </div>

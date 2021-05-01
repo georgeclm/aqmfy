@@ -3,15 +3,15 @@
 @section('content')
     <!-- catg header banner section -->
     <section id="aa-catg-head-banner">
-        <img src="http://bappeda.bengkuluselatankab.go.id/wp-content/uploads/2019/09/cropped-background-keren-8.jpg"
-            alt="fashion img">
+        <img src="{{ asset('img/background.jpeg') }}" alt="fashion img">
+
         <div class="aa-catg-head-banner-area">
             <div class="container">
                 <div class="aa-catg-head-banner-content">
                     <h2>Cart Page</h2>
                     <ol class="breadcrumb">
                         <li><a href="{{ route('services.index') }}">Home</a></li>
-                        <li class="active" style="color:rgb(189, 158, 158)">Cart</li>
+                        <li class="active">Cart</li>
                     </ol>
                 </div>
             </div>

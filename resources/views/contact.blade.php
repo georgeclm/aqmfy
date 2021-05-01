@@ -6,7 +6,7 @@
 
     <!-- catg header banner section -->
     <section id="aa-catg-head-banner">
-        <img src="{{ asset('img/contact.jpg') }}" alt="fashion img">
+        <img src="{{ asset('img/background.jpeg') }}" alt="fashion img">
         <div class="aa-catg-head-banner-area">
             <div class="container">
                 <div class="aa-catg-head-banner-content">
@@ -79,8 +79,7 @@
                                     <div class="aa-contact-address-right">
                                         <address>
                                             <h4>Aqmfy Stock</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum modi dolor
-                                                facilis! Nihil error, eius.</p>
+
                                             <p><span class="fa fa-home">Palembang, Jln. Way Hitam No.55</span></p>
                                             <p><span class="fa fa-phone"></span>081298989898</p>
                                             <p><span class="fa fa-envelope"></span>Email: support@aqmfystock.com</p>

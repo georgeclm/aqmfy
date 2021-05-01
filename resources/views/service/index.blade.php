@@ -9,7 +9,7 @@
             <div id="sequence" class="seq">
                 <div class="seq-screen">
                     <ul class="seq-canvas">
-                        @foreach ($services as $service)
+                        @foreach ($services->take(7) as $service)
                             <li>
                                 <div class="seq-model">
                                     <img data-seq src="{{ asset($service->serviceImage()) }}">
@@ -361,7 +361,6 @@
                             <div class="aa-support-single">
                                 <span class="fa fa-truck"></span>
                                 <h4>FREE SHIPPING</h4>
-                                <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P>
                             </div>
                         </div>
                         <!-- single support -->
@@ -369,7 +368,6 @@
                             <div class="aa-support-single">
                                 <span class="fa fa-clock-o"></span>
                                 <h4>30 DAYS MONEY BACK</h4>
-                                <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P>
                             </div>
                         </div>
                         <!-- single support -->
@@ -377,7 +375,6 @@
                             <div class="aa-support-single">
                                 <span class="fa fa-phone"></span>
                                 <h4>SUPPORT 24/7</h4>
-                                <P>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.</P>
                             </div>
                         </div>
                     </div>
@@ -393,7 +390,8 @@
                 <div class="col-md-12">
                     <div class="aa-subscribe-area">
                         <h3>Subscribe our newsletter </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
+                        <p>Support Our Website</p>
+
                         <form action="" class="aa-subscribe-form">
                             <input type="email" name="" id="" placeholder="Enter your Email">
                             <input type="submit" value="Subscribe">

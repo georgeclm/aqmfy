@@ -18,7 +18,9 @@ class SellersController extends Controller
             'sellername' =>  'required',
             'address' => 'sometimes',
             'url' => ['sometimes', 'url'],
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg',
+            'phone_num' => 'numeric'
         ]);
 
         // dd($request->all());
@@ -46,7 +48,7 @@ class SellersController extends Controller
         $seller->user->assignRole('Seller');
 
 
-        return redirect('/');
+        return redirect()->route('sellers.show', $seller)->with('success', 'You are now a seller, Sell Great Photo');
     }
     function show(Seller $seller)
     {

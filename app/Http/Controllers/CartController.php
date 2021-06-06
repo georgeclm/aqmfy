@@ -14,11 +14,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::where('user_id', auth()->id())->get();
-        $subtotal = $carts->sum('price');
-        $tax = $subtotal * 10 / 100;
-        $total = $subtotal + $tax;
-        return view('cart.index', compact('carts', 'subtotal', 'tax', 'total'));
+        return view('cart.index');
     }
 
     public function checkout()
@@ -101,7 +97,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        Cart::destroy($id);
-        return redirect()->back()->with('success', 'Photo have been removed from cart');
+        // Cart::destroy($id);
+        // return redirect()->back()->with('success', 'Photo have been removed from cart');
     }
 }

@@ -119,12 +119,7 @@
                               <!-- cart box -->
                               <div class="aa-cartbox">
                                   @auth
-
-                                      <a class="aa-cart-link" href="{{ route('carts.index') }}">
-                                          <span class="fa fa-shopping-basket"></span>
-                                          <span class="aa-cart-title">SHOPPING CART</span>
-                                          <span class="aa-cart-notify">{{ auth()->user()->carts->count() }}</span>
-                                      </a>
+                                @livewire('cart-counter')
                                   @endauth
                                   <div class="aa-cartbox-summary">
                                       @if ($carts->count() == 0)

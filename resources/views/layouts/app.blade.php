@@ -31,16 +31,17 @@
     <link href="{{ asset('css/sequence-theme.modern-slide-in.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/simple-notify.min.css') }}" />
+    @livewireStyles
 </head>
 
 <body>
     <x-header />
     <div id="app">
         <main>
-
             @yield('content')
         </main>
     </div>
+
     @yield('home')
     <x-footer />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -127,7 +128,7 @@
 
         </script>
     @endif
-
+    @livewireScripts
 </body>
 <script type="text/javascript">
     var path = "{{ route('autocomplete') }}";
